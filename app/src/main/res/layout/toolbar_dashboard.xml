@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@drawable/bg_toolbar"
+    android:paddingVertical="0dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/il_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/dimen_2dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:focusable="false"
+            app:boxCornerRadiusBottomEnd="@dimen/dimen_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/dimen_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/dimen_32dp"
+            app:boxCornerRadiusTopStart="@dimen/dimen_32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_toolbar_notification"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_search">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/btn_toolbar_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="Notification Button"
+            android:paddingHorizontal="@dimen/dimen_16dp"
+            android:paddingVertical="@dimen/dimen_16dp"
+            android:src="@drawable/ic_notification"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_toolbar_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_40" />
+
+        <ImageButton
+            android:id="@+id/btn_toolbar_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="Profile Button"
+            android:paddingHorizontal="@dimen/dimen_16dp"
+            android:paddingVertical="@dimen/dimen_16dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_40" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.BacaLagi.Text">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.DisplayLarge">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_57sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.DisplayMedium">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_45sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.DisplaySmall">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_36sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.HeadlineLarge">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_32sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.HeadlineMedium">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_28sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.HeadlineSmall">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.BodyLarge">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_16sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.BodyMedium">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.BodySmall">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_12sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.LabelLarge">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/font_16sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.LabelMedium">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.LabelSmall">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/font_12sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.TitleLarge">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/font_22sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.TitleMedium">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/font_16sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.Text.TitleSmall">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+</resources>
