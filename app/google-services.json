@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "396789053314",
+    "project_id": "try-learning-firebase-annas",
+    "storage_bucket": "try-learning-firebase-annas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396789053314:android:da9bb709840e908505c19b",
+        "android_client_info": {
+          "package_name": "com.reader.bacalagi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396789053314-rh2adl0n6nd5hnddfbap0bulcfu1sfkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reader.bacalagi",
+            "certificate_hash": "84b8e83f6c77c95c5923460f7c286c43cac2b84a"
+          }
+        },
+        {
+          "client_id": "396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANkHSPNpuzJ0UDlbs4BX5Mwr0v8Jg9s-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

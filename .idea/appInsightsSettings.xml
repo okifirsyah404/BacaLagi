@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.reader.bacalagi" />
+                  <option name="mobileSdkAppId" value="1:396789053314:android:da9bb709840e908505c19b" />
+                  <option name="projectId" value="try-learning-firebase-annas" />
+                  <option name="projectNumber" value="396789053314" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -4,9 +4,18 @@ plugins {
     alias(libs.plugins.kspKotlinAndroid)
 
     id("androidx.navigation.safeargs")
+    id("com.google.gms.google-services")
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("B:\\Bangkit\\Capstone\\keystore\\debug.jks")
+            storePassword = "reader"
+            keyAlias = "debug"
+            keyPassword = "reader"
+        }
+    }
     namespace = "com.reader.bacalagi"
     compileSdk = 34
 
@@ -18,6 +27,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildFeatures {
@@ -53,9 +63,15 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.analytics)
 
     //  Coroutines
     implementation(libs.kotlinx.coroutines.core)
