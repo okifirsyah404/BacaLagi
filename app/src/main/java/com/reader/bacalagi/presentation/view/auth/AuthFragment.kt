@@ -18,6 +18,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentAuthBinding
+import timber.log.Timber
 
 class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
@@ -104,13 +105,15 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    Log.d("MainActivity", "signInWithCredential:success")
-                    Log.d("GoogleSignInFragment", "signInWithCredential:success")
-                    Log.d("GoogleSignInFragment", "Token: $idToken")
-                    Log.d("GoogleSignInFragment", "User: ${user?.uid}")
-                    Log.d("GoogleSignInFragment", "User: ${user?.displayName}")
-                    Log.d("GoogleSignInFragment", "User: ${user?.email}")
-                    Log.d("GoogleSignInFragment", "User: ${user?.photoUrl}")
+//                    Log.d("MainActivity", "signInWithCredential:success")
+//                    Log.d("GoogleSignInFragment", "signInWithCredential:success")
+//                    Log.d("GoogleSignInFragment", "Token: $idToken")
+//                    Log.d("GoogleSignInFragment", "User: ${user?.uid}")
+//                    Log.d("GoogleSignInFragment", "User: ${user?.displayName}")
+//                    Log.d("GoogleSignInFragment", "User: ${user?.email}")
+//                    Log.d("GoogleSignInFragment", "User: ${user?.photoUrl}")
+
+
                     Toast.makeText(
                         requireActivity(),
                         "Authentication successful.",
@@ -120,6 +123,16 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     Log.w("MainActivity", "signInWithCredential:failure", task.exception)
                     Toast.makeText(requireActivity(), "Authentication failed.", Toast.LENGTH_SHORT)
                         .show()
+                }
+            }
+
+        auth.currentUser?.getIdToken(true)
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val _idToken = task.result?.token
+                    Timber.tag("GoogleSignInFragment").d("ID Token: $_idToken")
+                } else {
+                    Log.e("GoogleSignInFragment", "Error getting ID token.")
                 }
             }
     }
