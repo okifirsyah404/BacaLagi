@@ -11,4 +11,11 @@
     <string name="shr_kecamatan">Kecamatan</string>
     <string name="shr_kelurahan">Kelurahan</string>
     <string name="shr_hint_address">Alamat</string>
+    <string name="shr_title">Title</string>
+    <string name="shr_author">Author</string>
+    <string name="shr_publisher">Publisher</string>
+    <string name="shr_publish_year">Publish Year</string>
+    <string name="shr_buy_price">Buy Price</string>
+    <string name="shr_isbn">ISBN</string>
+    <string name="shr_language">Language</string>
 </resources>
