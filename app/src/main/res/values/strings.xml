@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">BacaLagi</string>
     <string name="web_client_id">396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com</string>
+    <string name="shr_hint_phonenumber">No. Whatsapp</string>
+    <string name="shr_phone_number">No. Whatsapp</string>
+    <string name="shr_province">Provinsi</string>
+    <string name="shr_hint_province">Provinsi</string>
+    <string name="shr_address">Alamat</string>
+    <string name="shr_city">Kabupaten/Kota</string>
+    <string name="shr_hint_city">Kabupaten/Kota</string>
+    <string name="shr_kecamatan">Kecamatan</string>
+    <string name="shr_kelurahan">Kelurahan</string>
+    <string name="shr_hint_address">Alamat</string>
 </resources>
