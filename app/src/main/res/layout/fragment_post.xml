@@ -31,7 +31,7 @@
 
             <include
                 android:id="@+id/iv_upload_image"
-                layout="@layout/card_image_upload"
+                layout="@layout/card_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
