@@ -10,21 +10,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        >
 
         <ImageView
             android:id="@+id/iv_upload"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_camera"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_camera"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

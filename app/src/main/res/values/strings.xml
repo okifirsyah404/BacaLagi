@@ -18,4 +18,7 @@
     <string name="shr_buy_price">Buy Price</string>
     <string name="shr_isbn">ISBN</string>
     <string name="shr_language">Language</string>
+    <string name="shr_description">Description</string>
+    <string name="shr_agreement">Use Recomendation?</string>
+    <string name="shr_hint_price">Price</string>
 </resources>
