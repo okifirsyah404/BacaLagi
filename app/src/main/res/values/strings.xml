@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">BacaLagi</string>
     <string name="web_client_id">396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com</string>
+    <string name="shr_hint_phonenumber">No. Whatsapp</string>
+    <string name="shr_phone_number">No. Whatsapp</string>
+    <string name="shr_province">Provinsi</string>
+    <string name="shr_hint_province">Provinsi</string>
+    <string name="shr_address">Alamat</string>
+    <string name="shr_city">Kabupaten/Kota</string>
+    <string name="shr_hint_city">Kabupaten/Kota</string>
+    <string name="shr_kecamatan">Kecamatan</string>
+    <string name="shr_kelurahan">Kelurahan</string>
+    <string name="shr_hint_address">Alamat</string>
+    <string name="shr_title">Title</string>
+    <string name="shr_author">Author</string>
+    <string name="shr_publisher">Publisher</string>
+    <string name="shr_publish_year">Publish Year</string>
+    <string name="shr_buy_price">Buy Price</string>
+    <string name="shr_isbn">ISBN</string>
+    <string name="shr_language">Language</string>
+    <string name="shr_description">Description</string>
+    <string name="shr_agreement">Use Recomendation?</string>
+    <string name="shr_hint_price">Price</string>
 </resources>
