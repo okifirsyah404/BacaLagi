@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.BacaLagi.AppBar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="titleTextAppearance">@style/Theme.BacaLagi.Text.TitleMedium</item>
     </style>
@@ -8,5 +9,14 @@
         <item name="android:fontFamily">@font/nunito</item>
         <item name="android:textSize">@dimen/font_14sp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="Theme.BacaLagi.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">@dimen/font_57sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dimen_48dp</item>
     </style>
 </resources>
