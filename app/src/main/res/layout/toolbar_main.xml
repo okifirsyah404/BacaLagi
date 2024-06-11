@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_toolbar"
+    android:background="@drawable/bg_stroke_bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="1dp"
         android:foregroundGravity="center"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
         app:navigationIconTint="?attr/colorOnSurface"
         app:titleCentered="true"
-        app:titleTextAppearance="@style/Theme.BacaLagi.Text.LabelMedium" />
+        app:titleTextAppearance="@style/Theme.BacaLagi.Text.LabelLarge" />
 
 </com.google.android.material.appbar.AppBarLayout>

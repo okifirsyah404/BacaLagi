@@ -3,6 +3,10 @@ package com.reader.bacalagi
 import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
+import com.reader.bacalagi.data.di.dataModule
+import com.reader.bacalagi.di.presentationModule
+import com.reader.bacalagi.di.storagePreferenceModule
+import com.reader.bacalagi.domain.di.domainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -23,7 +27,10 @@ class BacaLagiApplication : Application() {
             androidContext(this@BacaLagiApplication)
 
             modules(
-
+                storagePreferenceModule(dataStore),
+                dataModule,
+                domainModule,
+                presentationModule,
             )
         }
     }

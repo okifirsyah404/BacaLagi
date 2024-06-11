@@ -7,7 +7,7 @@
     tools:context=".presentation.view.profile.ProfileFragment">
 
     <include
-        android:id="@+id/main_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -18,10 +18,10 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/filledButton_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-        app:layout_constraintBottom_toTopOf="@id/filledButton_register">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,21 +31,19 @@
             android:paddingTop="4dp">
 
             <TextView
+                style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/shr_phone_number"
-                android:textAllCaps="true"
-                android:textSize="16sp" />
+                android:text="@string/label_phone_number" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_no_whatsapp"
+                style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:hint="@string/shr_hint_phonenumber">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -64,7 +62,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dropdown_provinsi"
-                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                style="@style/Theme.BacaLagi.TextInputLayout.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -72,8 +70,9 @@
                     android:id="@+id/tf_provinsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/shr_hint_province"
+
                     android:inputType="none" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -98,77 +97,32 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/shr_city"
                     android:inputType="none" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="@string/shr_kecamatan"
-                android:textAllCaps="true"
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dropdown_kecamatan"
-                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/tf_kecamatan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/shr_kecamatan"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="@string/shr_kelurahan"
-                android:textAllCaps="true"
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dropdown_kelurahan"
-                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/tf_kelurahan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/shr_kelurahan"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
+                style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/shr_address"
-                android:textAllCaps="true"
-                android:textSize="16sp" />
+                android:text="@string/shr_address" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_address"
+                style="@style/Theme.BacaLagi.TextInputLayout.MultiLines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:hint="@string/shr_hint_address">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="128dp" />
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:maxLines="5"
+                    android:minLines="5" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>

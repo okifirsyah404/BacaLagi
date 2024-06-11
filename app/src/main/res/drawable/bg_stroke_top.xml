@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="?attr/background" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="-2dp"
+        android:end="-2dp"
+        android:start="-2dp"
+        android:top="2dp">
+        <shape>
+
+            <stroke
+                android:width="2dp"
+                android:color="?attr/colorOnSurfaceVariant" />
+
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+
+</layer-list>

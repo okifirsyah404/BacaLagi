@@ -10,77 +10,91 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/ll_post_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_stroke_bottom_primary"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_post_author_photo"
+                android:layout_width="@dimen/dimen_24dp"
+                android:layout_height="@dimen/dimen_24dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                tools:src="@drawable/img_bg" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/Theme.BacaLagi.Text.LabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                app:layout_constraintStart_toEndOf="@+id/ll"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Oki Firdaus" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_item_photo"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_marginTop="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+            app:layout_constraintTop_toBottomOf="@id/ll_post_author"
             tools:src="@drawable/img_bg" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_post_author_photo"
-            android:layout_width="@dimen/dimen_24dp"
-            android:layout_height="@dimen/dimen_24dp"
-            android:layout_marginStart="@dimen/dimen_16dp"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/img_bg" />
-
-        <TextView
-            android:id="@+id/tv_item_name"
-            style="@style/Theme.BacaLagi.Text.LabelMedium"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_8dp"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toEndOf="@+id/iv_post_author_photo"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Oki Firdaus" />
-
-        <TextView
-            android:id="@+id/tv_item_title"
-            style="@style/Theme.BacaLagi.Text.BodyMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:layout_marginTop="@dimen/dimen_8dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_item_photo"
-            tools:text="Description" />
-
-        <TextView
-            android:id="@+id/tv_upload_at"
-            style="@style/Theme.BacaLagi.Text.BodyMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:layout_marginVertical="@dimen/dimen_8dp"
-            android:textSize="@dimen/font_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
-            tools:text="Sunday, 25 May 2024" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_loc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:layout_marginVertical="@dimen/dimen_8dp"
-            android:text="Chip"
-            app:chipCornerRadius="@dimen/dimen_24dp"
-            app:chipIcon="@drawable/ic_location"
-            app:chipIconTint="@color/primary_40"
+            android:background="@drawable/bg_stroke_top_primary"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_upload_at" />
+            app:layout_constraintTop_toBottomOf="@id/iv_item_photo">
+
+            <TextView
+                android:id="@+id/tv_item_title"
+                style="@style/Theme.BacaLagi.Text.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_item_photo"
+                tools:text="Book Title" />
+
+            <TextView
+                android:id="@+id/tv_upload_at"
+                style="@style/Theme.BacaLagi.Text.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:layout_marginVertical="@dimen/dimen_8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
+                tools:text="Rp. 100.000" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_loc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="Location"
+                app:chipCornerRadius="@dimen/dimen_24dp"
+                app:chipIcon="@drawable/ic_location"
+                app:chipIconTint="@color/primary_40"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_upload_at" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

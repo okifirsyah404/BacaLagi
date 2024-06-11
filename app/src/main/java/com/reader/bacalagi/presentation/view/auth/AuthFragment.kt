@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -17,14 +19,24 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
+import com.reader.bacalagi.data.dto.AuthDto
 import com.reader.bacalagi.databinding.FragmentAuthBinding
+import com.reader.bacalagi.domain.utils.extension.observeSingleEventResult
+import com.reader.bacalagi.utils.extension.showLoadingDialog
+import com.reader.bacalagi.utils.extension.showSingleActionDialog
+import com.reader.bacalagi.utils.helper.MutableReference
+import com.reader.bacalagi.utils.provider.FirebaseProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
+    private val viewModel: AuthViewModel by viewModel()
+
     private lateinit var auth: FirebaseAuth
     private lateinit var oneTapClient: SignInClient
-    private val RC_SIGN_IN = 9001
+
+    private val loadingDialogReference = MutableReference<AlertDialog?>(null)
 
     private val signInLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -60,15 +72,64 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     override fun initUI() {
-//        TODO("Not yet implemented")
         auth = FirebaseAuth.getInstance()
         oneTapClient = Identity.getSignInClient(requireActivity())
     }
 
     override fun initActions() {
         binding.btnGoogleSignIn.setOnClickListener {
-//            findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
             signIn()
+        }
+    }
+
+    override fun initObservers() {
+        viewModel.authResult.observeSingleEventResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onError = { errorMessage ->
+                showLoading(false)
+                showError(true, errorMessage)
+            }
+
+            onSuccess = {
+                showLoading(false)
+                showError(false, "")
+                onResult(it)
+            }
+
+        }
+    }
+
+    private fun onResult(data: AuthDto) {
+
+        Timber.tag("AuthFragment").d("Data: $data")
+        Timber.tag("AuthFragment").d("Data: ${data.isRegistered}")
+        Timber.tag("AuthFragment").d("Data: ${data.accessToken}")
+
+        if (data.isRegistered) {
+            findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
+        } else {
+            findNavController().navigate(R.id.action_authFragment_to_registerFragment)
+        }
+
+        return
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        showLoadingDialog(
+            loading = isLoading,
+            dialogReference = loadingDialogReference
+        )
+    }
+
+    override fun showError(isError: Boolean, message: String) {
+        if (isError) {
+            showSingleActionDialog(
+                title = "Error",
+                message = message
+            )
         }
     }
 
@@ -77,7 +138,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId(getString(R.string.web_client_id))
+                    .setServerClientId(FirebaseProvider.webClientId)
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )
@@ -105,14 +166,6 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-//                    Log.d("MainActivity", "signInWithCredential:success")
-//                    Log.d("GoogleSignInFragment", "signInWithCredential:success")
-//                    Log.d("GoogleSignInFragment", "Token: $idToken")
-//                    Log.d("GoogleSignInFragment", "User: ${user?.uid}")
-//                    Log.d("GoogleSignInFragment", "User: ${user?.displayName}")
-//                    Log.d("GoogleSignInFragment", "User: ${user?.email}")
-//                    Log.d("GoogleSignInFragment", "User: ${user?.photoUrl}")
-
 
                     Toast.makeText(
                         requireActivity(),
@@ -130,6 +183,11 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val _idToken = task.result?.token
+
+                    Timber.tag("GoogleSignInFragment").d("ID Token: $_idToken")
+                    viewModel.auth(_idToken ?: "")
+
+
                     Timber.tag("GoogleSignInFragment").d("ID Token: $_idToken")
                 } else {
                     Log.e("GoogleSignInFragment", "Error getting ID token.")

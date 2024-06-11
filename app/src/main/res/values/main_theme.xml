@@ -12,11 +12,29 @@
     </style>
 
     <style name="Theme.BacaLagi.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="android:textSize">@dimen/font_57sp</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/dimen_48dp</item>
         <item name="boxCornerRadiusBottomStart">@dimen/dimen_48dp</item>
         <item name="boxCornerRadiusTopEnd">@dimen/dimen_48dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/dimen_48dp</item>
+    </style>
+
+    <style name="Theme.BacaLagi.TextInputLayout.ExposedDropdownMenu" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dimen_48dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dimen_48dp</item>
+    </style>
+
+    <style name="Theme.BacaLagi.TextInputLayout.MultiLines" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/dimen_12dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dimen_12dp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dimen_12dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dimen_12dp</item>
     </style>
 </resources>

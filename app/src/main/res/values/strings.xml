@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">BacaLagi</string>
     <string name="web_client_id">396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com</string>
-    <string name="shr_hint_phonenumber">No. Whatsapp</string>
-    <string name="shr_phone_number">No. Whatsapp</string>
+    <string name="hint_phone_number" translatable="false">08xxxxxxxxxx</string>
+    <string name="label_phone_number">Whatsapp Number</string>
     <string name="shr_province">Provinsi</string>
     <string name="shr_hint_province">Provinsi</string>
     <string name="shr_address">Alamat</string>
