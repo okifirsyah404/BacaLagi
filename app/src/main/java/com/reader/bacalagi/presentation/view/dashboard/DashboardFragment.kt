@@ -24,6 +24,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             edSearch.setOnClickListener {
                 findNavController().navigate(R.id.action_dashboardFragment_to_searchFragment)
             }
+            btnToolbarProfile.setOnClickListener {
+                findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
+            }
         }
     }
 

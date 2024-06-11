@@ -1,7 +1,6 @@
 package com.reader.bacalagi.presentation.view.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -49,10 +48,10 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                     if (googleIdToken != null) {
                         firebaseAuthWithGoogle(googleIdToken)
                     } else {
-                        Log.e("MainActivity", "No Google ID token!")
+                        Timber.tag("MainActivity").e("No Google ID token!")
                     }
                 } catch (e: ApiException) {
-                    Log.w("MainActivity", "Google sign in failed", e)
+                    Timber.tag("MainActivity").w(e, "Google sign in failed")
                     Toast.makeText(
                         requireActivity(),
                         "Google sign in failed: ${e.statusCode}",
@@ -103,17 +102,11 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     private fun onResult(data: AuthDto) {
-
-        Timber.tag("AuthFragment").d("Data: $data")
-        Timber.tag("AuthFragment").d("Data: ${data.isRegistered}")
-        Timber.tag("AuthFragment").d("Data: ${data.accessToken}")
-
         if (data.isRegistered) {
             findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
         } else {
             findNavController().navigate(R.id.action_authFragment_to_registerFragment)
         }
-
         return
     }
 
@@ -151,7 +144,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 signInLauncher.launch(intentSenderRequest)
             }
             .addOnFailureListener(requireActivity()) { e ->
-                Log.e("MainActivity", "Google sign in failed", e)
+                Timber.tag("MainActivity").e(e, "Google sign in failed")
                 Toast.makeText(
                     requireActivity(),
                     "Google sign in failed: ${e.message}",
@@ -173,7 +166,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    Log.w("MainActivity", "signInWithCredential:failure", task.exception)
+                    Timber.tag("MainActivity").w(task.exception, "signInWithCredential:failure")
                     Toast.makeText(requireActivity(), "Authentication failed.", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -184,13 +177,11 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 if (task.isSuccessful) {
                     val _idToken = task.result?.token
 
-                    Timber.tag("GoogleSignInFragment").d("ID Token: $_idToken")
+                    Timber.tag("GoogleSignInFragment").d("ID token: $_idToken")
+
                     viewModel.auth(_idToken ?: "")
-
-
-                    Timber.tag("GoogleSignInFragment").d("ID Token: $_idToken")
                 } else {
-                    Log.e("GoogleSignInFragment", "Error getting ID token.")
+                    Timber.tag("GoogleSignInFragment").e("Error getting ID token.")
                 }
             }
     }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.view.profile.ProfileFragment">
 
     <include
-        android:id="@+id/main_toolbar_profile"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,77 +15,159 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/card_profile"
-        layout="@layout/card_profile"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar_profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_post_author_photo"
+                    android:layout_width="@dimen/dimen_96dp"
+                    android:layout_height="@dimen/dimen_96dp"
+                    android:src="@drawable/img_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:maxLines="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_post_author_photo"
+                    tools:text="Oki Firdaus" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    style="@style/Theme.BacaLagi.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                    tools:text="+62851392847214" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    style="@style/Theme.BacaLagi.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_email"
+                    tools:text="Sleman, Yogyakarta" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_menu_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_profile">
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="Transaction"
+                    tools:title="Transaction" />
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="Profile" />
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_account_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="Account Information" />
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="Setting" />
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_faq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="FaQ" />
+
+                <com.reader.bacalagi.presentation.custom_view.CardListTile
+                    android:id="@+id/clt_privacy_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    app:prefixIcon="@drawable/ic_person"
+                    app:title="Privacy Policy" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+
+                android:id="@+id/btn_sing_out"
+                style="@style/Theme.BacaLagi.OutlinedButtonTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:text="Sign Out"
+                android:textColor="@color/error_60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_list"
+                app:strokeColor="@color/error_60" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <include
-        android:id="@+id/item_list_transaction"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_profile" />
-
-    <include
-        android:id="@+id/item_edit_profile"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_list_transaction" />
-
-    <include
-        android:id="@+id/item_account_information"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_edit_profile" />
-
-    <include
-        android:id="@+id/item_setting"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_account_information" />
-
-    <include
-        android:id="@+id/item_faq"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_setting" />
-
-    <include
-        android:id="@+id/item_privacy_policy"
-        layout="@layout/card_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_faq" />
-
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        style="@style/Theme.BacaLagi.OutlinedButtonTheme"
-        android:text="Logout"
-        android:textSize="@dimen/font_20sp"
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_privacy_policy" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

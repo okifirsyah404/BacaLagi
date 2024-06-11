@@ -9,12 +9,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentSplashBinding
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
+
+    private val viewModel: SplashViewModel by viewModel()
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +35,17 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         val navigateToDashboardRunnable = Runnable {
             lifecycleScope.launch {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                    findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+
+                    viewModel.isAlreadyLogin().collect { isAlreadyLogin ->
+                        isAlreadyLogin?.let {
+                            if (it) {
+                                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToDashboardFragment())
+                                return@collect
+                            }
+                        }
+                        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToAuthFragment())
+                        return@collect
+                    }
                 }
             }
         }

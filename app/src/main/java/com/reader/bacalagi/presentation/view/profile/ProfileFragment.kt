@@ -1,17 +1,23 @@
 package com.reader.bacalagi.presentation.view.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
+import com.reader.bacalagi.data.dto.UserDto
 import com.reader.bacalagi.databinding.FragmentProfileBinding
-import com.reader.bacalagi.presentation.view.transaction.TransactionFragment
+import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
+import com.reader.bacalagi.utils.extension.showDecisionDialog
+import com.reader.bacalagi.utils.extension.showSingleActionDialog
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
+
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -22,7 +28,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     override fun initAppBar() {
-        binding.mainToolbarProfile.apply {
+        binding.toolbar.apply {
             mainToolbar.title = "My Profile"
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
@@ -33,40 +39,82 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     override fun initUI() {
-        binding.itemListTransaction.apply {
-            tvSetting.text = "My Transaction"
-            ivItemSetting.setImageResource(R.drawable.ic_edit)
 
-//            root.setOnClickListener {
-//                val fragment = TransactionFragment()
-//                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-//                val fragmentTransaction = fragmentManager.beginTransaction()
-//                fragmentTransaction.replace(R.id.transactionFragment, fragment)
-//                fragmentTransaction.addToBackStack(null)
-//                fragmentTransaction.commit()
-//            }
-        }
-        binding.itemEditProfile.apply {
-            tvSetting.text = "Edit Profile"
-            ivItemSetting.setImageResource(R.drawable.ic_edit)
-        }
+    }
 
-        binding.itemAccountInformation.apply {
-            tvSetting.text = "Account Information"
-            ivItemSetting.setImageResource(R.drawable.ic_account_box)
+    override fun initActions() {
+        binding.apply {
+            btnSingOut.setOnClickListener {
+                showDecisionDialog(
+                    title = "Sign Out",
+                    message = "Are you sure you want to sign out?",
+                    onYes = {
+                        viewModel.deleteAccessToken()
+                        findNavController().navigate(R.id.action_profileFragment_to_authFragment)
+                    }
+                )
+            }
         }
-        binding.itemSetting.apply {
-            tvSetting.text = "Settings"
-            ivItemSetting.setImageResource(R.drawable.ic_settings)
-        }
-        binding.itemFaq.apply {
-            tvSetting.text = "Frequently Ask Question"
-            ivItemSetting.setImageResource(R.drawable.ic_help_center)
-        }
-        binding.itemPrivacyPolicy.apply {
-            tvSetting.text = "Privacy Policy"
-            ivItemSetting.setImageResource(R.drawable.ic_verified_user)
-        }
+    }
 
+    override fun initProcess() {
+        viewModel.getProfile()
+    }
+
+    override fun initObservers() {
+        viewModel.profileResult.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onSuccess = {
+                showError(false, "")
+                showLoading(false)
+                onResult(it)
+            }
+            onError = {
+                showError(true, it)
+            }
+            onEmpty = {
+
+            }
+        }
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                clMainContent.gone()
+                loadingContainer.root.show()
+            }
+        } else {
+            binding.apply {
+                clMainContent.show()
+                loadingContainer.root.gone()
+            }
+        }
+    }
+
+    override fun showError(isError: Boolean, message: String) {
+        if (isError) {
+            binding.apply {
+                clMainContent.gone()
+                showSingleActionDialog("Error", message)
+            }
+        } else {
+            binding.apply {
+                clMainContent.show()
+            }
+        }
+    }
+
+    private fun onResult(data: UserDto) {
+        binding.apply {
+            data.profile?.let {
+                tvUserName.text = it.name
+                tvEmail.text = it.phoneNumber
+                tvAddress.text = "${it.cityLocality}, ${it.adminAreaLocality}"
+            }
+        }
     }
 }
