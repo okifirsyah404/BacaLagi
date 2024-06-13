@@ -34,6 +34,12 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         initObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        initResume()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -65,6 +71,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     protected open fun initIntent() {}
 
     protected open fun initActions() {}
+
+    protected open fun initResume() {}
 
     protected open fun showLoading(isLoading: Boolean) {}
 

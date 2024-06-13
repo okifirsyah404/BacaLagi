@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">BacaLagi</string>
     <string name="label_phone_number">Nomor Whatsapp</string>
+    <string name="btn_label_start_reading">Start Reading</string>
 </resources>

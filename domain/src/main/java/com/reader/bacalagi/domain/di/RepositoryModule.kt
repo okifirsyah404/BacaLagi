@@ -1,5 +1,6 @@
 package com.reader.bacalagi.domain.di
 
+import com.reader.bacalagi.domain.repository.area.AreaRepositoryImpl
 import com.reader.bacalagi.domain.repository.auth.AuthRepositoryImpl
 import com.reader.bacalagi.domain.repository.profile.ProfileRepositoryImpl
 import org.koin.dsl.module
@@ -7,4 +8,5 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single { AuthRepositoryImpl(get()) }
     single { ProfileRepositoryImpl(get()) }
+    single { AreaRepositoryImpl(get()) }
 }

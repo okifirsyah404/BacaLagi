@@ -1,6 +1,7 @@
 package com.reader.bacalagi.di
 
 import com.reader.bacalagi.presentation.MainActivityViewModel
+import com.reader.bacalagi.presentation.view.area_selector.AreaSelectorViewModel
 import com.reader.bacalagi.presentation.view.auth.AuthViewModel
 import com.reader.bacalagi.presentation.view.profile.ProfileViewModel
 import com.reader.bacalagi.presentation.view.splash.SplashViewModel
@@ -22,5 +23,9 @@ val viewModelModule = module {
 
     viewModel {
         SplashViewModel(get())
+    }
+
+    viewModel {
+        AreaSelectorViewModel(get())
     }
 }

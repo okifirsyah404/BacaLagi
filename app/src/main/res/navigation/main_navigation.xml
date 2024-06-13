@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_registerFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_areaSelectorFragment"
+            app:destination="@id/areaSelectorFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -83,4 +86,13 @@
         android:name="com.reader.bacalagi.presentation.view.post_detail.DetailPostFragment"
         android:label="fragment_detail_post"
         tools:layout="@layout/fragment_detail_post" />
+    <fragment
+        android:id="@+id/areaSelectorFragment"
+        android:name="com.reader.bacalagi.presentation.view.area_selector.AreaSelectorFragment"
+        android:label="fragment_area_selector"
+        tools:layout="@layout/fragment_area_selector">
+        <argument
+            android:name="area_argument"
+            app:argType="com.reader.bacalagi.presentation.parcel.AreaContextParcel" />
+    </fragment>
 </navigation>

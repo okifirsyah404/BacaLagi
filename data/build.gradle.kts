@@ -19,7 +19,13 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
 
+        buildConfigField("String", "DATABASE_NAME", "\"baca-lagi-db\"")
         buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField(
+            "String",
+            "AREA_BASE_URL",
+            "\"${properties.getProperty("AREA_BASE_URL")}\""
+        )
     }
 
     buildTypes {
@@ -62,6 +68,10 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.paging)
+
+    //Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     //  Koin
     implementation(libs.koin.core)

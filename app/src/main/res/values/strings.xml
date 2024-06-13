@@ -21,4 +21,5 @@
     <string name="shr_description">Description</string>
     <string name="shr_agreement">Use Recomendation?</string>
     <string name="shr_hint_price">Price</string>
+    <string name="btn_label_start_reading">Start Reading</string>
 </resources>

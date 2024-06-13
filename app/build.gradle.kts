@@ -5,7 +5,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kspKotlinAndroid)
 
-    id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
     id("com.google.gms.google-services")
 }
 
@@ -113,4 +114,7 @@ dependencies {
     // Image View
     implementation(libs.circleimageview)
     implementation(libs.roundedimageview)
+
+    //Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 }
