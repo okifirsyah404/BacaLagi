@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reader.bacalagi.data.dto.UserDto
 import com.reader.bacalagi.data.local.preference.StoragePreference
+import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.domain.repository.profile.ProfileRepositoryImpl
 import kotlinx.coroutines.launch
@@ -17,11 +17,11 @@ class ProfileViewModel(
     private val repository: ProfileRepositoryImpl
 ) : ViewModel() {
 
-    val profileResult: LiveData<ApiResponse<UserDto>> by lazy { _profileResult }
-    private val _profileResult = MutableLiveData<ApiResponse<UserDto>>()
+    val profileResult: LiveData<ApiResponse<UserResponse>> by lazy { _profileResult }
+    private val _profileResult = MutableLiveData<ApiResponse<UserResponse>>()
 
     fun getProfile() {
-        runBlocking {
+        viewModelScope.launch {
             repository.getProfile()
                 .collect {
                     _profileResult.postValue(it)
@@ -30,7 +30,7 @@ class ProfileViewModel(
     }
 
     fun deleteAccessToken() {
-        viewModelScope.launch {
+        runBlocking {
             Timber.tag("ProfileViewModel").d("deleteAccessToken")
             pref.clearAccessToken()
         }

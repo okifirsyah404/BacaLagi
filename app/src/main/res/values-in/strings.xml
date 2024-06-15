@@ -2,5 +2,13 @@
 <resources>
     <string name="app_name">BacaLagi</string>
     <string name="label_phone_number">Nomor Whatsapp</string>
-    <string name="btn_label_start_reading">Start Reading</string>
+    <string name="btn_label_start_reading">Mulai Reading</string>
+    <string name="dialog_msg_sign_out">Apakah anda yakin ingin keluar?</string>
+    <string name="btn_label_sign_in_google">Lanjutkan dengan Google</string>
+    <string name="btn_label_sign_out">Keluar</string>
+    <string name="notif_connection_connected">Terhubung ke Internet</string>
+    <string name="notif_connection_disconnected">Tidak ada koneksi Internet</string>
+    <string name="btn_label_sign_in_again">Masuk Kembali</string>
+    <string name="msg_failed_unauthorize">Silakan masuk lagi untuk menggunakan aplikasi Baca Lagi</string>
+    <string name="title_failed_unauthorize">Sesi Kamu Telah Berakhir</string>
 </resources>

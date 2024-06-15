@@ -1,15 +1,18 @@
 package com.reader.bacalagi.data.source
 
-import com.reader.bacalagi.data.dto.UserDto
+import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.network.service.ProfileService
 import com.reader.bacalagi.data.utils.ApiResponse
+import com.reader.bacalagi.data.utils.extension.createErrorResponse
+import com.reader.bacalagi.data.utils.extension.getHttpBodyErrorMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 
 
 class ProfileDataSource(private val service: ProfileService) {
 
-    suspend fun fetchProfile(): Flow<ApiResponse<UserDto>> {
+    suspend fun fetchProfile(): Flow<ApiResponse<UserResponse>> {
 
         return flow {
             try {
@@ -21,16 +24,11 @@ class ProfileDataSource(private val service: ProfileService) {
                     return@flow
                 }
 
-                val dto = UserDto.fromResponse(response.data)
-
-                if (dto == null) {
-                    emit(ApiResponse.Error("Failed to parse response"))
-                    return@flow
-                }
-
-                emit(ApiResponse.Success(dto))
+                emit(ApiResponse.Success(response.data))
+            } catch (e: HttpException) {
+                emit(ApiResponse.Error(e.getHttpBodyErrorMessage()))
             } catch (e: Exception) {
-                emit(ApiResponse.Error(e.message ?: ""))
+                emit(ApiResponse.Error(e.createErrorResponse()))
             }
         }
     }

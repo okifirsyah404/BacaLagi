@@ -54,7 +54,7 @@
         android:layout_marginHorizontal="@dimen/dimen_16dp"
         android:layout_marginBottom="@dimen/dimen_16dp"
         android:backgroundTint="@color/neutral_10"
-        android:text="Continue with google"
+        android:text="@string/btn_label_sign_in_google"
         android:textColor="@color/neutral_100"
         app:icon="@drawable/ic_google_color"
         app:iconTint="@null"

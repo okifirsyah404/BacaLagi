@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.data.dto.UserDto
+import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.databinding.FragmentProfileBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.parcel.FailedParcel
+import com.reader.bacalagi.utils.enum.FailedContext
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
 import com.reader.bacalagi.utils.extension.showDecisionDialog
@@ -54,6 +56,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     }
                 )
             }
+
+
+            layoutRefresh.setOnRefreshListener {
+                viewModel.getProfile()
+                layoutRefresh.isRefreshing = false
+            }
+
         }
     }
 
@@ -73,6 +82,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 onResult(it)
             }
             onError = {
+                showLoading(false)
                 showError(true, it)
             }
             onEmpty = {
@@ -97,6 +107,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun showError(isError: Boolean, message: String) {
         if (isError) {
+
+            if (message == getString(R.string.code_unauthorized)) {
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToFailedFragment(
+                        FailedParcel(context = FailedContext.UNAUTHORIZED)
+                    )
+                )
+                return
+            }
+
             binding.apply {
                 clMainContent.gone()
                 showSingleActionDialog("Error", message)
@@ -108,12 +128,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
     }
 
-    private fun onResult(data: UserDto) {
+    private fun onResult(data: UserResponse) {
         binding.apply {
             data.profile?.let {
                 tvUserName.text = it.name
-                tvEmail.text = it.phoneNumber
                 tvAddress.text = "${it.cityLocality}, ${it.adminAreaLocality}"
+            }
+
+            data.account?.let {
+                tvEmail.text = it.email
             }
         }
     }

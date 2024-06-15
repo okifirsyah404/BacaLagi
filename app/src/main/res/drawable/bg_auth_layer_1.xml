@@ -11,5 +11,5 @@
 
   <path
       android:pathData="M189.5,145.5C64.5,127.5 1.5,27.5 0,0V355H360V200.5C360,200.5 287.99,159.68 189.5,145.5Z"
-      android:fillColor="@color/md_theme_primary"/>
+      android:fillColor="@color/primary_40"/>
 </vector>

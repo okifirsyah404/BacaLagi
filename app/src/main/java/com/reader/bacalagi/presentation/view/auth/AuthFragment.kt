@@ -18,9 +18,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.data.dto.AuthDto
+import com.reader.bacalagi.data.network.response.AuthResponse
 import com.reader.bacalagi.databinding.FragmentAuthBinding
 import com.reader.bacalagi.domain.utils.extension.observeSingleEventResult
+import com.reader.bacalagi.utils.extension.observeInternetConnection
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog
 import com.reader.bacalagi.utils.helper.MutableReference
@@ -36,6 +37,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private lateinit var oneTapClient: SignInClient
 
     private val loadingDialogReference = MutableReference<AlertDialog?>(null)
+    private var isAuthButtonClicked = false
 
     private val signInLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -76,9 +78,27 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     override fun initActions() {
-        binding.btnGoogleSignIn.setOnClickListener {
-            signIn()
+
+        observeInternetConnection(requireActivity(), viewLifecycleOwner) {
+            onConnected = {
+                binding.btnGoogleSignIn.setOnClickListener {
+                    when {
+                        isAuthButtonClicked -> {
+                            return@setOnClickListener
+                        }
+
+                        else -> {
+                            isAuthButtonClicked = true
+                            signIn()
+                        }
+                    }
+                }
+            }
+            onDisconnected = {
+
+            }
         }
+
     }
 
     override fun initObservers() {
@@ -101,7 +121,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         }
     }
 
-    private fun onResult(data: AuthDto) {
+    private fun onResult(data: AuthResponse) {
         if (data.isRegistered) {
             findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
         } else {
@@ -158,13 +178,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-
-                    Toast.makeText(
-                        requireActivity(),
-                        "Authentication successful.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    authWithGoogle()
                 } else {
                     Timber.tag("MainActivity").w(task.exception, "signInWithCredential:failure")
                     Toast.makeText(requireActivity(), "Authentication failed.", Toast.LENGTH_SHORT)
@@ -172,12 +186,14 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 }
             }
 
+
+    }
+
+    private fun authWithGoogle() {
         auth.currentUser?.getIdToken(true)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val _idToken = task.result?.token
-
-                    Timber.tag("GoogleSignInFragment").d("ID token: $_idToken")
 
                     viewModel.auth(_idToken ?: "")
                 } else {

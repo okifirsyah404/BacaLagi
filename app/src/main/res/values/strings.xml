@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BacaLagi</string>
+    <string name="app_name">Baca Lagi</string>
     <string name="web_client_id">396789053314-hpd9psv7oo8n2aaoqr24luk3mkuagt5j.apps.googleusercontent.com</string>
     <string name="hint_phone_number" translatable="false">08xxxxxxxxxx</string>
     <string name="label_phone_number">Whatsapp Number</string>
@@ -22,4 +22,15 @@
     <string name="shr_agreement">Use Recomendation?</string>
     <string name="shr_hint_price">Price</string>
     <string name="btn_label_start_reading">Start Reading</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_msg_sign_out">Are you sure to sign out?</string>
+    <string name="btn_label_sign_in_google">Continue with Google</string>
+    <string name="btn_label_sign_out">Sign Out</string>
+    <string name="notif_connection_connected">Connected</string>
+    <string name="notif_connection_disconnected">Disconnected</string>
+    <string name="btn_label_sign_in_again">Sing In Again</string>
+    <string name="title_failed_unauthorize">Your Session Was Ended</string>
+    <string name="msg_failed_unauthorize">Please sing in again to use Baca Lagi application</string>
+    <string name="code_unauthorized" translatable="false">Unauthorized</string>
 </resources>

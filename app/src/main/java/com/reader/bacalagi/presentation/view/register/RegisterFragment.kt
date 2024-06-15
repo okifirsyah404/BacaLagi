@@ -3,23 +3,34 @@ package com.reader.bacalagi.presentation.view.register
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentRegisterBinding
+import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.parcel.AreaContextParcel
 import com.reader.bacalagi.presentation.parcel.ProvinceParcel
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
 import com.reader.bacalagi.utils.enum.AreaContext
+import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog
 import com.reader.bacalagi.utils.extension.toCapitalCase
+import com.reader.bacalagi.utils.helper.MutableReference
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
+    private val viewModel: RegisterViewModel by viewModel()
+
     private lateinit var auth: FirebaseAuth
 
+    private val loadingDialogReference = MutableReference<AlertDialog?>(null)
     private var province: ProvinceParcel? = null
     private var regency: RegencyParcel? = null
+
+    private var firebaseTokenId: String? = null
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +52,23 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initUI() {
         auth = FirebaseAuth.getInstance()
+
+        auth.currentUser?.getIdToken(true)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+
+                firebaseTokenId = task.result?.token
+
+                Timber.tag("RegisterFragment").d("Firebase token id: $firebaseTokenId")
+
+
+            } else {
+                showSingleActionDialog(
+                    title = "Error",
+                    message = "Failed to get firebase token"
+                )
+            }
+
+        }
 
         binding.tilName.apply {
             auth.currentUser?.displayName?.let {
@@ -103,6 +131,83 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             }
         }
 
+        binding.btnRegister.setOnClickListener {
+            val name = binding.tilName.editText?.text.toString()
+            val phoneNumber = binding.tilNoWhatsapp.editText?.text.toString()
+            val address = binding.tilAddress.editText?.text.toString()
+
+            if (name.isEmpty()) {
+                showSingleActionDialog(
+                    title = "Error",
+                    message = "Please fill in the name field"
+                )
+                return@setOnClickListener
+            }
+
+            if (phoneNumber.isEmpty()) {
+                showSingleActionDialog(
+                    title = "Error",
+                    message = "Please fill in the phone number field"
+                )
+                return@setOnClickListener
+            }
+
+            if (province == null || regency == null) {
+                showSingleActionDialog(
+                    title = "Error",
+                    message = "Please select province and regency"
+                )
+
+                return@setOnClickListener
+            }
+
+            viewModel.register(
+                name = name,
+                phoneNumber = phoneNumber,
+                regency = regency?.name?.toCapitalCase() ?: "",
+                province = province?.name?.toCapitalCase() ?: "",
+                address = address,
+                firebaseTokenId = firebaseTokenId ?: ""
+            )
+
+        }
+
+    }
+
+    override fun initObservers() {
+        viewModel.user.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onError = { errorMessage ->
+                showLoading(false)
+                showError(true, errorMessage)
+            }
+
+            onSuccess = {
+                showLoading(false)
+                showError(false, "")
+                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToDashboardFragment())
+            }
+        }
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        showLoadingDialog(
+            loading = isLoading,
+            dialogReference = loadingDialogReference
+        )
+    }
+
+    override fun showError(isError: Boolean, message: String) {
+        if (isError) {
+            Timber.tag("RegisterFragment").d("Error: $isError, message: $message")
+            showSingleActionDialog(
+                title = "Error",
+                message = message
+            )
+        }
     }
 
     override fun initResume() {
@@ -143,6 +248,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         }
     }
+
 
     private fun saveTextFieldState() {
         findNavController().currentBackStackEntry?.savedStateHandle?.set(

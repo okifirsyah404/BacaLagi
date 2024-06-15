@@ -1,10 +1,14 @@
 package com.reader.bacalagi.utils.extension
 
+import android.content.Context
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.reader.bacalagi.R
+import com.reader.bacalagi.data.utils.helper.network_state.InternetConnectionObserver
+import com.reader.bacalagi.utils.ObserveConnectionConfig
 import com.reader.bacalagi.utils.helper.MutableReference
 
 fun Fragment.showLoadingDialog(
@@ -71,4 +75,19 @@ fun Fragment.showDecisionDialog(
             it.dismiss()
         }
     }.show()
+}
+
+fun Fragment.observeInternetConnection(
+    context: Context,
+    lifecycleOwner: LifecycleOwner,
+    config: ObserveConnectionConfig.() -> Unit
+) {
+    val internetConnectionObserver = InternetConnectionObserver.instance(context).networkStatus
+    internetConnectionObserver.observe(lifecycleOwner) { isConnected ->
+        if (!isConnected) {
+            ObserveConnectionConfig().apply(config).onDisconnected?.invoke()
+        } else {
+            ObserveConnectionConfig().apply(config).onConnected?.invoke()
+        }
+    }
 }
