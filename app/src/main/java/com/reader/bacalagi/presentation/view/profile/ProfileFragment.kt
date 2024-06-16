@@ -56,6 +56,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     }
                 )
             }
+            cltProfile.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            }
+            cltFaq.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_faqFragment)
+            }
+            cltPrivacyPolicy.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_privacyPolicyFragment)
+            }
+            cltSetting.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+            }
 
 
             layoutRefresh.setOnRefreshListener {

@@ -5,6 +5,7 @@ import com.reader.bacalagi.presentation.view.area_selector.AreaSelectorViewModel
 import com.reader.bacalagi.presentation.view.auth.AuthViewModel
 import com.reader.bacalagi.presentation.view.failed.FailedViewModel
 import com.reader.bacalagi.presentation.view.profile.ProfileViewModel
+import com.reader.bacalagi.presentation.view.profile_edit_profile.EditProfileViewModel
 import com.reader.bacalagi.presentation.view.register.RegisterViewModel
 import com.reader.bacalagi.presentation.view.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -37,5 +38,8 @@ val viewModelModule = module {
 
     viewModel {
         AreaSelectorViewModel(get())
+    }
+    viewModel {
+        EditProfileViewModel(get())
     }
 }
