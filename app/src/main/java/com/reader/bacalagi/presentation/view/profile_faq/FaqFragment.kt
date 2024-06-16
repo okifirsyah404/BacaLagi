@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentEditProfileBinding
 import com.reader.bacalagi.databinding.FragmentFaqBinding
+import com.reader.bacalagi.presentation.adapter.CardAdapter
 
 class FaqFragment : BaseFragment<FragmentFaqBinding>() {
 
@@ -34,5 +36,18 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>() {
     }
 
     override fun initUI() {
+        val questions = listOf("Question 1", "Question 2", "Question 3")
+        val descriptions = listOf(
+            "Description for Question 1",
+            "Description for Question 2",
+            "Description for Question 3"
+        )
+
+        val cardAdapter = CardAdapter(questions, descriptions)
+
+        binding.rvQuestion.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = cardAdapter
+        }
     }
 }

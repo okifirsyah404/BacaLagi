@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_person"
-                        app:title="Profile" />
+                        app:title="Edit Profile" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_setting"
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_help_center"
-                        app:title="FaQ" />
+                        app:title="Frequently Ask Question" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_privacy_policy"

@@ -102,6 +102,9 @@
         <action
             android:id="@+id/action_profileFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -159,4 +162,18 @@
         android:id="@+id/settingsFragment"
         android:name="com.reader.bacalagi.presentation.view.profile_settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.reader.bacalagi.presentation.view.transaction.TransactionFragment"
+        android:label="fragment_transaction"
+        tools:layout="@layout/fragment_transaction" >
+        <action
+            android:id="@+id/action_transactionFragment_to_detailTransactionFragment"
+            app:destination="@id/detailTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTransactionFragment"
+        android:name="com.reader.bacalagi.presentation.view.transaction_detail.DetailTransactionFragment"
+        android:label="fragment_detail_transaction"
+        tools:layout="@layout/fragment_detail_transaction" />
 </navigation>

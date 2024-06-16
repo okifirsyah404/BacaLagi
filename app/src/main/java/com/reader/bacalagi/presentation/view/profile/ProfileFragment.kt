@@ -56,6 +56,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     }
                 )
             }
+            cltTransaction.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_transactionFragment)
+            }
             cltProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
             }
