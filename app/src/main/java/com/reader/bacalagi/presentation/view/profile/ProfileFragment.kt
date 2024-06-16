@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.UserResponse
@@ -56,7 +57,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     }
                 )
             }
-
 
             layoutRefresh.setOnRefreshListener {
                 viewModel.getProfile()
@@ -133,6 +133,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             data.profile?.let {
                 tvUserName.text = it.name
                 tvAddress.text = "${it.cityLocality}, ${it.adminAreaLocality}"
+
+                ivProfile.load(it.avatarURL) {
+                    placeholder(R.drawable.img_emoji_worried)
+                    error(R.drawable.img_emoji_dead)
+                }
             }
 
             data.account?.let {
