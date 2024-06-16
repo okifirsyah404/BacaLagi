@@ -8,8 +8,8 @@ import androidx.transition.TransitionManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.databinding.CardTextBinding
 
-class CardAdapter(private val questions: List<String>, private val descriptions: List<String>) :
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+class CardAdapterFaq(private val questions: List<String>, private val descriptions: List<String>) :
+    RecyclerView.Adapter<CardAdapterFaq.CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val binding = CardTextBinding.inflate(LayoutInflater.from(parent.context), parent, false)

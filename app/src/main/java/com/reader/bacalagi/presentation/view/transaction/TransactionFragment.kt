@@ -1,16 +1,15 @@
 package com.reader.bacalagi.presentation.view.transaction
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.databinding.FragmentDashboardBinding
 import com.reader.bacalagi.databinding.FragmentTransactionBinding
+import com.reader.bacalagi.presentation.adapter.CardAdapterTransaction
+import com.reader.bacalagi.presentation.adapter.CardItem
 
 class TransactionFragment : BaseFragment<FragmentTransactionBinding>() {
 
@@ -34,6 +33,20 @@ class TransactionFragment : BaseFragment<FragmentTransactionBinding>() {
     }
 
     override fun initUI() {
+        val items = listOf(
+            CardItem("05/05/2024", "On Post", R.drawable.img_bg, "Buku 1"),
+            CardItem("07/05/2024", "Delivered", R.drawable.img_bg, "Buku 2")
+        )
+
+        val cardAdapter = CardAdapterTransaction(items)
+
+        binding.rvTransactionList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = cardAdapter
+//            setOnClickListener {
+//                findNavController().navigate(R.id.action_transactionFragment_to_detailTransactionFragment)
+//            }
+        }
 
     }
 }

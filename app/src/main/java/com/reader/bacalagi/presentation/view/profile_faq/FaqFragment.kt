@@ -1,18 +1,14 @@
 package com.reader.bacalagi.presentation.view.profile_faq
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.databinding.FragmentEditProfileBinding
 import com.reader.bacalagi.databinding.FragmentFaqBinding
-import com.reader.bacalagi.presentation.adapter.CardAdapter
+import com.reader.bacalagi.presentation.adapter.CardAdapterFaq
 
 class FaqFragment : BaseFragment<FragmentFaqBinding>() {
 
@@ -43,11 +39,11 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>() {
             "Description for Question 3"
         )
 
-        val cardAdapter = CardAdapter(questions, descriptions)
+        val cardAdapterFaq = CardAdapterFaq(questions, descriptions)
 
         binding.rvQuestion.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = cardAdapter
+            adapter = cardAdapterFaq
         }
     }
 }
