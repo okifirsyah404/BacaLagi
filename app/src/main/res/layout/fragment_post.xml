@@ -7,7 +7,7 @@
     tools:context=".presentation.view.post.PostFragment">
 
     <include
-        android:id="@+id/main_toolbar"
+        android:id="@+id/main_toolbar_post"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rl_button_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar_post">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +177,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rl_button_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -190,12 +190,16 @@
         <Button
             android:id="@+id/btn_submit"
             style="@style/Theme.BacaLagi.FilledButtonTheme"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             android:layout_marginVertical="@dimen/dimen_8dp"
             android:text="Submit"
-            android:textSize="16sp" />
-    </RelativeLayout>
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

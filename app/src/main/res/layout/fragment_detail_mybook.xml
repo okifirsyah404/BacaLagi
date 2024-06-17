@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Price"
-                style="@style/Theme.BacaLagi.Text.BodyMedium" />
+                style="@style/Theme.BacaLagi.Text.LabelLarge" />
 
             <TextView
                 android:id="@+id/tv_price_recommendation"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Rp100.000"
-                style="@style/Theme.BacaLagi.Text.BodyLarge" />
+                style="@style/Theme.BacaLagi.Text.BodyMedium" />
 
         </LinearLayout>
     </ScrollView>
@@ -86,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Set as Done"
+            android:text="@string/set_as_done"
             android:textColor="@android:color/white"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>

@@ -57,4 +57,6 @@
     <string name="appbar_title_privacy_policy">Kebijakan Privasi</string>
     <string name="change_image">Ubah Foto</string>
     <string name="button_save">Simpan</string>
+    <string name="submit">Unggah</string>
+    <string name="set_as_done">Tandai Terjual</string>
 </resources>

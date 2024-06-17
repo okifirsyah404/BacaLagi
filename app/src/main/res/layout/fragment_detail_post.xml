@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Price Recommendation"
-                style="@style/Theme.BacaLagi.Text.BodyMedium" />
+                style="@style/Theme.BacaLagi.Text.LabelLarge" />
 
             <TextView
                 android:id="@+id/tv_price_recommendation"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Rp100.000"
-                style="@style/Theme.BacaLagi.Text.BodyLarge" />
+                style="@style/Theme.BacaLagi.Text.BodyMedium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/shr_agreement"
-                    style="@style/Theme.BacaLagi.Text.BodyMedium" />
+                    style="@style/Theme.BacaLagi.Text.LabelMedium" />
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/toggleButton"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Price"
-                style="@style/Theme.BacaLagi.Text.BodyMedium" />
+                style="@style/Theme.BacaLagi.Text.LabelLarge" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_price"
@@ -133,7 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

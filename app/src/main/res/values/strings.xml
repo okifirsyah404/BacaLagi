@@ -65,4 +65,6 @@
     <string name="appbar_title_privacy_policy">Privacy Policy</string>
     <string name="change_image">Change Image</string>
     <string name="button_save">Save</string>
+    <string name="submit">Submit</string>
+    <string name="set_as_done">Set as Sold</string>
 </resources>

@@ -1,22 +1,11 @@
 package com.reader.bacalagi.presentation.view.post
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.net.Uri
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.databinding.FragmentDashboardBinding
 import com.reader.bacalagi.databinding.FragmentPostBinding
 
 class PostFragment : BaseFragment<FragmentPostBinding>() {
@@ -33,10 +22,10 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
     }
 
     override fun initUI() {
-        binding.ivUploadImage.ivUpload.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
-        }
+//        binding.ivUploadImage.ivUpload.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+//        }
     }
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,7 +41,7 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 //    }
 
     override fun initAppBar() {
-        binding.mainToolbar.apply {
+        binding.mainToolbarPost.apply {
             mainToolbar.title = getString(R.string.appbar_title_post)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
