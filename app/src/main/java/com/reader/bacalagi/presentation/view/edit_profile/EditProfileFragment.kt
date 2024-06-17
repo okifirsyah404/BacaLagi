@@ -71,7 +71,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
     override fun initAppBar() {
         binding.mainToolbarEditProfile.apply {
-            mainToolbar.title = "Edit Profile"
+            mainToolbar.title = getString(R.string.appbar_title_edit_profile)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
             mainToolbar.setNavigationOnClickListener {

@@ -24,7 +24,7 @@ class PrivacyPolicyFragment : BaseFragment<FragmentPrivacyPolicyBinding>() {
 
     override fun initAppBar() {
         binding.mainToolbarPrivacyPolicy.apply {
-            mainToolbar.title = "Privacy Policy"
+            mainToolbar.title = getString(R.string.appbar_title_privacy_policy)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
             mainToolbar.setNavigationOnClickListener {

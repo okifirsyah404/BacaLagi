@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/dimen_16dp"
-                android:text="Ubah Foto"
+                android:text="@string/change_image"
                 android:textColor="@color/primary_50"
                 app:icon="@drawable/ic_camera"
                 app:strokeColor="@color/primary_50" />
@@ -181,7 +181,7 @@
             style="@style/Theme.BacaLagi.FilledButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/button_save"
             android:textSize="16sp" />
     </FrameLayout>
 

@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.reader.bacalagi.R
-import com.reader.bacalagi.databinding.ItemTransactionBinding
-
-class CardAdapterTransaction(private val items: List<CardItem>) :
-    RecyclerView.Adapter<CardAdapterTransaction.CardViewHolder>() {
+import com.reader.bacalagi.databinding.ItemBookBinding
+class CardAdapterBook(private val items: List<CardItem>) :
+    RecyclerView.Adapter<CardAdapterBook.CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val binding = ItemTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardViewHolder(binding)
     }
 
@@ -21,13 +20,13 @@ class CardAdapterTransaction(private val items: List<CardItem>) :
 
     override fun getItemCount(): Int = items.size
 
-    inner class CardViewHolder(private val binding: ItemTransactionBinding) :
+    inner class CardViewHolder(private val binding: ItemBookBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CardItem) {
             binding.tvDate.text = item.date
             binding.tvStatus.text = item.status
-            binding.ivImage.setImageResource(item.imageRes)
+            binding.ivBook.setImageResource(item.imageRes)
             binding.tvTitle.text = item.title
 
             val color = when (item.status) {

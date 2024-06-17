@@ -53,7 +53,7 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 
     override fun initAppBar() {
         binding.mainToolbar.apply {
-            mainToolbar.title = "Post Book"
+            mainToolbar.title = getString(R.string.appbar_title_post)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
             mainToolbar.setNavigationOnClickListener {

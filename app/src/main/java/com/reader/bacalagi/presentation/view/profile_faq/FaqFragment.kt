@@ -22,7 +22,7 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>() {
 
     override fun initAppBar() {
         binding.mainToolbarFaq.apply {
-            mainToolbar.title = "Frequently Ask Question"
+            mainToolbar.title = getString(R.string.appbar_title_faq)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
             mainToolbar.setNavigationOnClickListener {

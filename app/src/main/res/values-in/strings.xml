@@ -50,4 +50,11 @@
     <string name="edt_label_province">Provinsi</string>
     <string name="edt_label_regency">Kota/Kabupaten</string>
     <string name="edt_label_address">Alamat</string>
+    <string name="appbar_title_book">Buku Saya</string>
+    <string name="appbar_title_edit_profile">Ubah Profil</string>
+    <string name="appbar_title_post">Unggah Buku</string>
+    <string name="appbar_title_faq">Pertanyaan yang Sering Ditanyakan</string>
+    <string name="appbar_title_privacy_policy">Kebijakan Privasi</string>
+    <string name="change_image">Ubah Foto</string>
+    <string name="button_save">Simpan</string>
 </resources>

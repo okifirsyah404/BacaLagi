@@ -35,7 +35,7 @@
     <string name="btn_label_sign_out">Sign Out</string>
     <string name="notif_connection_connected">Connected</string>
     <string name="notif_connection_disconnected">Disconnected</string>
-    <string name="btn_label_sign_in_again">Sing In Again</string>
+    <string name="btn_label_sign_in_again">Sign In Again</string>
     <string name="title_failed_unauthorize">Your Session Was Ended</string>
     <string name="msg_failed_unauthorize">Please sing in again to use Baca Lagi application</string>
     <string name="code_unauthorized" translatable="false">Unauthorized</string>
@@ -58,4 +58,11 @@
     <string name="edt_label_province">Province</string>
     <string name="edt_label_regency">Regency</string>
     <string name="edt_label_address">Address</string>
+    <string name="appbar_title_book">My Books</string>
+    <string name="appbar_title_edit_profile">Edit Profile</string>
+    <string name="appbar_title_post">Post Book</string>
+    <string name="appbar_title_faq">Frequently Ask Question</string>
+    <string name="appbar_title_privacy_policy">Privacy Policy</string>
+    <string name="change_image">Change Image</string>
+    <string name="button_save">Save</string>
 </resources>
