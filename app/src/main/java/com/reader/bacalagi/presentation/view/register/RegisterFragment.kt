@@ -134,26 +134,41 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
             if (name.isEmpty()) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please fill in the name field"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_sign_out)
                 )
                 return@setOnClickListener
             }
 
             if (phoneNumber.isEmpty()) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please fill in the phone number field"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_phone_number_field_empty)
                 )
                 return@setOnClickListener
             }
 
-            if (province == null || regency == null) {
+            if (province == null) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please select province and regency"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_province_field_empty)
                 )
 
+                return@setOnClickListener
+            }
+
+            if (regency == null) {
+                showSingleActionDialog(
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_regency_field_empty)
+                )
+            }
+
+            if (address.isEmpty()) {
+                showSingleActionDialog(
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_address_field_empty)
+                )
                 return@setOnClickListener
             }
 
@@ -180,10 +195,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 showLoading(false)
                 showError(true, errorMessage)
             }
-
             onSuccess = {
                 showLoading(false)
                 showError(false, "")
+
+                province?.let { it1 -> viewModel.saveSelectedProvince(it1.toModel()) }
+                regency?.let { it1 -> viewModel.saveSelectedRegency(it1.toModel()) }
+
                 findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToDashboardFragment())
             }
         }

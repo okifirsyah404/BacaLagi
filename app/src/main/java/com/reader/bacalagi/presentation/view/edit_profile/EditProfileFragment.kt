@@ -18,6 +18,7 @@ import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentEditProfileBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.domain.utils.extension.observeSingleEvent
 import com.reader.bacalagi.presentation.parcel.AreaContextParcel
 import com.reader.bacalagi.presentation.parcel.ProvinceParcel
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
@@ -29,6 +30,7 @@ import com.reader.bacalagi.utils.extension.showSingleActionDialog
 import com.reader.bacalagi.utils.extension.toCapitalCase
 import com.reader.bacalagi.utils.helper.MutableReference
 import com.reader.bacalagi.utils.helper.getImageUri
+import com.reader.bacalagi.utils.helper.uriToFile
 import com.yalantis.ucrop.UCrop
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -61,6 +63,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
     private var province: ProvinceParcel? = null
     private var regency: RegencyParcel? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getProvince(args.profile.province)
+        viewModel.getRegency(args.profile.regency)
+    }
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,7 +81,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
         binding.mainToolbarEditProfile.apply {
             mainToolbar.title = getString(R.string.appbar_title_edit_profile)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
-
             mainToolbar.setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
@@ -81,17 +88,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
     }
 
     override fun initUI() {
-
         binding.apply {
             tilName.editText?.setText(args.profile.name)
             tilNoWhatsapp.editText?.setText(args.profile.phoneNumber)
             tilAddress.editText?.setText(args.profile.address)
-            tilProvince.editText?.setText(args.profile.province)
-            tilRegency.editText?.setText(args.profile.regency)
-
             ivProfile.load(args.profile.avatarUrl) {
             }
-
         }
 
         binding.btnChangePhoto.setOnClickListener {
@@ -108,9 +110,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                         RegisterFragment.REGENCY_STATE_NAVIGATION_KEY,
                         null
                     )
-
-                    binding.tilRegency.editText?.setText("")
-                    regency = null
+                    viewModel.deleteSavedRegency()
                 }
 
                 findNavController().navigate(
@@ -124,21 +124,16 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             }
         }
 
-
         binding.tilRegency.apply {
             editText?.setOnClickListener {
                 if (province != null) {
-
                     saveTextFieldState()
-
                     findNavController().navigate(
                         EditProfileFragmentDirections.actionEditProfileFragmentToAreaSelectorFragment(
-                            (
-                                    AreaContextParcel(
-                                        areaContext = AreaContext.REGENCY,
-                                        provinceCode = province?.code
-                                    )
-                                    )
+                            (AreaContextParcel(
+                                areaContext = AreaContext.REGENCY,
+                                provinceCode = province?.code
+                            ))
                         )
                     )
                 } else {
@@ -157,26 +152,41 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
             if (name.isEmpty()) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please fill in the name field"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_sign_out)
                 )
                 return@setOnClickListener
             }
 
             if (phoneNumber.isEmpty()) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please fill in the phone number field"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_phone_number_field_empty)
                 )
                 return@setOnClickListener
             }
 
-            if (province == null || regency == null) {
+            if (province == null) {
                 showSingleActionDialog(
-                    title = "Error",
-                    message = "Please select province and regency"
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_province_field_empty)
                 )
 
+                return@setOnClickListener
+            }
+
+            if (regency == null) {
+                showSingleActionDialog(
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_regency_field_empty)
+                )
+            }
+
+            if (address.isEmpty()) {
+                showSingleActionDialog(
+                    title = getString(R.string.dialog_title_warning),
+                    message = getString(R.string.dialog_msg_address_field_empty)
+                )
                 return@setOnClickListener
             }
 
@@ -185,7 +195,10 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                 phoneNumber = phoneNumber,
                 regency = regency?.name?.toCapitalCase() ?: "",
                 province = province?.name?.toCapitalCase() ?: "",
-                address = address
+                address = address,
+                image = imageUri?.let { uri ->
+                    uriToFile(requireActivity(), uri)
+                }
             )
         }
     }
@@ -214,20 +227,34 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                 if (result.data != null && result.resultCode == RESULT_OK) {
                     imageUri = UCrop.getOutput(result.data!!);
                     setImage()
-
-//                    val outputUri = UCrop.getOutput(result.data!!)
-//                    if (outputUri != null) {
-//                        deleteImage(requireActivity(), imageUri!!)
-//                        imageUri = outputUri
-//                        setImage()
-//                    } else {
-//                        Timber.tag("MainActivity").e("UCrop output Uri is null")
-//                    }
                 }
             }
     }
 
+    override fun initProcess() {
+
+    }
+
     override fun initObservers() {
+
+        viewModel.getSavedProvince().observeSingleEvent(viewLifecycleOwner) {
+            province = it?.let { it1 ->
+                ProvinceParcel.fromSavedProvinceModel(
+                    it1
+                )
+            }
+            binding.tilProvince.editText?.setText(province?.name?.toCapitalCase() ?: "")
+        }
+
+        viewModel.getSavedRegency().observeSingleEvent(viewLifecycleOwner) {
+            regency = it?.let { it1 ->
+                RegencyParcel.fromSavedRegencyModel(
+                    it1
+                )
+            }
+            binding.tilRegency.editText?.setText(regency?.name?.toCapitalCase() ?: "")
+        }
+
         viewModel.user.observeResult(viewLifecycleOwner) {
             onLoading = {
                 showError(false, "")
@@ -265,21 +292,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
     override fun initResume() {
         findNavController().currentBackStackEntry?.savedStateHandle?.run {
-            getLiveData<ProvinceParcel>(
-                PROVINCE_STATE_NAVIGATION_KEY
-            ).observe(viewLifecycleOwner) {
-                province = it
-                binding.tilProvince.editText?.setText(it.name.toCapitalCase())
-            }
-
-            getLiveData<RegencyParcel?>(
-                REGENCY_STATE_NAVIGATION_KEY
-            ).observe(viewLifecycleOwner) {
-                regency = it
-                if (it != null) {
-                    binding.tilRegency.editText?.setText(it.name.toCapitalCase())
-                }
-            }
 
             getLiveData<String>(
                 PHONE_NUMBER_STATE_KEY
@@ -301,7 +313,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
         }
     }
-
 
     private fun saveTextFieldState() {
         findNavController().currentBackStackEntry?.savedStateHandle?.set(

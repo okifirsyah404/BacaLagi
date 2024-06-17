@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentAreaSelectorBinding
 import com.reader.bacalagi.presentation.adapter.ProvincePagingAdapter
@@ -57,11 +58,11 @@ class AreaSelectorFragment : BaseFragment<FragmentAreaSelectorBinding>() {
         binding.toolbar.mainToolbar.apply {
             title = when (areaContext) {
                 AreaContext.PROVINCE -> {
-                    "Select Province"
+                    getString(R.string.appbar_title_select_province)
                 }
 
                 AreaContext.REGENCY -> {
-                    "Select City"
+                    getString(R.string.appbar_title_select_regency)
                 }
 
                 else -> {
@@ -164,6 +165,7 @@ class AreaSelectorFragment : BaseFragment<FragmentAreaSelectorBinding>() {
             province
         )
         findNavController().popBackStack()
+        viewModel.saveSelectedProvince(province.toModel())
     }
 
     private fun backWithRegencyData(regency: RegencyParcel) {
@@ -173,6 +175,7 @@ class AreaSelectorFragment : BaseFragment<FragmentAreaSelectorBinding>() {
             regency
         )
         findNavController().popBackStack()
+        viewModel.saveSelectedRegency(regency.toModel())
     }
 
 }

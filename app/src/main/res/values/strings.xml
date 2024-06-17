@@ -29,7 +29,7 @@
     <string name="shr_hint_price">Price</string>
     <string name="btn_label_start_reading">Start Reading</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="dialog_msg_sign_out">Are you sure to sign out?</string>
     <string name="btn_label_sign_in_google">Continue with Google</string>
     <string name="btn_label_sign_out">Sign Out</string>
@@ -58,6 +58,7 @@
     <string name="edt_label_province">Province</string>
     <string name="edt_label_regency">Regency</string>
     <string name="edt_label_address">Address</string>
+
     <string name="appbar_title_book">My Books</string>
     <string name="appbar_title_edit_profile">Edit Profile</string>
     <string name="appbar_title_post">Post Book</string>
@@ -68,4 +69,15 @@
     <string name="submit">Submit</string>
     <string name="set_as_done">Set as Sold</string>
     <string name="dummy_desc" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat scelerisque varius morbi enim nunc. Ac tortor vitae purus faucibus ornare suspendisse. Neque viverra justo nec ultrices dui sapien eget. Tempor orci dapibus ultrices in iaculis nunc sed augue. Nec nam aliquam sem et tortor consequat. Vitae proin sagittis nisl rhoncus. Viverra maecenas accumsan lacus vel facilisis volutpat. Sed augue lacus viverra vitae congue. Consequat id porta nibh venenatis cras sed felis. Ultricies integer quis auctor elit sed vulputate.</string>
+
+    <string name="appbar_title_select_province">Select Province</string>
+    <string name="appbar_title_select_regency">Select Regency</string>
+    <string name="dialog_title_error" translatable="false">Error</string>
+    <string name="dialog_title_warning">Warning</string>
+    <string name="dialog_msg_name_field_empty">Please fill in the name field</string>
+    <string name="dialog_msg_phone_number_field_empty">Please fill in the phone number field</string>
+    <string name="dialog_msg_province_field_empty">Please fill in the province field</string>
+    <string name="dialog_msg_regency_field_empty">Please fill in the regency field</string>
+    <string name="dialog_msg_address_field_empty">Please fill in the address field</string>
+
 </resources>

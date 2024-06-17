@@ -37,3 +37,14 @@ fun <T> LiveData<Event<ApiResponse<T>>>.observeSingleEventResult(
         }
     }
 }
+
+fun <T> LiveData<Event<T>>.observeSingleEvent(
+    lifecycleOwner: LifecycleOwner,
+    onEventUnhandledContent: (T) -> Unit
+) {
+    this.observe(lifecycleOwner) { event ->
+        event.getContentIfNotHandled()?.let { data ->
+            onEventUnhandledContent(data)
+        }
+    }
+}
