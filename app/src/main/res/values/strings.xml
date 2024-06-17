@@ -58,4 +58,14 @@
     <string name="edt_label_province">Province</string>
     <string name="edt_label_regency">Regency</string>
     <string name="edt_label_address">Address</string>
+    <string name="appbar_title_select_province">Select Province</string>
+    <string name="appbar_title_select_regency">Select Regency</string>
+    <string name="dialog_title_error" translatable="false">Error</string>
+    <string name="dialog_title_warning">Warning</string>
+    <string name="dialog_msg_name_field_empty">Please fill in the name field</string>
+    <string name="dialog_msg_phone_number_field_empty">Please fill in the phone number field</string>
+    <string name="dialog_msg_province_field_empty">Please fill in the province field</string>
+    <string name="dialog_msg_regency_field_empty">Please fill in the regency field</string>
+    <string name="dialog_msg_address_field_empty">Please fill in the address field</string>
+
 </resources>

@@ -8,6 +8,8 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.reader.bacalagi.data.local.model.ProvinceModel
 import com.reader.bacalagi.data.local.model.RegencyModel
+import com.reader.bacalagi.data.local.model.SavedProvinceModel
+import com.reader.bacalagi.data.local.model.SavedRegencyModel
 import com.reader.bacalagi.data.local.room.BacaLagiDatabase
 import com.reader.bacalagi.data.mediator.ProvinceRemoteMediator
 import com.reader.bacalagi.data.mediator.RegencyRemoteMediator
@@ -29,10 +31,17 @@ class AreaDataSource(private val service: AreaService, private val database: Bac
             try {
                 emit(ApiResponse.Loading)
                 val response = service.fetchProvinces(name, page, limit)
+                
                 if (response.data.isEmpty()) {
                     emit(ApiResponse.Error(response.message))
                     return@flow
                 }
+
+                response.data.map {
+                    database.getSavedProvinceDao()
+                        .insertSaved(SavedProvinceModel.fromProvince(ProvinceModel.fromResponse(it)))
+                }
+
 
                 emit(ApiResponse.Success(response.data))
             } catch (e: Exception) {
@@ -69,9 +78,15 @@ class AreaDataSource(private val service: AreaService, private val database: Bac
                     limit = limit,
                     provinceCode = provinceCode
                 )
+
                 if (response.data.isEmpty()) {
                     emit(ApiResponse.Error(response.message))
                     return@flow
+                }
+
+                response.data.map {
+                    database.getSavedRegencyDao()
+                        .insertSaved(SavedRegencyModel.fromRegency(RegencyModel.fromResponse(it)))
                 }
 
                 emit(ApiResponse.Success(response.data))
@@ -92,6 +107,37 @@ class AreaDataSource(private val service: AreaService, private val database: Bac
                 database.getRegencyDao().getAllRegency()
             }
         ).liveData
+    }
+
+    suspend fun saveSelectedProvince(province: ProvinceModel) {
+        try {
+            database.getSavedProvinceDao().insertSaved(SavedProvinceModel.fromProvince(province))
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    fun getSavedProvince(): LiveData<SavedProvinceModel?> =
+        database.getSavedProvinceDao().getSaved()
+
+    suspend fun deleteSavedProvince() {
+        database.getSavedProvinceDao().deleteAll()
+    }
+
+
+    suspend fun saveSelectedRegency(regency: RegencyModel) {
+        try {
+            database.getSavedRegencyDao().insertSaved(SavedRegencyModel.fromRegency(regency))
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    fun getSavedRegency(): LiveData<SavedRegencyModel?> =
+        database.getSavedRegencyDao().getSaved()
+
+    suspend fun deleteSavedRegency() {
+        database.getSavedRegencyDao().deleteAll()
     }
 
 }

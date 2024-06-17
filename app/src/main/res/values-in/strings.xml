@@ -33,4 +33,14 @@
     <string name="edt_label_province">Provinsi</string>
     <string name="edt_label_regency">Kota/Kabupaten</string>
     <string name="edt_label_address">Alamat</string>
+    <string name="appbar_title_select_province">Pilih Provinsi</string>
+    <string name="appbar_title_select_regency">Pilih Kota/Kabupaten</string>
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_title_warning">Perhatian</string>
+    <string name="dialog_msg_name_field_empty">Harap masukkan nama anda</string>
+    <string name="dialog_msg_phone_number_field_empty">Harap masukkan nomor telepon anda</string>
+    <string name="dialog_msg_address_field_empty">Harap masukkan alamat anda</string>
+    <string name="dialog_msg_province_field_empty">Harap pilih provinsi anda</string>
+    <string name="dialog_msg_regency_field_empty">Harap pilih kota/kabupaten anda</string>
+    
 </resources>

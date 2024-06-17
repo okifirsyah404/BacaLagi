@@ -4,6 +4,7 @@ import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.source.ProfileDataSource
 import com.reader.bacalagi.data.utils.ApiResponse
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 
 class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : ProfileRepository {
     override suspend fun getProfile(): Flow<ApiResponse<UserResponse>> {
@@ -15,9 +16,10 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : Profile
         phoneNumber: String,
         regency: String,
         province: String,
-        address: String
+        address: String,
+        image: File?
     ): Flow<ApiResponse<UserResponse>> {
-        return dataSource.editProfile(name, phoneNumber, regency, province, address)
+        return dataSource.editProfile(name, phoneNumber, regency, province, address, image)
     }
 
 }

@@ -22,7 +22,7 @@ val viewModelModule = module {
     }
 
     viewModel {
-        RegisterViewModel(get())
+        RegisterViewModel(get(), get())
     }
 
     viewModel {
@@ -42,7 +42,7 @@ val viewModelModule = module {
     }
 
     viewModel {
-        EditProfileViewModel(get())
+        EditProfileViewModel(get(), get())
     }
 
     viewModel {

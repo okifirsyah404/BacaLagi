@@ -57,7 +57,7 @@ val networkModule = module {
 
 private fun getHeaderAppJsonInterceptor(storagePreference: StoragePreference): Interceptor {
     val headers = HashMap<String, String>()
-    headers["Content-Type"] = "application/json"
+//    headers["Content-Type"] = "application/json"
 
     return HeaderInterceptor(headers, storagePreference)
 }

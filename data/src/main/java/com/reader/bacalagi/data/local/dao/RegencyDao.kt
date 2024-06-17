@@ -10,11 +10,14 @@ import com.reader.bacalagi.data.local.model.RegencyModel
 @Dao
 interface RegencyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(users: List<RegencyModel>)
+    suspend fun insertAll(regency: List<RegencyModel>)
 
     @Query("SELECT * FROM regency")
     fun getAllRegency(): PagingSource<Int, RegencyModel>
 
     @Query("DELETE FROM regency")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM regency WHERE code = :code")
+    fun getRegencyByCode(code: String): RegencyModel
 }

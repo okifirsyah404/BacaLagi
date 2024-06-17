@@ -6,9 +6,11 @@ import com.reader.bacalagi.data.network.service.ProfileService
 import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.data.utils.extension.createErrorResponse
 import com.reader.bacalagi.data.utils.extension.getHttpBodyErrorMessage
+import com.reader.bacalagi.data.utils.extension.toMultipart
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import java.io.File
 
 
 class ProfileDataSource(private val service: ProfileService) {
@@ -18,7 +20,7 @@ class ProfileDataSource(private val service: ProfileService) {
         return flow {
             try {
                 emit(ApiResponse.Loading)
-                val response = service.auth()
+                val response = service.fetchProfile()
 
                 if (response.data == null) {
                     emit(ApiResponse.Error(response.message))
@@ -39,12 +41,13 @@ class ProfileDataSource(private val service: ProfileService) {
         phoneNumber: String,
         regency: String,
         province: String,
-        address: String
+        address: String,
+        file: File?
     ): Flow<ApiResponse<UserResponse>> {
         return flow {
             try {
                 emit(ApiResponse.Loading)
-                val response = service.edit(
+                val response = service.editProfile(
                     EditProfileRequest(
                         name = name,
                         phoneNumber = phoneNumber,
@@ -58,6 +61,16 @@ class ProfileDataSource(private val service: ProfileService) {
                     emit(ApiResponse.Error(response.message))
                     return@flow
                 }
+
+                if (file != null) {
+                    val uploadResponse = service.uploadProfilePicture(file.toMultipart())
+                    
+                    if (uploadResponse.data == null) {
+                        emit(ApiResponse.Error(uploadResponse.message))
+                        return@flow
+                    }
+                }
+
                 emit(ApiResponse.Success(response.data))
             } catch (e: HttpException) {
                 emit(ApiResponse.Error(e.getHttpBodyErrorMessage()))
