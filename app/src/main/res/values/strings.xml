@@ -9,20 +9,20 @@
 
     <string name="hint_phone_number" translatable="false">08xxxxxxxxxx</string>
     <string name="label_phone_number">Whatsapp Number</string>
-    <string name="shr_province">Provinsi</string>
-    <string name="shr_hint_province">Provinsi</string>
-    <string name="shr_address">Alamat</string>
-    <string name="shr_city">Kabupaten/Kota</string>
-    <string name="shr_hint_city">Kabupaten/Kota</string>
-    <string name="shr_kecamatan">Kecamatan</string>
-    <string name="shr_kelurahan">Kelurahan</string>
-    <string name="shr_hint_address">Alamat</string>
+    <string name="shr_province">Province</string>
+    <string name="shr_hint_province">Province</string>
+    <string name="shr_address">Address</string>
+    <string name="shr_city">Regency</string>
+    <string name="shr_hint_city">Regency</string>
+    <string name="shr_kecamatan">Subdistrict</string>
+    <string name="shr_kelurahan">Neighborhood</string>
+    <string name="shr_hint_address">Address</string>
     <string name="shr_title">Title</string>
     <string name="shr_author">Author</string>
     <string name="shr_publisher">Publisher</string>
     <string name="shr_publish_year">Publish Year</string>
     <string name="shr_buy_price">Buy Price</string>
-    <string name="shr_isbn">ISBN</string>
+    <string name="shr_isbn" translatable="false">ISBN</string>
     <string name="shr_language">Language</string>
     <string name="shr_description">Description</string>
     <string name="shr_agreement">Use Recomendation?</string>

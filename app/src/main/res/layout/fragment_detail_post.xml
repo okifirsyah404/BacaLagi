@@ -118,6 +118,7 @@
                 android:id="@+id/tf_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Theme.BacaLagi.TextInputLayout"
                 android:hint="@string/shr_hint_price">
 
                 <com.google.android.material.textfield.TextInputEditText

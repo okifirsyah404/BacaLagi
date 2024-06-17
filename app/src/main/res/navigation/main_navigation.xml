@@ -97,11 +97,14 @@
             android:id="@+id/action_profileFragment_to_faqFragment"
             app:destination="@id/faqFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_transactionFragment"
-            app:destination="@id/transactionFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myBookFragment"
+            app:destination="@id/myBookFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -155,22 +158,27 @@
         android:label="fragment_faq"
         tools:layout="@layout/fragment_faq" />
     <fragment
-        android:id="@+id/transactionFragment"
-        android:name="com.reader.bacalagi.presentation.view.transaction.TransactionFragment"
-        android:label="fragment_transaction"
-        tools:layout="@layout/fragment_transaction">
-        <action
-            android:id="@+id/action_transactionFragment_to_detailTransactionFragment"
-            app:destination="@id/detailTransactionFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailTransactionFragment"
-        android:name="com.reader.bacalagi.presentation.view.transaction_detail.DetailTransactionFragment"
-        android:label="fragment_detail_transaction"
-        tools:layout="@layout/fragment_detail_transaction" />
-    <fragment
         android:id="@+id/settingFragment"
         android:name="com.reader.bacalagi.presentation.view.setting.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/detailMyBookFragment"
+        android:name="com.reader.bacalagi.presentation.view.mybook_detail.DetailMyBookFragment"
+        android:label="fragment_detail_mybook"
+        tools:layout="@layout/fragment_detail_mybook" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.reader.bacalagi.presentation.view.profile_privacy_policy.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/myBookFragment"
+        android:name="com.reader.bacalagi.presentation.view.mybook.MyBookFragment"
+        android:label="fragment_mybook"
+        tools:layout="@layout/fragment_mybook" >
+        <action
+            android:id="@+id/action_myBookFragment_to_detailMyBookFragment"
+            app:destination="@id/detailMyBookFragment" />
+    </fragment>
 </navigation>

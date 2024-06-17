@@ -1,4 +1,4 @@
-package com.reader.bacalagi.presentation.view.transaction
+package com.reader.bacalagi.presentation.view.mybook
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.databinding.FragmentTransactionBinding
+import com.reader.bacalagi.databinding.FragmentMybookBinding
 import com.reader.bacalagi.presentation.adapter.CardAdapterTransaction
 import com.reader.bacalagi.presentation.adapter.CardItem
 
-class TransactionFragment : BaseFragment<FragmentTransactionBinding>() {
+class MyBookFragment : BaseFragment<FragmentMybookBinding>() {
 
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentTransactionBinding {
-        return FragmentTransactionBinding.inflate(inflater, container, false)
+    ): FragmentMybookBinding {
+        return FragmentMybookBinding.inflate(inflater, container, false)
     }
 
     override fun initAppBar() {

@@ -59,12 +59,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 )
             }
             cltBooks.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_myBookFragment)
             }
             cltFaq.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_faqFragment)
             }
             cltSetting.setOnClickListener {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingFragment())
+                findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
+            }
+            cltPrivacyPolicy.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_privacyPolicyFragment)
             }
 
             layoutRefresh.setOnRefreshListener {

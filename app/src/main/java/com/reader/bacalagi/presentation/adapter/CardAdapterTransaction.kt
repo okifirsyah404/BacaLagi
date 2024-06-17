@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.reader.bacalagi.R
 import com.reader.bacalagi.databinding.ItemTransactionBinding
-import com.reader.bacalagi.presentation.view.transaction.TransactionFragment
 
 class CardAdapterTransaction(private val items: List<CardItem>) :
     RecyclerView.Adapter<CardAdapterTransaction.CardViewHolder>() {

@@ -8,6 +8,23 @@
     </string-array>
 
     <string name="label_phone_number">Nomor Whatsapp</string>
+    <string name="shr_province">Provinsi</string>
+    <string name="shr_hint_province">Provinsi</string>
+    <string name="shr_address">Alamat</string>
+    <string name="shr_city">Kabupaten/Kota</string>
+    <string name="shr_hint_city">Kabupaten/Kota</string>
+    <string name="shr_kecamatan">Kecamatan</string>
+    <string name="shr_kelurahan">Kelurahan</string>
+    <string name="shr_hint_address">Alamat</string>
+    <string name="shr_title">Judul</string>
+    <string name="shr_author">Penulis</string>
+    <string name="shr_publisher">Penerbit</string>
+    <string name="shr_publish_year">Tahun Terbit</string>
+    <string name="shr_buy_price">Harga Beli</string>
+    <string name="shr_language">Bahasa</string>
+    <string name="shr_description">Deskripsi</string>
+    <string name="shr_agreement">Gunakan Rekomendasi?</string>
+    <string name="shr_hint_price">Harga</string>
     <string name="btn_label_start_reading">Mulai Reading</string>
     <string name="dialog_msg_sign_out">Apakah anda yakin ingin keluar?</string>
     <string name="btn_label_sign_in_google">Lanjutkan dengan Google</string>
