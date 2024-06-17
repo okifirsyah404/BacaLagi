@@ -24,7 +24,6 @@ class CardAdapterBook(private val items: List<CardItem>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CardItem) {
-            binding.tvDate.text = item.date
             binding.tvStatus.text = item.status
             binding.ivBook.setImageResource(item.imageRes)
             binding.tvTitle.text = item.title

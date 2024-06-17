@@ -23,7 +23,7 @@
             app:boxCornerRadiusTopEnd="@dimen/dimen_32dp"
             app:boxCornerRadiusTopStart="@dimen/dimen_32dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_toolbar_notification"
+            app:layout_constraintEnd_toStartOf="@id/btn_toolbar_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_search">
@@ -36,21 +36,6 @@
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/btn_toolbar_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:contentDescription="Notification Button"
-            android:paddingHorizontal="@dimen/dimen_16dp"
-            android:paddingVertical="@dimen/dimen_16dp"
-            android:src="@drawable/ic_notification"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_toolbar_profile"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/primary_40" />
 
         <ImageButton
             android:id="@+id/btn_toolbar_profile"
