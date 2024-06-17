@@ -10,14 +10,14 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : Profile
         return dataSource.fetchProfile()
     }
 
-    override suspend fun edit(
+    override suspend fun editProfile(
         name: String,
         phoneNumber: String,
         regency: String,
         province: String,
         address: String
     ): Flow<ApiResponse<UserResponse>> {
-        return dataSource.edit(name, phoneNumber, regency, province, address)
+        return dataSource.editProfile(name, phoneNumber, regency, province, address)
     }
 
 }

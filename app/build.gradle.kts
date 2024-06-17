@@ -117,4 +117,7 @@ dependencies {
 
     //Paging
     implementation(libs.androidx.paging.runtime.ktx)
+
+    //UCrop
+    implementation(libs.ucrop)
 }

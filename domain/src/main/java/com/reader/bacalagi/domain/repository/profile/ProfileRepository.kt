@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface ProfileRepository {
 
     suspend fun getProfile(): Flow<ApiResponse<UserResponse>>
-    suspend fun edit(
+    suspend fun editProfile(
         name: String,
         phoneNumber: String,
         regency: String,

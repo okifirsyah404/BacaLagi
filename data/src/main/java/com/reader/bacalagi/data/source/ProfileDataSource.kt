@@ -34,7 +34,7 @@ class ProfileDataSource(private val service: ProfileService) {
         }
     }
 
-    suspend fun edit(
+    suspend fun editProfile(
         name: String,
         phoneNumber: String,
         regency: String,

@@ -1,7 +1,10 @@
 package com.reader.bacalagi.utils.extension
 
 import android.content.Context
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
@@ -91,3 +94,42 @@ fun Fragment.observeInternetConnection(
         }
     }
 }
+
+fun Fragment.requestPermission(
+    permissions: Array<String>,
+    onGranted: () -> Unit,
+    onDenied: () -> Unit
+) {
+    val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val granted = permissions.entries.all { it.value }
+
+        if (granted) {
+            onGranted()
+        } else {
+            onDenied()
+        }
+    }
+
+    requestPermissionLauncher.launch(permissions)
+}
+
+fun Fragment.getCameraLauncher(onSuccess: (isSuccess: Boolean) -> Unit) =
+    registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+        onSuccess(isSuccess)
+    }
+
+fun Fragment.getGalleryLauncher(onSuccess: (uri: Uri?) -> Unit) = registerForActivityResult(
+    ActivityResultContracts.GetContent()
+) { uri ->
+    onSuccess(uri)
+}
+
+fun Fragment.checkMediaPermission(): Boolean =
+    requireContext().checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+
+fun Fragment.checkLocationPermission(): Boolean =
+    requireContext().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            requireContext().checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+

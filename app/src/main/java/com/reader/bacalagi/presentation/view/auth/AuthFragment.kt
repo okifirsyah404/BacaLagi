@@ -122,6 +122,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     }
 
     private fun onResult(data: AuthResponse) {
+        isAuthButtonClicked = false
         if (data.isRegistered) {
             findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
         } else {

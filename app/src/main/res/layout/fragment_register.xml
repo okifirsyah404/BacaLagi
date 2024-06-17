@@ -37,14 +37,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="Nama" />
+                android:text="@string/edt_label_name" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:placeholderText="08xxxxxxxxxx">
+                app:placeholderText="Nama Anda">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/label_phone_number" />
+                android:text="@string/edt_label_phone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_no_whatsapp"
@@ -79,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/shr_province" />
+                android:text="@string/edt_label_province" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_province"
@@ -93,7 +94,6 @@
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/shr_city" />
+                android:text="@string/edt_label_regency" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_regency"
@@ -116,9 +116,7 @@
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <TextView
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
@@ -127,7 +125,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/shr_address" />
+                android:text="@string/edt_label_address" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_address"

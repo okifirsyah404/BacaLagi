@@ -1,13 +1,11 @@
-package com.reader.bacalagi.presentation.view.profile_edit_profile
+package com.reader.bacalagi.presentation.view.edit_profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reader.bacalagi.data.local.preference.StoragePreference
 import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.utils.ApiResponse
-import com.reader.bacalagi.domain.repository.profile.ProfileRepository
 import com.reader.bacalagi.domain.repository.profile.ProfileRepositoryImpl
 import kotlinx.coroutines.launch
 
@@ -25,7 +23,7 @@ class EditProfileViewModel(
         address: String
     ) {
         viewModelScope.launch {
-            repository.edit(name, phoneNumber, regency, province, address)
+            repository.editProfile(name, phoneNumber, regency, province, address)
                 .collect {
                     _user.postValue(it)
                 }

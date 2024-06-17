@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BacaLagi</string>
+
+    <string-array name="pictures">
+        <item>Dari kamera</item>
+        <item>Dari galeri</item>
+    </string-array>
+
     <string name="label_phone_number">Nomor Whatsapp</string>
     <string name="btn_label_start_reading">Mulai Reading</string>
     <string name="dialog_msg_sign_out">Apakah anda yakin ingin keluar?</string>
@@ -11,4 +17,20 @@
     <string name="btn_label_sign_in_again">Masuk Kembali</string>
     <string name="msg_failed_unauthorize">Silakan masuk lagi untuk menggunakan aplikasi Baca Lagi</string>
     <string name="title_failed_unauthorize">Sesi Kamu Telah Berakhir</string>
+    <string name="appbar_title_register">Informasi Tambahan</string>
+    <string name="appbar_title_profile">Profil Saya</string>
+    <string name="appbar_title_setting">Pengaturan Aplikasi</string>
+    <string name="tile_label_theme">Tema Aplikasi</string>
+    <string name="tile_label_language">Bahasa</string>
+    <string name="tile_label_transaction">Transaksi</string>
+    <string name="tile_label_edit_profile">Ubah Profil</string>
+    <string name="tile_label_setting">Pengaturan Aplikasi</string>
+    <string name="tile_label_privacy_policy">Kebijakan Privasi</string>
+    <string name="tile_label_my_books">Buku Saya</string>
+    <string name="dialog_title_sign_out">Keluar</string>
+    <string name="edt_label_name">Nama</string>
+    <string name="edt_label_phone">No Telp (Whatsapp)</string>
+    <string name="edt_label_province">Provinsi</string>
+    <string name="edt_label_regency">Kota/Kabupaten</string>
+    <string name="edt_label_address">Alamat</string>
 </resources>

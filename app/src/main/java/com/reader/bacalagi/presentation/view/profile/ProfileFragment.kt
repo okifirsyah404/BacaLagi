@@ -10,6 +10,7 @@ import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.databinding.FragmentProfileBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.parcel.EditProfileParcel
 import com.reader.bacalagi.presentation.parcel.FailedParcel
 import com.reader.bacalagi.utils.enum.FailedContext
 import com.reader.bacalagi.utils.extension.gone
@@ -32,7 +33,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun initAppBar() {
         binding.toolbar.apply {
-            mainToolbar.title = "My Profile"
+            mainToolbar.title = getString(R.string.appbar_title_profile)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
             mainToolbar.setNavigationOnClickListener {
@@ -49,28 +50,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.apply {
             btnSingOut.setOnClickListener {
                 showDecisionDialog(
-                    title = "Sign Out",
-                    message = "Are you sure you want to sign out?",
+                    title = getString(R.string.dialog_title_sign_out),
+                    message = getString(R.string.dialog_msg_sign_out),
                     onYes = {
                         viewModel.deleteAccessToken()
-                        findNavController().navigate(R.id.action_profileFragment_to_authFragment)
+                        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToAuthFragment())
                     }
                 )
             }
-            cltTransaction.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_transactionFragment)
-            }
-            cltProfile.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            cltBooks.setOnClickListener {
             }
             cltFaq.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_faqFragment)
             }
-            cltPrivacyPolicy.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_privacyPolicyFragment)
-            }
             cltSetting.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingFragment())
             }
 
             layoutRefresh.setOnRefreshListener {
@@ -145,19 +139,29 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun onResult(data: UserResponse) {
         binding.apply {
-            data.profile?.let {
-                tvUserName.text = it.name
-                tvAddress.text = "${it.cityLocality}, ${it.adminAreaLocality}"
+            data.profile?.let { profile ->
+                tvUserName.text = profile.name
+                tvAddress.text = "${profile.cityLocality}, ${profile.adminAreaLocality}"
 
-                ivProfile.load(it.avatarURL) {
+                ivProfile.load(profile.avatarURL) {
                     placeholder(R.drawable.img_emoji_worried)
                     error(R.drawable.img_emoji_dead)
+                }
+
+                cltProfile.setOnClickListener { v ->
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(
+                            EditProfileParcel.fromResponse(profile)
+                        )
+                    )
                 }
             }
 
             data.account?.let {
                 tvEmail.text = it.email
             }
+
+
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.reader.bacalagi.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +28,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initActivityResult()
         initArgument()
         initAppBar()
         initIntent()
@@ -57,8 +61,17 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
+    fun intentToAppSetting() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", requireContext().packageName, null)
+        intent.setData(uri)
+        startActivity(intent)
+    }
+
 
     abstract fun initUI()
+
+    protected open fun initActivityResult() {}
 
     protected open fun initObservers() {}
 

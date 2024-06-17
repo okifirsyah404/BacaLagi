@@ -93,13 +93,12 @@
                     android:orientation="vertical">
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
-                        android:id="@+id/clt_transaction"
+                        android:id="@+id/clt_books"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
-                        app:prefixIcon="@drawable/ic_transaction"
-                        app:title="Transaction"
-                        tools:title="Transaction" />
+                        app:prefixIcon="@drawable/ic_book_library"
+                        app:title="@string/tile_label_my_books" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_profile"
@@ -107,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_person"
-                        app:title="Edit Profile" />
+                        app:title="@string/tile_label_edit_profile" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_setting"
@@ -115,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_setting"
-                        app:title="Settings" />
+                        app:title="@string/tile_label_setting" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_faq"
@@ -123,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_help_center"
-                        app:title="Frequently Ask Question" />
+                        app:title="@string/tile_label_faq" />
 
                     <com.reader.bacalagi.presentation.custom_view.CardListTile
                         android:id="@+id/clt_privacy_policy"
@@ -131,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_8dp"
                         app:prefixIcon="@drawable/ic_verified_user"
-                        app:title="Privacy Policy" />
+                        app:title="@string/tile_label_privacy_policy" />
 
                 </LinearLayout>
 

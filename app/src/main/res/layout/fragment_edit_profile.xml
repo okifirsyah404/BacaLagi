@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".presentation.view.profile_edit_profile.EditProfileFragment">
+    tools:context=".presentation.view.edit_profile.EditProfileFragment">
 
     <include
         android:id="@+id/main_toolbar_edit_profile"
@@ -30,6 +30,28 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="@dimen/dimen_128dp"
+                android:layout_height="@dimen/dimen_128dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_change_photo"
+                style="@style/Theme.BacaLagi.OutlinedButtonTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/dimen_16dp"
+                android:text="Ubah Foto"
+                android:textColor="@color/primary_50"
+                app:icon="@drawable/ic_camera"
+                app:strokeColor="@color/primary_50" />
+
             <TextView
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
@@ -37,22 +59,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="Add Profile Image" />
+                android:text="@string/edt_label_name" />
 
-            <include
-                android:id="@+id/iv_upload_image"
-                layout="@layout/card_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="Nama" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
@@ -72,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/label_phone_number" />
+                android:text="@string/edt_label_phone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_no_whatsapp"
@@ -94,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/shr_province" />
+                android:text="@string/edt_label_province" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_province"
@@ -116,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="@string/shr_city" />
+                android:text="@string/edt_label_regency" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_regency"
@@ -139,7 +147,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="0dp"
-                android:text="@string/shr_address" />
+                android:text="@string/edt_label_address" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_address"

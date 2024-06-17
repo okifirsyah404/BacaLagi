@@ -9,10 +9,7 @@ class MainActivityViewModel(private val pref: StoragePreference) : ViewModel() {
     fun getThemeSettings(): LiveData<Boolean?> {
         return pref.getThemeSetting().asLiveData()
     }
-
-    suspend fun setLocaleSettings(locale: String) {
-        pref.saveLocaleSetting(locale)
-    }
+    
 
     fun getLocaleSettings(): LiveData<String?> {
         return pref.getLocaleSetting().asLiveData()

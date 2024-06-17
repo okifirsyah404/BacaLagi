@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentRegisterBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
@@ -41,7 +42,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initAppBar() {
         binding.toolbar.mainToolbar.apply {
-            title = "Additional Information"
+            title = getString(R.string.appbar_title_register)
 
             setNavigationOnClickListener {
                 findNavController().popBackStack()
@@ -55,12 +56,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         auth.currentUser?.getIdToken(true)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-
                 firebaseTokenId = task.result?.token
-
-                Timber.tag("RegisterFragment").d("Firebase token id: $firebaseTokenId")
-
-
             } else {
                 showSingleActionDialog(
                     title = "Error",

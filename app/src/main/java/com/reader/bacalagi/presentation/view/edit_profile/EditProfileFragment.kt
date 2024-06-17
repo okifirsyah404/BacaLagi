@@ -1,43 +1,66 @@
-package com.reader.bacalagi.presentation.view.profile_edit_profile
+package com.reader.bacalagi.presentation.view.edit_profile
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
-import androidx.fragment.app.viewModels
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
+import androidx.navigation.fragment.navArgs
+import coil.load
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentEditProfileBinding
-import com.reader.bacalagi.databinding.FragmentTransactionBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.parcel.AreaContextParcel
 import com.reader.bacalagi.presentation.parcel.ProvinceParcel
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
-import com.reader.bacalagi.presentation.view.post.PostFragment
 import com.reader.bacalagi.presentation.view.register.RegisterFragment
-import com.reader.bacalagi.presentation.view.register.RegisterFragmentDirections
-import com.reader.bacalagi.presentation.view.register.RegisterViewModel
 import com.reader.bacalagi.utils.enum.AreaContext
+import com.reader.bacalagi.utils.extension.requestPermission
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog
 import com.reader.bacalagi.utils.extension.toCapitalCase
 import com.reader.bacalagi.utils.helper.MutableReference
+import com.reader.bacalagi.utils.helper.getImageUri
+import com.yalantis.ucrop.UCrop
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
     private val viewModel: EditProfileViewModel by viewModel()
+    private val args by navArgs<EditProfileFragmentArgs>()
 
+    private lateinit var uCropLauncher: ActivityResultLauncher<Intent>
     private val loadingDialogReference = MutableReference<AlertDialog?>(null)
+
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                intentToUCrop()
+            }
+        }
+
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri != null) {
+                imageUri = uri
+                intentToUCrop()
+            }
+        }
+
+    private var imageUri: Uri? = null
+
     private var province: ProvinceParcel? = null
     private var regency: RegencyParcel? = null
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,15 +82,20 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
 
     override fun initUI() {
 
-        binding.ivUploadImage.ivUpload.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, EditProfileFragment.PICK_IMAGE_REQUEST)
+        binding.apply {
+            tilName.editText?.setText(args.profile.name)
+            tilNoWhatsapp.editText?.setText(args.profile.phoneNumber)
+            tilAddress.editText?.setText(args.profile.address)
+            tilProvince.editText?.setText(args.profile.province)
+            tilRegency.editText?.setText(args.profile.regency)
+
+            ivProfile.load(args.profile.avatarUrl) {
+            }
+
         }
 
-        binding.tilName.apply {
-        }
-
-        binding.tilNoWhatsapp.apply {
+        binding.btnChangePhoto.setOnClickListener {
+            showImagePickerMenu()
         }
 
         binding.tilProvince.apply {
@@ -104,13 +132,15 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                     saveTextFieldState()
 
                     findNavController().navigate(
-                        EditProfileFragmentDirections.actionEditProfileFragmentToAreaSelectorFragment((
-                            AreaContextParcel(
-                                areaContext = AreaContext.REGENCY,
-                                provinceCode = province?.code
-                            )
+                        EditProfileFragmentDirections.actionEditProfileFragmentToAreaSelectorFragment(
+                            (
+                                    AreaContextParcel(
+                                        areaContext = AreaContext.REGENCY,
+                                        provinceCode = province?.code
+                                    )
+                                    )
                         )
-                    ))
+                    )
                 } else {
                     showSingleActionDialog(
                         title = "Error",
@@ -159,6 +189,44 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             )
         }
     }
+
+    override fun initActivityResult() {
+        requestPermission(
+            arrayOf(
+                android.Manifest.permission.CAMERA
+            ),
+            onGranted = {
+
+            },
+            onDenied = {
+                showSingleActionDialog(
+                    title = "Permission required",
+                    message = "Please allow all permission to continue",
+                    onTap = {
+                        intentToAppSetting()
+                    },
+                )
+            }
+        )
+
+        uCropLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.data != null && result.resultCode == RESULT_OK) {
+                    imageUri = UCrop.getOutput(result.data!!);
+                    setImage()
+
+//                    val outputUri = UCrop.getOutput(result.data!!)
+//                    if (outputUri != null) {
+//                        deleteImage(requireActivity(), imageUri!!)
+//                        imageUri = outputUri
+//                        setImage()
+//                    } else {
+//                        Timber.tag("MainActivity").e("UCrop output Uri is null")
+//                    }
+                }
+            }
+    }
+
     override fun initObservers() {
         viewModel.user.observeResult(viewLifecycleOwner) {
             onLoading = {
@@ -177,6 +245,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             }
         }
     }
+
     override fun showLoading(isLoading: Boolean) {
         showLoadingDialog(
             loading = isLoading,
@@ -249,6 +318,51 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             ADDRESS_STATE_KEY,
             binding.tilAddress.editText?.text.toString()
         )
+    }
+
+    private fun showImagePickerMenu() {
+        MaterialAlertDialogBuilder(requireActivity()).apply {
+            setItems(R.array.pictures) { _, p1 ->
+                if (p1 == 0) {
+                    launchCamera()
+                } else {
+                    launchGallery()
+                }
+            }
+        }.show()
+    }
+
+    private fun setImage() {
+        binding.ivProfile.setImageURI(imageUri)
+    }
+
+    private fun intentToUCrop() {
+        uCropLauncher.launch(
+            UCrop.of(
+                imageUri!!,
+                getImageUri(requireActivity())
+            ).withOptions(
+                UCrop.Options().apply {
+                    setCompressionQuality(100)
+                    withAspectRatio(1f, 1f)
+                    setHideBottomControls(true)
+                    setFreeStyleCropEnabled(true)
+                    setCompressionFormat(Bitmap.CompressFormat.PNG)
+                    withMaxResultSize(512, 512)
+                    setToolbarColor(requireActivity().getColor(R.color.primary_40))
+                    setStatusBarColor(requireActivity().getColor(R.color.primary_50))
+                }
+            ).getIntent(requireActivity())
+        )
+    }
+
+    private fun launchCamera() {
+        imageUri = getImageUri(requireActivity())
+        cameraLauncher.launch(imageUri)
+    }
+
+    private fun launchGallery() {
+        galleryLauncher.launch("image/*")
     }
 
     companion object {
