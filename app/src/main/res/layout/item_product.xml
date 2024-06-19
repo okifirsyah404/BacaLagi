@@ -71,7 +71,7 @@
                 tools:text="Book Title" />
 
             <TextView
-                android:id="@+id/tv_upload_at"
+                android:id="@+id/tv_price"
                 style="@style/Theme.BacaLagi.Text.TitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

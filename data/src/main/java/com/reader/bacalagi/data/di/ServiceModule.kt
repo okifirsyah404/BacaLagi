@@ -2,6 +2,9 @@ package com.reader.bacalagi.data.di
 
 import com.reader.bacalagi.data.network.service.AreaService
 import com.reader.bacalagi.data.network.service.AuthService
+import com.reader.bacalagi.data.network.service.BookService
+import com.reader.bacalagi.data.network.service.FaqService
+import com.reader.bacalagi.data.network.service.PrivacyPolicyService
 import com.reader.bacalagi.data.network.service.ProfileService
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -19,6 +22,15 @@ val serviceModule = module {
     single {
         provideAreaService(get(named(DataDiKey.AREA_RETROFIT)))
     }
+    single {
+        provideBookService(get(named(DataDiKey.DEFAULT_RETROFIT)))
+    }
+    single {
+        provideFaqService(get(named(DataDiKey.DEFAULT_RETROFIT)))
+    }
+    single {
+        providePrivacyPolicyService(get(named(DataDiKey.DEFAULT_RETROFIT)))
+    }
 }
 
 private fun provideAuthService(retrofit: Retrofit): AuthService {
@@ -31,5 +43,14 @@ private fun provideProfileService(retrofit: Retrofit): ProfileService {
 
 private fun provideAreaService(retrofit: Retrofit): AreaService {
     return retrofit.create(AreaService::class.java)
+}
+private fun provideBookService(retrofit: Retrofit): BookService {
+    return retrofit.create(BookService::class.java)
+}
+private fun provideFaqService(retrofit: Retrofit): FaqService {
+    return retrofit.create(FaqService::class.java)
+}
+private fun providePrivacyPolicyService(retrofit: Retrofit): PrivacyPolicyService {
+    return retrofit.create(PrivacyPolicyService::class.java)
 }
 

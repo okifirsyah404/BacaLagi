@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_postFragment"
             app:destination="@id/postFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_detailBookFragment"
+            app:destination="@id/detailBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -184,4 +187,9 @@
             android:id="@+id/action_myBookFragment_to_detailMyBookFragment"
             app:destination="@id/detailMyBookFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailBookFragment"
+        android:name="com.reader.bacalagi.presentation.view.detail_book.DetailBookFragment"
+        android:label="fragment_detail_book"
+        tools:layout="@layout/fragment_detail_book" />
 </navigation>
