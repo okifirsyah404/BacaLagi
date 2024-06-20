@@ -36,7 +36,7 @@ class MyBooksAdapter() : RecyclerView.Adapter<MyBooksAdapter.ProductViewHolder>(
 
         fun bind(item: ProductResponse) {
             binding.apply {
-                tvTitle.text = item.books.title
+                tvTitle.text = item.book?.title ?: ""
                 tvPrice.text = item.finalPrice.toString()
                 tvStatus.text = item.status
             }
