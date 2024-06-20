@@ -4,7 +4,9 @@ import com.reader.bacalagi.data.network.response.AuthResponse
 import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.source.AuthDataSource
 import com.reader.bacalagi.data.utils.ApiResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class AuthRepositoryImpl(private val dataSource: AuthDataSource) : AuthRepository {
     override suspend fun auth(firebaseTokenId: String): Flow<ApiResponse<AuthResponse>> {
@@ -20,6 +22,9 @@ class AuthRepositoryImpl(private val dataSource: AuthDataSource) : AuthRepositor
         firebaseTokenId: String
     ): Flow<ApiResponse<UserResponse>> {
         return dataSource.register(name, phoneNumber, regency, province, address, firebaseTokenId)
+            .flowOn(
+                Dispatchers.IO
+            )
     }
 
 

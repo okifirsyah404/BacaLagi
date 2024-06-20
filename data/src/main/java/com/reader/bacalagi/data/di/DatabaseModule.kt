@@ -13,8 +13,12 @@ val databaseModule = module {
     factory { get<BacaLagiDatabase>().getRegencyDao() }
     factory { get<BacaLagiDatabase>().getProvinceRemoteKeysDao() }
     factory { get<BacaLagiDatabase>().getRegencyRemoteKeysDao() }
-    factory { get<BacaLagiDatabase>().getBookDao() }
-    factory { get<BacaLagiDatabase>().bookRemoteKeysDao() }
+    factory { get<BacaLagiDatabase>().getSavedProvinceDao() }
+    factory { get<BacaLagiDatabase>().getSavedRegencyDao() }
+    factory { get<BacaLagiDatabase>().getGeneralProductDao() }
+    factory { get<BacaLagiDatabase>().getGeneralProductRemoteKeysDao() }
+//    factory { get<BacaLagiDatabase>().getBookDao() }
+//    factory { get<BacaLagiDatabase>().bookRemoteKeysDao() }
 
     single { provideDatabase(androidApplication()) }
 }

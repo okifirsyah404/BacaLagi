@@ -116,12 +116,16 @@
         android:id="@+id/postFragment"
         android:name="com.reader.bacalagi.presentation.view.post.PostFragment"
         android:label="fragment_post"
-        tools:layout="@layout/fragment_post" />
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/action_postFragment_to_detailPostFragment"
+            app:destination="@id/detailPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailPostFragment"
         android:name="com.reader.bacalagi.presentation.view.post_detail.DetailPostFragment"
         android:label="fragment_detail_post"
-        tools:layout="@layout/fragment_detail_post" />
+        tools:layout="@layout/fragment_detail_post"></fragment>
     <fragment
         android:id="@+id/areaSelectorFragment"
         android:name="com.reader.bacalagi.presentation.view.area_selector.AreaSelectorFragment"
@@ -182,7 +186,7 @@
         android:id="@+id/myBookFragment"
         android:name="com.reader.bacalagi.presentation.view.mybook.MyBookFragment"
         android:label="fragment_mybook"
-        tools:layout="@layout/fragment_mybook" >
+        tools:layout="@layout/fragment_mybook">
         <action
             android:id="@+id/action_myBookFragment_to_detailMyBookFragment"
             app:destination="@id/detailMyBookFragment" />
