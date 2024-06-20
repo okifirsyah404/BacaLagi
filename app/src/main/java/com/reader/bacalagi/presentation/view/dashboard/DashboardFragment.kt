@@ -1,16 +1,18 @@
 package com.reader.bacalagi.presentation.view.dashboard
 
-import BookPagingAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDashboardBinding
+import com.reader.bacalagi.presentation.adapter.DashboardProductPagingAdapter
+import com.reader.bacalagi.utils.decorator.ListRecyclerViewItemDivider
 import com.reader.bacalagi.utils.extension.hide
 import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,6 +20,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val viewModel: DashboardViewModel by viewModel()
+    private val productAdapter: DashboardProductPagingAdapter by lazy {
+        DashboardProductPagingAdapter(
+            onClick = {
+//            navigateToDetailBookFragment(it)
+            }
+        )
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -25,12 +34,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         savedInstanceState: Bundle?
     ): FragmentDashboardBinding {
         return FragmentDashboardBinding.inflate(inflater, container, false)
-    }
-
-    private val bookPagingAdapter: BookPagingAdapter by lazy {
-        BookPagingAdapter(requireActivity()) {
-            navigateToDetailBookFragment(it)
-        }
     }
 
     override fun initAppBar() {
@@ -51,52 +54,38 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding.rvProductMain.apply {
             layoutManager = LinearLayoutManager(requireContext(), GridLayoutManager.VERTICAL, false)
 
-            adapter = bookPagingAdapter
+            adapter = productAdapter
 
-            isNestedScrollingEnabled = false
+            addItemDecoration(
+                ListRecyclerViewItemDivider(
+                    resources.getDimension(R.dimen.dimen_8dp).toInt(),
+                    resources.getDimension(R.dimen.dimen_16dp).toInt()
+                )
+            )
         }
     }
 
     override fun initActions() {
+        binding.apply {
+            layoutRefresh.setOnRefreshListener {
+                viewModel.fetchProducts()
+                layoutRefresh.isRefreshing = false
+            }
+        }
+    }
 
-            initObservers()
-            binding.rvProductMain.scrollToPosition(0)
+    override fun initProcess() {
+        viewModel.fetchProducts()
     }
 
     override fun initObservers() {
-        viewModel.getPagingBooks().observe(this) {
-            bookPagingAdapter.submitData(lifecycle, it)
+
+        viewModel.getProductList().observe(viewLifecycleOwner) {
+            productAdapter.submitData(lifecycle, it)
         }
 
-        bookPagingAdapter.addLoadStateListener { loadState ->
-            if (loadState.append.endOfPaginationReached && bookPagingAdapter.itemCount < 1) {
-                showError(false, "")
-                showEmpty(true)
-            }
-
-            when (loadState.refresh) {
-                is LoadState.Loading -> {
-                    showEmpty(false)
-                    showError(false, "")
-                    showLoading(true)
-                }
-                is LoadState.NotLoading -> {
-                    showError(false, "")
-                    showEmpty(false)
-                    showLoading(false)
-                    binding.rvProductMain.scheduleLayoutAnimation()
-                }
-                is LoadState.Error -> {
-                    showLoading(false)
-                    showEmpty(false)
-                    showError(true, (loadState.refresh as LoadState.Error).error.message.toString())
-                }
-                else -> {
-                    showLoading(false)
-                    showError(false, "")
-                    showEmpty(false)
-                }
-            }
+        productAdapter.addLoadStateListener {
+            loadStateListener(it)
         }
     }
 
@@ -110,8 +99,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun showLoading(isLoading: Boolean) {
         if (isLoading) {
+            binding.loadingContainer.root.show()
             binding.rvProductMain.hide()
         } else {
+            binding.loadingContainer.root.hide()
             binding.rvProductMain.show()
         }
     }
@@ -121,6 +112,25 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
             binding.rvProductMain.hide()
         } else {
             binding.rvProductMain.show()
+        }
+    }
+
+    private fun loadStateListener(loadState: CombinedLoadStates) {
+
+        if (view == null) return
+
+        when (loadState.refresh) {
+            is LoadState.NotLoading -> {
+                showLoading(false)
+            }
+
+            is LoadState.Loading -> {
+                showLoading(true)
+            }
+
+            is LoadState.Error -> {
+                showLoading(false)
+            }
         }
     }
 

@@ -15,43 +15,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/layout_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="@dimen/dimen_16dp"-->
-<!--            android:layout_marginTop="@dimen/dimen_16dp"-->
-<!--            android:layout_marginBottom="@dimen/dimen_8dp"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <androidx.appcompat.widget.AppCompatTextView-->
-<!--                style="@style/Theme.BacaLagi.Text.LabelLarge"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:text="Cari-cari dulu nih" />-->
-
-<!--        </RelativeLayout>-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_product_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_height="match_parent"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_product"
             tools:orientation="vertical"
-            tools:paddingHorizontal="@dimen/dimen_16dp"
             tools:scrollbars="vertical"
             tools:spanCount="2" />
 
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -10,20 +10,22 @@ import com.reader.bacalagi.data.network.response.AreaProvinceResponse
 import com.reader.bacalagi.data.network.response.AreaRegenciesResponse
 import com.reader.bacalagi.data.source.AreaDataSource
 import com.reader.bacalagi.data.utils.ApiResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class AreaRepositoryImpl(private val dataSource: AreaDataSource) : AreaRepository {
 
     suspend fun fetchProvinces(
         name: String?,
     ): Flow<ApiResponse<List<AreaProvinceResponse>>> =
-        dataSource.fetchProvinces(name = name)
+        dataSource.fetchProvinces(name = name).flowOn(Dispatchers.IO)
 
     override fun getPagingProvince(): LiveData<PagingData<ProvinceModel>> =
         dataSource.fetchPagingProvinces()
 
     suspend fun fetchRegencies(name: String?): Flow<ApiResponse<List<AreaRegenciesResponse>>> =
-        dataSource.fetchRegencies(name = name)
+        dataSource.fetchRegencies(name = name).flowOn(Dispatchers.IO)
 
     override fun getPagingRegency(provinceId: String): LiveData<PagingData<RegencyModel>> =
         dataSource.fetchPagingRegencies(provinceId)
