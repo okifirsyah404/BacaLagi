@@ -21,13 +21,6 @@ class EditProfileViewModel(
 ) : ViewModel() {
     val user: LiveData<ApiResponse<UserResponse>> by lazy { _user }
     private val _user = MutableLiveData<ApiResponse<UserResponse>>()
-
-//    val province: LiveData<ApiResponse<List<AreaProvinceResponse>>> by lazy { _province }
-//    private val _province = MutableLiveData<ApiResponse<List<AreaProvinceResponse>>>()
-//
-//    val regency: LiveData<ApiResponse<List<AreaRegenciesResponse>>> by lazy { _regency }
-//    private val _regency = MutableLiveData<ApiResponse<List<AreaRegenciesResponse>>>()
-
     fun edit(
         name: String,
         phoneNumber: String,

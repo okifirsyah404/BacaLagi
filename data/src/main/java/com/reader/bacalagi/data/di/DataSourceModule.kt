@@ -1,5 +1,6 @@
 package com.reader.bacalagi.data.di
 
+import com.reader.bacalagi.data.local.model.ProductDataSource
 import com.reader.bacalagi.data.source.AreaDataSource
 import com.reader.bacalagi.data.source.AuthDataSource
 import com.reader.bacalagi.data.source.BookDataSource
@@ -15,4 +16,5 @@ val dataSourceModule = module {
     single { BookDataSource(get(), get()) }
     single { FaqDataSource(get()) }
     single { PolicyDataSource(get()) }
+    single { ProductDataSource(get()) }
 }

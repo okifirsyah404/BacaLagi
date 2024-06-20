@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 class FaqDataSource(private val service: FaqService) {
-    suspend fun getAllFaq(): Flow<ApiResponse<FaqResponse>> {
+    suspend fun getAllFaq(): Flow<ApiResponse<List<FaqResponse>>> {
         return flow {
             try {
                 emit(ApiResponse.Loading)

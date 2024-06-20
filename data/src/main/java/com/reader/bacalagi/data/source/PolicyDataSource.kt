@@ -1,8 +1,6 @@
 package com.reader.bacalagi.data.source
 
-import com.reader.bacalagi.data.network.response.FaqResponse
 import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
-import com.reader.bacalagi.data.network.service.FaqService
 import com.reader.bacalagi.data.network.service.PolicyService
 import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.data.utils.extension.createErrorResponse
@@ -12,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 class PolicyDataSource(private val service: PolicyService) {
-    suspend fun getAllPolicy(): Flow<ApiResponse<PrivacyPolicyResponse>> {
+    suspend fun getAllPolicy(): Flow<ApiResponse<List<PrivacyPolicyResponse>>> {
         return flow {
             try {
                 emit(ApiResponse.Loading)

@@ -13,5 +13,5 @@ import kotlinx.coroutines.flow.first
 
 interface FaqRepository {
 
-    suspend fun getAll(): Flow<ApiResponse<FaqResponse>>
+    suspend fun getAll(): Flow<ApiResponse<List<FaqResponse>>>
 }

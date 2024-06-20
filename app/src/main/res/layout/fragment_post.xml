@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".presentation.view.post.PostFragment">
 
     <include
@@ -18,7 +19,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/rl_button_post"
+        app:layout_constraintBottom_toTopOf="@id/fl_bottom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_toolbar_post">
@@ -29,26 +30,42 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <include
-                android:id="@+id/iv_upload_image"
-                layout="@layout/card_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="@dimen/dimen_128dp"
+                android:layout_height="@dimen/dimen_128dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_change_photo"
+                style="@style/Theme.BacaLagi.OutlinedButtonTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/dimen_16dp"
+                android:text="@string/upload_image"
+                android:textColor="@color/primary_50"
+                app:icon="@drawable/ic_camera"
+                app:strokeColor="@color/primary_50" />
 
             <TextView
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_title" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_title"
+                android:id="@+id/til_title"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_title">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -59,16 +76,16 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_author" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_author"
+                android:id="@+id/til_author"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_author">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -79,16 +96,16 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_publisher" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_publisher"
+                android:id="@+id/til_publisher"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_publisher">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -99,16 +116,16 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_publish_year" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_publish_year"
+                android:id="@+id/til_publish_year"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_publish_year">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -119,16 +136,16 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_buy_price" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_buy_price"
+                android:id="@+id/til_buy_price"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_buy_price">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -139,16 +156,16 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_isbn" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_isbn"
+                android:id="@+id/til_isbn"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_isbn">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -159,47 +176,74 @@
                 style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/shr_language" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_language"
+                android:id="@+id/til_language"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/shr_language">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="@style/Theme.BacaLagi.Text.LabelLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/shr_description" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_description"
+                style="@style/Theme.BacaLagi.TextInputLayout.MultiLines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:maxLines="5"
+                    android:minLines="5" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rl_button_post"
+    <FrameLayout
+        android:id="@+id/fl_bottom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_stroke_top"
-        android:backgroundTint="?attr/backgroundColor"
+        android:background="@drawable/bg_stroke_top_primary"
+        android:paddingHorizontal="@dimen/dimen_16dp"
+        android:paddingVertical="@dimen/dimen_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_submit"
+            android:id="@+id/btn_post"
             style="@style/Theme.BacaLagi.FilledButtonTheme"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:layout_marginVertical="@dimen/dimen_8dp"
-            android:text="Submit"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@string/button_submit"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <include
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar_post" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

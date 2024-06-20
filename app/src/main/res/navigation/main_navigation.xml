@@ -116,12 +116,20 @@
         android:id="@+id/postFragment"
         android:name="com.reader.bacalagi.presentation.view.post.PostFragment"
         android:label="fragment_post"
-        tools:layout="@layout/fragment_post" />
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_detailPostFragment"
+            app:destination="@id/detailPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailPostFragment"
         android:name="com.reader.bacalagi.presentation.view.post_detail.DetailPostFragment"
         android:label="fragment_detail_post"
-        tools:layout="@layout/fragment_detail_post" />
+        tools:layout="@layout/fragment_detail_post" >
+        <argument
+            android:name="product"
+            app:argType="com.reader.bacalagi.presentation.parcel.ProductParcel" />
+    </fragment>
     <fragment
         android:id="@+id/areaSelectorFragment"
         android:name="com.reader.bacalagi.presentation.view.area_selector.AreaSelectorFragment"

@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailPostBinding
 import com.reader.bacalagi.databinding.FragmentProfileBinding
+import com.reader.bacalagi.presentation.view.edit_profile.EditProfileFragmentArgs
+import com.reader.bacalagi.utils.helper.uriToFile
 
 class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
 
+    private val args by navArgs<DetailPostFragmentArgs>()
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +28,12 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     }
 
     override fun initUI() {
-
+//        viewModel.postProduct(
+//            buyPrice = buyPrice,
+//            image = imageUri.let { uri ->
+//                uriToFile(requireActivity(), uri!!)
+//            }
+//        )
     }
 
     override fun initAppBar() {
@@ -39,9 +48,15 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     }
 
     override fun initActions() {
+
         binding.toggleButton.check(R.id.button2)
         binding.labelPrice.visibility = View.GONE
         binding.tfPrice.visibility = View.GONE
+
+        binding.ivProduct.setImageURI(args.product.imageUri)
+        binding.tvTitle.text = args.product.title
+        binding.tvDescription.text = args.product.description
+        binding.tvPriceRecommendation.text = args.product.predictionResult
 
         binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {

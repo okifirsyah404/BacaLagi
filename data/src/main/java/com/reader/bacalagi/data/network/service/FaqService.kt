@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface FaqService {
     @GET("faq")
-    suspend fun getAllFaq(): BaseResponse<FaqResponse>
+    suspend fun getAllFaq(): BaseResponse<List<FaqResponse>>
 }

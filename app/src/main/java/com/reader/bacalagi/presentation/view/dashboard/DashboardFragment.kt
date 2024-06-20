@@ -42,6 +42,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
                 findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
             }
         }
+        binding.fabAddStory.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_postFragment)
+        }
     }
 
     override fun initUI() {

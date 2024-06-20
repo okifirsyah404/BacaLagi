@@ -68,4 +68,6 @@
     <string name="dialog_msg_address_field_empty">Harap masukkan alamat anda</string>
     <string name="dialog_msg_province_field_empty">Harap pilih provinsi anda</string>
     <string name="dialog_msg_regency_field_empty">Harap pilih kota/kabupaten anda</string>
+    <string name="upload_image">Unggah Gambar</string>
+    <string name="button_submit">Kirim</string>
 </resources>

@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface PolicyService {
     @GET("privacy-policy")
-    suspend fun getAllPolicy(): BaseResponse<PrivacyPolicyResponse>
+    suspend fun getAllPolicy(): BaseResponse<List<PrivacyPolicyResponse>>
 }

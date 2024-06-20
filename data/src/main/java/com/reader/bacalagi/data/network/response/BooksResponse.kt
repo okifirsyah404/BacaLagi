@@ -11,5 +11,5 @@ data class BooksResponse(
     val language: String,
     val imageUrl: String,
     val buyPrice: Long,
-    val predictionResults: PredictionResults
+    val predictionResponse: PredictionResponse
 )

@@ -7,13 +7,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.data.network.response.FaqResponse
 import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
 import com.reader.bacalagi.databinding.FragmentPrivacyPolicyBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
-import com.reader.bacalagi.presentation.adapter.CardAdapterFaq
 import com.reader.bacalagi.presentation.adapter.PrivacyPolicyAdapter
-import com.reader.bacalagi.presentation.view.profile_faq.FaqViewModel
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,7 +18,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PrivacyPolicyFragment : BaseFragment<FragmentPrivacyPolicyBinding>() {
 
     private val viewModel: PrivacyPolicyViewModel by viewModel()
-    private lateinit var adapter: PrivacyPolicyAdapter
+
+    private val policyAdapter: PrivacyPolicyAdapter by lazy { PrivacyPolicyAdapter() }
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,14 +65,14 @@ class PrivacyPolicyFragment : BaseFragment<FragmentPrivacyPolicyBinding>() {
         }
     }
 
-    private fun onResult(data: PrivacyPolicyResponse) {
-        adapter.submitList(data.data)
+    private fun onResult(data: List<PrivacyPolicyResponse>) {
+        policyAdapter.setItems(ArrayList(data))
     }
+
     override fun initUI() {
-        adapter = PrivacyPolicyAdapter()
         binding.rvPrivacyPolicy.apply {
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            this.adapter = policyAdapter
         }
     }
 

@@ -1,11 +1,8 @@
 package com.reader.bacalagi.presentation.view.profile_faq
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
@@ -21,7 +18,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FaqFragment : BaseFragment<FragmentFaqBinding>() {
 
     private val viewModel: FaqViewModel by viewModel()
-    private lateinit var adapter: CardAdapterFaq
+    private val faqAdapter: CardAdapterFaq by lazy { CardAdapterFaq() }
+
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -68,14 +66,14 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>() {
         }
     }
 
-    private fun onResult(data: FaqResponse) {
-        adapter.submitList(data.ListQuestion)
+    private fun onResult(data: List<FaqResponse>) {
+        faqAdapter.setItems(ArrayList(data))
     }
+
     override fun initUI() {
-        adapter = CardAdapterFaq()
         binding.rvQuestion.apply {
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            this.adapter = faqAdapter
         }
     }
 

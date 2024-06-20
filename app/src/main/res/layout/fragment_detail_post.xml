@@ -29,11 +29,15 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_16dp">
 
-            <include
-                android:id="@+id/iv_upload_image"
-                layout="@layout/card_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_product"
+                android:layout_width="@dimen/dimen_128dp"
+                android:layout_height="@dimen/dimen_128dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_title"
