@@ -1,9 +1,10 @@
 package com.reader.bacalagi.data.network.service
 
+import com.reader.bacalagi.data.base.BaseResponse
 import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
 import retrofit2.http.GET
 
-interface PrivacyPolicyService {
+interface PolicyService {
     @GET("privacy-policy")
-    suspend fun getAllPolicy(): PrivacyPolicyResponse
+    suspend fun getAllPolicy(): BaseResponse<PrivacyPolicyResponse>
 }

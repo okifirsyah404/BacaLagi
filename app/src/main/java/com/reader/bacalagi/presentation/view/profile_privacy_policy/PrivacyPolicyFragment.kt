@@ -7,13 +7,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
+import com.reader.bacalagi.data.network.response.FaqResponse
+import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
 import com.reader.bacalagi.databinding.FragmentPrivacyPolicyBinding
+import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.adapter.CardAdapterFaq
 import com.reader.bacalagi.presentation.adapter.PrivacyPolicyAdapter
+import com.reader.bacalagi.presentation.view.profile_faq.FaqViewModel
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PrivacyPolicyFragment : BaseFragment<FragmentPrivacyPolicyBinding>() {
 
+    private val viewModel: PrivacyPolicyViewModel by viewModel()
     private lateinit var adapter: PrivacyPolicyAdapter
-    private lateinit var myDataList: List<PrivacyPolicyAdapter.MyData>
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,15 +41,54 @@ class PrivacyPolicyFragment : BaseFragment<FragmentPrivacyPolicyBinding>() {
         }
     }
 
+    override fun initProcess() {
+        viewModel.getAllPolicy()
+    }
+
+    override fun initObservers() {
+        viewModel.listPolicy.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onSuccess = {
+                showError(false, "")
+                showLoading(false)
+                onResult(it)
+            }
+            onError = {
+                showLoading(false)
+                showError(true, it)
+            }
+            onEmpty = {
+                showLoading(false)
+                showError(true, getString(R.string.appbar_title_faq))
+            }
+        }
+    }
+
+    private fun onResult(data: PrivacyPolicyResponse) {
+        adapter.submitList(data.data)
+    }
     override fun initUI() {
-        myDataList = listOf(
-            PrivacyPolicyAdapter.MyData("Title 1", getString(R.string.dummy_desc)),
-            PrivacyPolicyAdapter.MyData("Title 2", getString(R.string.dummy_desc)),
-        )
+        adapter = PrivacyPolicyAdapter()
+        binding.rvPrivacyPolicy.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+        }
+    }
 
-        adapter = PrivacyPolicyAdapter(myDataList)
-        binding.rvPrivacyPolicy.layoutManager = LinearLayoutManager(context)
-        binding.rvPrivacyPolicy.adapter = adapter
-
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                rvPrivacyPolicy.gone()
+                loadingContainer.root.show()
+            }
+        } else {
+            binding.apply {
+                rvPrivacyPolicy.show()
+                loadingContainer.root.gone()
+            }
+        }
     }
 }

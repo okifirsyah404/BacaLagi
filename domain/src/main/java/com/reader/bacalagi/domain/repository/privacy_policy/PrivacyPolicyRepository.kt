@@ -1,0 +1,10 @@
+package com.reader.bacalagi.domain.repository.privacy_policy
+
+import com.reader.bacalagi.data.network.response.FaqResponse
+import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
+import com.reader.bacalagi.data.utils.ApiResponse
+import kotlinx.coroutines.flow.Flow
+
+interface PrivacyPolicyRepository {
+    suspend fun getAllPolicy(): Flow<ApiResponse<PrivacyPolicyResponse>>
+}

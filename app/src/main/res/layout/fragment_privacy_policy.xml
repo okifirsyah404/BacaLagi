@@ -20,10 +20,20 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
+        tools:listitem="@layout/list_privacy_policy"
         app:layout_constraintTop_toBottomOf="@id/main_toolbar_privacy_policy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar_privacy_policy" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

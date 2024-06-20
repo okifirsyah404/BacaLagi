@@ -4,7 +4,7 @@ import com.reader.bacalagi.data.network.service.AreaService
 import com.reader.bacalagi.data.network.service.AuthService
 import com.reader.bacalagi.data.network.service.BookService
 import com.reader.bacalagi.data.network.service.FaqService
-import com.reader.bacalagi.data.network.service.PrivacyPolicyService
+import com.reader.bacalagi.data.network.service.PolicyService
 import com.reader.bacalagi.data.network.service.ProfileService
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -50,7 +50,7 @@ private fun provideBookService(retrofit: Retrofit): BookService {
 private fun provideFaqService(retrofit: Retrofit): FaqService {
     return retrofit.create(FaqService::class.java)
 }
-private fun providePrivacyPolicyService(retrofit: Retrofit): PrivacyPolicyService {
-    return retrofit.create(PrivacyPolicyService::class.java)
+private fun providePrivacyPolicyService(retrofit: Retrofit): PolicyService {
+    return retrofit.create(PolicyService::class.java)
 }
 

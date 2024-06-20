@@ -3,12 +3,9 @@ package com.reader.bacalagi.data.local.model
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.ForeignKey
-import androidx.room.Relation
-import com.reader.bacalagi.data.network.response.BooksResponse
+import androidx.room.PrimaryKey
 import com.reader.bacalagi.data.network.response.ProductResponse
-import com.reader.bacalagi.data.network.response.UserResponse
 
 @Entity(
     tableName = "product",
@@ -16,22 +13,26 @@ import com.reader.bacalagi.data.network.response.UserResponse
         ForeignKey(
             entity = BookModel::class,
             parentColumns = ["id"],
-            childColumns = ["books"],
+            childColumns = ["id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
 data class ProductModel(
-    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val status: String,
-    val finalPrice: Long,
+    @ColumnInfo(name = "final_price")
+    val finalPrice: Int,
+    @ColumnInfo(name = "recommended_price")
     val recommendedPrice: Long,
     val description: String,
+    @ColumnInfo(name = "seen_count")
     val seenCount: Long,
+    @ColumnInfo(name = "created_at")
     val createdAt: String,
-    val books: List<BooksResponse>
+    @Embedded(prefix = "book_")
+    val book: BookModel?
 ) {
     companion object {
         fun fromResponse(response: ProductResponse) = ProductModel(
@@ -42,7 +43,17 @@ data class ProductModel(
             description = response.description,
             seenCount = response.seenCount,
             createdAt = response.createdAt,
-            books = listOf(response.books)
+            book = BookModel(
+                id = response.books.id,
+                title = response.books.title,
+                author = response.books.author,
+                isbn = response.books.ISBN,
+                publisher = response.books.publisher,
+                publishYear = response.books.publishYear,
+                language = response.books.language,
+                imageUrl = response.books.imageUrl,
+                buyPrice = response.books.buyPrice
+            )
         )
     }
 }

@@ -10,13 +10,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
+import com.reader.bacalagi.data.network.response.FaqResponse
 import com.reader.bacalagi.databinding.FragmentFaqBinding
+import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.adapter.CardAdapterFaq
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FaqFragment : BaseFragment<FragmentFaqBinding>() {
 
     private val viewModel: FaqViewModel by viewModel()
+    private lateinit var adapter: CardAdapterFaq
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -37,28 +42,54 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>() {
         }
     }
 
+    override fun initProcess() {
+        viewModel.getAllFaq()
+    }
+
+    override fun initObservers() {
+        viewModel.ListFaq.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onSuccess = {
+                showError(false, "")
+                showLoading(false)
+                onResult(it)
+            }
+            onError = {
+                showLoading(false)
+                showError(true, it)
+            }
+            onEmpty = {
+                showLoading(false)
+                showError(true, getString(R.string.appbar_title_faq))
+            }
+        }
+    }
+
+    private fun onResult(data: FaqResponse) {
+        adapter.submitList(data.ListQuestion)
+    }
     override fun initUI() {
-        val adapter = CardAdapterFaq()
+        adapter = CardAdapterFaq()
         binding.rvQuestion.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = adapter
         }
+    }
 
-        // Observe the LiveData
-        viewModel.getAllFaq()
-        viewModel.listFaq.observe(viewLifecycleOwner, Observer { listFaq ->
-            Log.d("FaqFragment", "Observed ListFaq: $listFaq")
-            if (listFaq != null) {
-                adapter.submitList(listFaq)
-            } else {
-                Log.d("FaqFragment", "ListFaq is null")
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                rvQuestion.gone()
+                loadingContainer.root.show()
             }
-        })
-
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
-            if (errorMessage != null) {
-                Log.e("FaqFragment", "Error: $errorMessage")
+        } else {
+            binding.apply {
+                rvQuestion.show()
+                loadingContainer.root.gone()
             }
-        })
+        }
     }
 }

@@ -3,32 +3,20 @@ package com.reader.bacalagi.data.local.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.reader.bacalagi.data.network.response.BooksResponse
+
 @Entity(tableName = "book")
 data class BookModel(
-    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val title: String,
     val author: String,
     val isbn: String,
     val publisher: String,
-    val publishYear: Long,
+    @ColumnInfo(name = "publish_year")
+    val publishYear: Int,
     val language: String,
-    val imageURL: String,
+    @ColumnInfo(name = "image_url")
+    val imageUrl: String,
+    @ColumnInfo(name = "buy_price")
     val buyPrice: Long
-) {
-    companion object {
-        fun fromResponse(response: BooksResponse) = BookModel(
-            id = response.id,
-        title = response.title,
-        author = response.author,
-        isbn = response.isbn,
-        publisher= response.publisher,
-        publishYear= response.publishYear,
-        language= response.language,
-        imageURL= response.imageURL,
-        buyPrice= response.buyPrice
-        )
-    }
-}
+)

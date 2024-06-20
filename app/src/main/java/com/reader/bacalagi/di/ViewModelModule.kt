@@ -58,6 +58,6 @@ val viewModelModule = module {
         FaqViewModel(get())
     }
     viewModel {
-        PrivacyPolicyViewModel()
+        PrivacyPolicyViewModel(get())
     }
 }

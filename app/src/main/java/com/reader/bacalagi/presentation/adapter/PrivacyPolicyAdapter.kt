@@ -1,30 +1,54 @@
 package com.reader.bacalagi.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.reader.bacalagi.data.network.response.ListPolicy
 import com.reader.bacalagi.databinding.ListPrivacyPolicyBinding
 
-class PrivacyPolicyAdapter(private val myDataList: List<MyData>) : RecyclerView.Adapter<PrivacyPolicyAdapter.MyViewHolder>() {
+class PrivacyPolicyAdapter : ListAdapter<ListPolicy, PrivacyPolicyAdapter.ItemViewHolder>(DIFF_CALLBACK) {
 
-    class MyViewHolder(private val binding: ListPrivacyPolicyBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: MyData) {
-            binding.tvTitle.text = data.title
-            binding.tvDesc.text = data.description
+    private var onItemClickCallback: OnItemClickCallBack? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallBack) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    class ItemViewHolder(private val binding: ListPrivacyPolicyBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(policy: ListPolicy, onItemClickCallback: OnItemClickCallBack?) {
+            binding.apply {
+                binding.tvTitle.text = policy.title
+                binding.tvDesc.text = policy.content
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ListPrivacyPolicyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        val binding: ListPrivacyPolicyBinding = ListPrivacyPolicyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myDataList[position])
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val policy = getItem(position)
+        holder.bind(policy, onItemClickCallback)
     }
 
-    override fun getItemCount(): Int {
-        return myDataList.size
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListPolicy>() {
+            override fun areItemsTheSame(oldItem: ListPolicy, newItem: ListPolicy): Boolean {
+                return oldItem.id == newItem.id // Assuming each policy has a unique ID
+            }
+
+            override fun areContentsTheSame(oldItem: ListPolicy, newItem: ListPolicy): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
-    data class MyData(val title: String, val description: String)
+
+    interface OnItemClickCallBack {
+        fun onItemClicked(policy: ListPolicy)
+    }
 }

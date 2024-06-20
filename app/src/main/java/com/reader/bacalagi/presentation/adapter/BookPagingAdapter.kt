@@ -32,9 +32,9 @@ class BookPagingAdapter(private val activity: Activity, private val onClick: (St
         fun bind(product : ProductModel) {
 
             binding.apply {
-                tvItemTitle.text = product.books[0].title
+                tvItemTitle.text = product.book?.title
                 tvPrice.text = product.finalPrice.toString()
-                ivItemPhoto.load(product.books.toString()) {
+                ivItemPhoto.load(product.book.toString()) {
                     placeholder(R.drawable.img_bg)
                 }
 

@@ -1,7 +1,9 @@
 package com.reader.bacalagi.data.network.response
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PredictionResults(
     val id: String,
     val bookCondition: String,
@@ -11,4 +13,4 @@ data class PredictionResults(
     val rippedRatio: Double,
     val wornOutRatio: Double,
     val overallRatio: Double
-)
+) : Parcelable

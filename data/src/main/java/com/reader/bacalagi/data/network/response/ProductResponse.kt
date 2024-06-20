@@ -6,7 +6,7 @@ data class ProductResponse(
 
 	val id: String,
 	val status: String,
-	val finalPrice: Long,
+	val finalPrice: Int,
 	val recommendedPrice: Long,
 	val description: String,
 	val seenCount: Long,
