@@ -10,5 +10,6 @@ data class BooksResponse(
     val publishYear: Int,
     val language: String,
     val imageUrl: String,
-    val buyPrice: Long
+    val buyPrice: Long,
+    val predictionResults: PredictionResults
 )
