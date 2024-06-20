@@ -4,16 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
+import com.reader.bacalagi.data.network.response.ProductResponse
 import com.reader.bacalagi.databinding.FragmentMybookBinding
-import com.reader.bacalagi.presentation.adapter.CardAdapterBook
-import com.reader.bacalagi.presentation.adapter.CardItem
+import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.adapter.MyBooksAdapter
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyBookFragment : BaseFragment<FragmentMybookBinding>() {
 
+    private val viewModel: MyBookViewModel by viewModel()
+    private val myBookAdapter: MyBooksAdapter by lazy { MyBooksAdapter() }
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,21 +38,57 @@ class MyBookFragment : BaseFragment<FragmentMybookBinding>() {
         }
     }
 
-    override fun initUI() {
-        val items = listOf(
-            CardItem("05/05/2024", "On Post", R.drawable.img_bg, "Buku 1"),
-            CardItem("07/05/2024", "Delivered", R.drawable.img_bg, "Buku 2")
-        )
+    override fun initProcess() {
+        viewModel.getMyBooks()
+    }
 
-        val cardAdapter = CardAdapterBook(items)
-
-        binding.rvBook.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = cardAdapter
-//            setOnClickListener {
-//                findNavController().navigate(R.id.action_transactionFragment_to_detailTransactionFragment)
-//            }
+    override fun initObservers() {
+        viewModel.listMyBook.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onSuccess = {
+                showError(false, "")
+                showLoading(false)
+                onResult(it)
+            }
+            onError = {
+                showLoading(false)
+                showError(true, it)
+            }
+            onEmpty = {
+                showLoading(false)
+                showError(true, getString(R.string.appbar_title_faq))
+            }
         }
+    }
 
+    private fun onResult(data: List<ProductResponse>) {
+        myBookAdapter.setItems(ArrayList(data))
+    }
+
+    override fun initUI() {
+        binding.rvBook.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = myBookAdapter
+            setOnClickListener {
+                findNavController().navigate(R.id.action_myBookFragment_to_detailMyBookFragment)
+            }
+        }
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                rvBook.gone()
+                loadingContainer.root.show()
+            }
+        } else {
+            binding.apply {
+                rvBook.show()
+                loadingContainer.root.gone()
+            }
+        }
     }
 }

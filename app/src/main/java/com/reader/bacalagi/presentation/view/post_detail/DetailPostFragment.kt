@@ -1,24 +1,25 @@
 package com.reader.bacalagi.presentation.view.post_detail
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailPostBinding
-import com.reader.bacalagi.databinding.FragmentProfileBinding
-import com.reader.bacalagi.presentation.view.edit_profile.EditProfileFragmentArgs
+import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
 import com.reader.bacalagi.utils.helper.uriToFile
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
 
     private val args by navArgs<DetailPostFragmentArgs>()
+    private val viewModel: DetailPostViewModel by viewModel()
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,12 +29,49 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     }
 
     override fun initUI() {
-//        viewModel.postProduct(
-//            buyPrice = buyPrice,
-//            image = imageUri.let { uri ->
-//                uriToFile(requireActivity(), uri!!)
-//            }
-//        )
+
+        binding.toggleButton.check(R.id.button2)
+        binding.labelPrice.visibility = View.GONE
+        binding.tfPrice.visibility = View.GONE
+
+        binding.ivProduct.setImageURI(args.product.imageUri)
+        binding.tvTitle.text = args.product.title
+        binding.tvDescription.text = args.product.description
+        binding.tvPriceRecommendation.text = args.product.predictionResult
+        var finalPrice = args.product.predictionResult
+
+        binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.button2 -> {
+                        binding.labelPrice.visibility = View.GONE
+                        binding.tfPrice.visibility = View.GONE
+                    }
+
+                    R.id.button1 -> {
+                        binding.labelPrice.visibility = View.VISIBLE
+                        binding.tfPrice.visibility = View.VISIBLE
+                        finalPrice = binding.tfPrice.editText?.text.toString()
+                    }
+                }
+            }
+        }
+        binding.filledButtonPost.setOnClickListener {
+            viewModel.post(
+                title = args.product.title,
+                author = args.product.author,
+                publisher = args.product.publisher,
+                publishYear = args.product.publishYear,
+                buyPrice = args.product.buyPrice,
+                finalPrice = finalPrice,
+                ISBN = args.product.ISBN,
+                language = args.product.language,
+                description = args.product.description,
+                image = args.product.imageUri.let { uri ->
+                    uriToFile(requireActivity(), uri)
+                }
+            )
+        }
     }
 
     override fun initAppBar() {
@@ -47,30 +85,35 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
         }
     }
 
-    override fun initActions() {
+    override fun initObservers() {
+        viewModel.product.observeResult(viewLifecycleOwner) {
+            onLoading = {
+                showError(false, "")
+                showLoading(true)
+            }
+            onSuccess = {
+                showError(false, "")
+                showLoading(false)
+                findNavController().navigate(R.id.action_detailPostFragment_to_dashboardFragment)
+            }
+            onError = {
+                showLoading(false)
+                showError(true, it)
+            }
+            onEmpty = {
 
-        binding.toggleButton.check(R.id.button2)
-        binding.labelPrice.visibility = View.GONE
-        binding.tfPrice.visibility = View.GONE
+            }
+        }
+    }
 
-        binding.ivProduct.setImageURI(args.product.imageUri)
-        binding.tvTitle.text = args.product.title
-        binding.tvDescription.text = args.product.description
-        binding.tvPriceRecommendation.text = args.product.predictionResult
-
-        binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.button2 -> {
-                        binding.labelPrice.visibility = View.GONE
-                        binding.tfPrice.visibility = View.GONE
-                    }
-
-                    R.id.button1 -> {
-                        binding.labelPrice.visibility = View.VISIBLE
-                        binding.tfPrice.visibility = View.VISIBLE
-                    }
-                }
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                loadingContainer.root.show()
+            }
+        } else {
+            binding.apply {
+                loadingContainer.root.gone()
             }
         }
     }

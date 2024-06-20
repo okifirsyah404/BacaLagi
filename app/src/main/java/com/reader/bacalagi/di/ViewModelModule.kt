@@ -7,6 +7,7 @@ import com.reader.bacalagi.presentation.view.dashboard.DashboardViewModel
 import com.reader.bacalagi.presentation.view.edit_profile.EditProfileViewModel
 import com.reader.bacalagi.presentation.view.failed.FailedViewModel
 import com.reader.bacalagi.presentation.view.post.PostViewModel
+import com.reader.bacalagi.presentation.view.post_detail.DetailPostViewModel
 import com.reader.bacalagi.presentation.view.profile.ProfileViewModel
 import com.reader.bacalagi.presentation.view.profile_faq.FaqViewModel
 import com.reader.bacalagi.presentation.view.profile_privacy_policy.PrivacyPolicyViewModel
@@ -63,5 +64,8 @@ val viewModelModule = module {
     }
     viewModel {
         PostViewModel(get())
+    }
+    viewModel {
+        DetailPostViewModel(get())
     }
 }

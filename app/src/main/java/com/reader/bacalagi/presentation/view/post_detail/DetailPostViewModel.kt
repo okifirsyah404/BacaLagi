@@ -20,16 +20,27 @@ class DetailPostViewModel(
         title: String,
         author: String,
         publisher: String,
-        publishYear: Long,
-        buyPrice: Long,
-        finalPrice: Long,
+        publishYear: String,
+        buyPrice: String,
+        finalPrice: String,
         ISBN: String,
         language: String,
         description: String,
-        image: File?
+        image: File
     ) {
         viewModelScope.launch {
-            repository.postProduct(title, author, publisher, publishYear, buyPrice, finalPrice,ISBN, language,description, image).collect {
+            repository.postProduct(
+                title,
+                author,
+                publisher,
+                publishYear,
+                buyPrice,
+                finalPrice,
+                ISBN,
+                language,
+                description,
+                image
+            ).collect {
                 _product.value = it
             }
         }

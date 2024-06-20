@@ -2,8 +2,6 @@ package com.reader.bacalagi.data.network.service
 
 import com.reader.bacalagi.data.base.BaseResponse
 import com.reader.bacalagi.data.network.request.EditProductRequest
-import com.reader.bacalagi.data.network.request.PostProductRequest
-import com.reader.bacalagi.data.network.request.PredictProductRequest
 import com.reader.bacalagi.data.network.response.PredictionResponse
 import com.reader.bacalagi.data.network.response.ProductResponse
 import okhttp3.MultipartBody
@@ -19,10 +17,22 @@ interface ProductService {
     @GET("book/author/post")
     suspend fun fetchProduct(): BaseResponse<ProductResponse>
 
+    @GET("book/author/post/")
+    suspend fun fetchBook(): BaseResponse<List<ProductResponse>>
+
     @POST("book/author/post")
     @Multipart
     suspend fun postProduct(
-        @Body request: PostProductRequest
+        @Part image: MultipartBody.Part,
+        @Part("author") author: RequestBody,
+        @Part("title") title: RequestBody,
+        @Part("publisher") publisher: RequestBody,
+        @Part("publishYear") publishYear: RequestBody,
+        @Part("buyPrice") buyPrice: RequestBody,
+        @Part("finalPrice") finalPrice: RequestBody,
+        @Part("ISBN") ISBN: RequestBody,
+        @Part("language") language: RequestBody,
+        @Part("description") description: RequestBody
     ): BaseResponse<ProductResponse>
 
     @POST("book/predict")

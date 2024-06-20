@@ -15,6 +15,10 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
         return dataSource.fetchProduct()
     }
 
+    override suspend fun getMyBooks(): Flow<ApiResponse<List<ProductResponse>>> {
+        return dataSource.fetchMyBook()
+    }
+
     override suspend fun predictProduct(
         buyPrice: String,
         image: File
@@ -28,16 +32,27 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
         title: String,
         author: String,
         publisher: String,
-        publishYear: Long,
-        buyPrice: Long,
-        finalPrice: Long,
+        publishYear: String,
+        buyPrice: String,
+        finalPrice: String,
         ISBN: String,
         language: String,
         description: String,
-        image: File?
-    ): Flow<ApiResponse<ProductResponse>> {
-        return dataSource.postProduct(title, author, publisher, publishYear, buyPrice, finalPrice, ISBN, language,description,image)
-    }
+        image: File
+    ): Flow<ApiResponse<ProductResponse>> =
+        dataSource.postProduct(
+            title,
+            author,
+            publisher,
+            publishYear,
+            buyPrice,
+            finalPrice,
+            ISBN,
+            language,
+            description,
+            image
+        ).flowOn(Dispatchers.IO)
+
 
     override suspend fun editProduct(
         title: String,
@@ -51,6 +66,17 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
         description: String,
         image: File?
     ): Flow<ApiResponse<ProductResponse>> {
-        return dataSource.editProduct(title, author, publisher, publishYear, buyPrice, finalPrice, ISBN, language,description,image)
+        return dataSource.editProduct(
+            title,
+            author,
+            publisher,
+            publishYear,
+            buyPrice,
+            finalPrice,
+            ISBN,
+            language,
+            description,
+            image
+        )
     }
 }
