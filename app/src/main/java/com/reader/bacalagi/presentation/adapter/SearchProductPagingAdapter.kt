@@ -7,31 +7,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.reader.bacalagi.R
-import com.reader.bacalagi.data.local.model.GeneralProductModel
+import com.reader.bacalagi.data.local.model.SearchProductModel
 import com.reader.bacalagi.databinding.ItemProductBinding
 import com.reader.bacalagi.utils.extension.toRupiah
 
-class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
-    PagingDataAdapter<GeneralProductModel, DashboardProductPagingAdapter.DashboardProductViewHolder>(
+class SearchProductPagingAdapter(private val onClick: (String) -> Unit) :
+    PagingDataAdapter<SearchProductModel, SearchProductPagingAdapter.SearchProductViewHolder>(
         DIFF_CALLBACK
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchProductViewHolder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DashboardProductViewHolder(binding)
+        return SearchProductViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DashboardProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchProductViewHolder, position: Int) {
         getItem(position)?.let {
             holder.bind(it)
         }
     }
 
-    inner class DashboardProductViewHolder(private val binding: ItemProductBinding) :
+    inner class SearchProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(item: GeneralProductModel) {
+        fun bind(item: SearchProductModel) {
             binding.apply {
 
                 binding.apply {
@@ -52,24 +52,24 @@ class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
                 }
 
                 root.setOnClickListener {
-//                    onClick(DashboardProductParcel.fromModel(data))
+//                    onClick(SearchProductParcel.fromModel(data))
                 }
             }
         }
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GeneralProductModel>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchProductModel>() {
             override fun areItemsTheSame(
-                oldItem: GeneralProductModel,
-                newItem: GeneralProductModel
+                oldItem: SearchProductModel,
+                newItem: SearchProductModel
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: GeneralProductModel,
-                newItem: GeneralProductModel
+                oldItem: SearchProductModel,
+                newItem: SearchProductModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }

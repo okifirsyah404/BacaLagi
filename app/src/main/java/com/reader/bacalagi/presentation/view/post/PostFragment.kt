@@ -20,7 +20,9 @@ import com.reader.bacalagi.data.network.response.PredictionResponse
 import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.databinding.FragmentPostBinding
 import com.reader.bacalagi.presentation.parcel.ProductParcel
-import com.reader.bacalagi.utils.extension.*
+import com.reader.bacalagi.utils.extension.requestPermission
+import com.reader.bacalagi.utils.extension.showLoadingDialog
+import com.reader.bacalagi.utils.extension.showSingleActionDialog
 import com.reader.bacalagi.utils.helper.MutableReference
 import com.reader.bacalagi.utils.helper.getImageUri
 import com.reader.bacalagi.utils.helper.uriToFile
@@ -89,54 +91,70 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 
 
             when {
+
+                imageUri == null -> {
+                    showSingleActionDialog(
+                        title = getString(R.string.dialog_title_warning),
+                        message = getString(R.string.dialog_msg_image_field_empty)
+                    )
+                }
+
                 title.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_title_field_empty)
                     )
                 }
+
                 author.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_author_field_empty)
                     )
                 }
+
                 publisher.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_publisher_field_empty)
                     )
                 }
+
                 publishYear.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_publish_year_field_empty)
                     )
                 }
+
                 buyPrice.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_buy_price_field_empty)
                     )
                 }
+
                 isbn.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_isbn_field_empty)
                     )
                 }
+
                 language.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_language_field_empty)
                     )
                 }
+
                 description.isEmpty() -> {
                     showSingleActionDialog(
                         title = getString(R.string.dialog_title_warning),
                         message = getString(R.string.dialog_msg_description_field_empty)
                     )
                 }
+
                 else -> {
                     viewModel.predict(
                         buyPrice = buyPrice,
@@ -183,10 +201,12 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                 is ApiResponse.Loading -> {
                     showLoading(true)
                 }
+
                 is ApiResponse.Success -> {
                     showLoading(false)
                     handleSuccessResponse(response.data)
                 }
+
                 is ApiResponse.Error -> {
                     showLoading(false)
                     showSingleActionDialog(
@@ -210,20 +230,21 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
         val language = binding.tilLanguage.editText?.text.toString()
         val description = binding.tilDescription.editText?.text.toString()
         val predictionResult = response.outputPrice.toString()
-        findNavController().navigate(PostFragmentDirections.actionPostFragmentToDetailPostFragment(
-            ProductParcel(
-                title = title,
-                author = author,
-                publisher = publisher,
-                publishYear = publishYear,
-                buyPrice = buyPrice,
-                ISBN = isbn,
-                language = language,
-                imageUri = imageUri!!,
-                description = description,
-                predictionResult = predictionResult
+        findNavController().navigate(
+            PostFragmentDirections.actionPostFragmentToDetailPostFragment(
+                ProductParcel(
+                    title = title,
+                    author = author,
+                    publisher = publisher,
+                    publishYear = publishYear,
+                    buyPrice = buyPrice,
+                    ISBN = isbn,
+                    language = language,
+                    imageUri = imageUri!!,
+                    description = description,
+                    predictionResult = predictionResult
+                )
             )
-        )
         )
     }
 

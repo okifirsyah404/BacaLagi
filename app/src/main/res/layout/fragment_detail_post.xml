@@ -89,26 +89,32 @@
                     android:gravity="center_vertical"
                     android:text="@string/shr_agreement" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/toggleButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     app:singleSelection="true">
 
                     <Button
                         android:id="@+id/button1"
-                        style="?attr/materialButtonOutlinedStyle"
+                        style="@style/Theme.BacaLagi.OutlinedButtonTheme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No" />
 
                     <Button
                         android:id="@+id/button2"
-                        style="?attr/materialButtonOutlinedStyle"
+                        style="@style/Theme.BacaLagi.OutlinedButtonTheme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes" />
+
+
                 </com.google.android.material.button.MaterialButtonToggleGroup>
             </LinearLayout>
 
@@ -124,8 +130,7 @@
                 android:id="@+id/tf_price"
                 style="@style/Theme.BacaLagi.TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/shr_hint_price">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

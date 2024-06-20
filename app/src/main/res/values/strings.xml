@@ -79,7 +79,7 @@
     <string name="dialog_msg_province_field_empty">Please fill in the province field</string>
     <string name="dialog_msg_regency_field_empty">Please fill in the regency field</string>
     <string name="dialog_msg_address_field_empty">Please fill in the address field</string>
-    <string name="upload_image">Upload Image</string>
+    <string name="upload_image">Add Image</string>
     <string name="button_submit">Submit</string>
     <string name="dialog_msg_title_field_empty">Judul Masih Kosong</string>
     <string name="dialog_msg_author_field_empty">Author Masih Kosong</string>
@@ -89,5 +89,6 @@
     <string name="dialog_msg_isbn_field_empty">ISBN masih kosong</string>
     <string name="dialog_msg_language_field_empty">Language Masih Kosong</string>
     <string name="dialog_msg_description_field_empty">Description Masih Kosong</string>
+    <string name="dialog_msg_image_field_empty">Image cannot be empty</string>
 
 </resources>

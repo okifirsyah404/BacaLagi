@@ -12,6 +12,7 @@ import com.reader.bacalagi.presentation.view.profile.ProfileViewModel
 import com.reader.bacalagi.presentation.view.profile_faq.FaqViewModel
 import com.reader.bacalagi.presentation.view.profile_privacy_policy.PrivacyPolicyViewModel
 import com.reader.bacalagi.presentation.view.register.RegisterViewModel
+import com.reader.bacalagi.presentation.view.search.SearchViewModel
 import com.reader.bacalagi.presentation.view.setting.SettingViewModel
 import com.reader.bacalagi.presentation.view.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -44,6 +45,10 @@ val viewModelModule = module {
 
     viewModel {
         AreaSelectorViewModel(get())
+    }
+
+    viewModel {
+        SearchViewModel(get())
     }
 
     viewModel {

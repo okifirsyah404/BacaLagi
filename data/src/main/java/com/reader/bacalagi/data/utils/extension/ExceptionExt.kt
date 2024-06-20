@@ -35,6 +35,11 @@ fun HttpException.getHttpBodyErrorMessage(): String {
             "Unauthorized"
         }
 
+        404 -> {
+            // Handle not found error
+            "Not found"
+        }
+
         else -> {
             // Handle other error codes
             val gson = Gson()

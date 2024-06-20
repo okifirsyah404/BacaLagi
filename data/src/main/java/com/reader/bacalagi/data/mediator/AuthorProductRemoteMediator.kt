@@ -5,18 +5,18 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.reader.bacalagi.data.local.model.GeneralProductModel
-import com.reader.bacalagi.data.local.model.GeneralProductRemoteKeysModel
+import com.reader.bacalagi.data.local.model.AuthorProductModel
+import com.reader.bacalagi.data.local.model.AuthorProductRemoteKeysModel
 import com.reader.bacalagi.data.local.room.BacaLagiDatabase
 import com.reader.bacalagi.data.network.service.BookService
 import com.reader.bacalagi.data.utils.extension.createErrorResponse
 import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)
-class GeneralProductRemoteMediator(
+class AuthorProductRemoteMediator(
     private val database: BacaLagiDatabase,
-    private val apiService: BookService,
-) : RemoteMediator<Int, GeneralProductModel>() {
+    private val apiService: BookService
+) : RemoteMediator<Int, AuthorProductModel>() {
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
@@ -29,7 +29,7 @@ class GeneralProductRemoteMediator(
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, GeneralProductModel>
+        state: PagingState<Int, AuthorProductModel>
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -61,15 +61,15 @@ class GeneralProductRemoteMediator(
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    database.getGeneralProductRemoteKeysDao().deleteRemoteKeys()
-                    database.getGeneralProductDao().deleteAll()
+                    database.getAuthorProductRemoteKeysDao().deleteRemoteKeys()
+                    database.getAuthorProductDao().deleteAll()
                 }
 
                 val prevKey = if (page == 1) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
 
                 val keys = responseData.data.map {
-                    GeneralProductRemoteKeysModel(
+                    AuthorProductRemoteKeysModel(
                         id = it.id,
                         prevKey = prevKey,
                         nextKey = nextKey
@@ -77,15 +77,15 @@ class GeneralProductRemoteMediator(
                 }
 
                 val product = responseData.data.map {
-                    GeneralProductModel.fromResponse(it)
+                    AuthorProductModel.fromResponse(it)
                 }
 
                 Timber.d("prefKey: $prevKey")
                 Timber.d("keys: $keys")
                 Timber.d("storyData: $product")
 
-                database.getGeneralProductRemoteKeysDao().insertAll(keys)
-                database.getGeneralProductDao().insertAllProducts(product)
+                database.getAuthorProductRemoteKeysDao().insertAll(keys)
+                database.getAuthorProductDao().insertAllProducts(product)
             }
 
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
@@ -94,22 +94,22 @@ class GeneralProductRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, GeneralProductModel>): GeneralProductRemoteKeysModel? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, AuthorProductModel>): AuthorProductRemoteKeysModel? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { data ->
-            database.getGeneralProductRemoteKeysDao().getRemoteKeysId(data.id)
+            database.getAuthorProductRemoteKeysDao().getRemoteKeysId(data.id)
         }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, GeneralProductModel>): GeneralProductRemoteKeysModel? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, AuthorProductModel>): AuthorProductRemoteKeysModel? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { data ->
-            database.getGeneralProductRemoteKeysDao().getRemoteKeysId(data.id)
+            database.getAuthorProductRemoteKeysDao().getRemoteKeysId(data.id)
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, GeneralProductModel>): GeneralProductRemoteKeysModel? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, AuthorProductModel>): AuthorProductRemoteKeysModel? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
-                database.getGeneralProductRemoteKeysDao().getRemoteKeysId(id)
+                database.getAuthorProductRemoteKeysDao().getRemoteKeysId(id)
             }
         }
     }

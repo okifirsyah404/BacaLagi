@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailPostBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
-import com.reader.bacalagi.utils.extension.gone
-import com.reader.bacalagi.utils.extension.show
+import com.reader.bacalagi.utils.extension.showLoadingDialog
+import com.reader.bacalagi.utils.helper.MutableReference
 import com.reader.bacalagi.utils.helper.uriToFile
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +21,7 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     private val args by navArgs<DetailPostFragmentArgs>()
     private val viewModel: DetailPostViewModel by viewModel()
 
+    private val loadingDialogReference = MutableReference<AlertDialog?>(null)
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,11 +36,20 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
         binding.labelPrice.visibility = View.GONE
         binding.tfPrice.visibility = View.GONE
 
+        binding.tfPrice.editText?.setText(args.product.buyPrice)
+
         binding.ivProduct.setImageURI(args.product.imageUri)
         binding.tvTitle.text = args.product.title
         binding.tvDescription.text = args.product.description
         binding.tvPriceRecommendation.text = args.product.predictionResult
+
+
         var finalPrice = args.product.predictionResult
+
+        finalPrice = when (binding.tfPrice.editText?.text.toString().isEmpty()) {
+            true -> args.product.predictionResult
+            false -> binding.tfPrice.editText?.text.toString()
+        }
 
         binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
@@ -56,6 +67,7 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
                 }
             }
         }
+
         binding.filledButtonPost.setOnClickListener {
             viewModel.post(
                 title = args.product.title,
@@ -107,14 +119,11 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     }
 
     override fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.apply {
-                loadingContainer.root.show()
-            }
-        } else {
-            binding.apply {
-                loadingContainer.root.gone()
-            }
-        }
+
+        showLoadingDialog(
+            loading = isLoading,
+            dialogReference = loadingDialogReference
+        )
+
     }
 }

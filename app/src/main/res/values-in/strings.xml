@@ -68,6 +68,15 @@
     <string name="dialog_msg_address_field_empty">Harap masukkan alamat anda</string>
     <string name="dialog_msg_province_field_empty">Harap pilih provinsi anda</string>
     <string name="dialog_msg_regency_field_empty">Harap pilih kota/kabupaten anda</string>
-    <string name="upload_image">Unggah Gambar</string>
+    <string name="upload_image">Tambah Gambar</string>
     <string name="button_submit">Kirim</string>
+    <string name="dialog_msg_title_field_empty">Judul Masih Kosong</string>
+    <string name="dialog_msg_author_field_empty">Author Masih Kosong</string>
+    <string name="dialog_msg_publisher_field_empty">Publisher Masih Kosong</string>
+    <string name="dialog_msg_publish_year_field_empty">Publish Year Masih Kosong</string>
+    <string name="dialog_msg_buy_price_field_empty">Buy Price Masih Kosong</string>
+    <string name="dialog_msg_isbn_field_empty">ISBN masih kosong</string>
+    <string name="dialog_msg_language_field_empty">Language Masih Kosong</string>
+    <string name="dialog_msg_description_field_empty">Description Masih Kosong</string>
+    <string name="dialog_msg_image_field_empty">Gambar buku tidak boleh kosong</string>
 </resources>
