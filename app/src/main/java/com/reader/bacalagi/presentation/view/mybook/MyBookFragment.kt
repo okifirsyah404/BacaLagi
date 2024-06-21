@@ -11,6 +11,7 @@ import com.reader.bacalagi.data.network.response.ProductResponse
 import com.reader.bacalagi.databinding.FragmentMybookBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.adapter.MyBooksAdapter
+import com.reader.bacalagi.utils.decorator.ListRecyclerViewItemDivider
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -72,6 +73,13 @@ class MyBookFragment : BaseFragment<FragmentMybookBinding>() {
         binding.rvBook.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = myBookAdapter
+
+            addItemDecoration(
+                ListRecyclerViewItemDivider(
+                    resources.getDimension(R.dimen.dimen_8dp).toInt(),
+                    resources.getDimension(R.dimen.dimen_16dp).toInt()
+                )
+            )
         }
     }
 
