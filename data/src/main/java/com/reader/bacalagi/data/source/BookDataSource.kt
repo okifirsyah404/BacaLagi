@@ -54,14 +54,34 @@ class BookDataSource(private val service: BookService, private val database: Bac
         return flow {
             try {
                 emit(ApiResponse.Loading)
-                val response = service.searchBooks(title)
+                val response = service.searchBookWithoutPaging(title)
 
-                if (response.data.isEmpty()) {
+                if (response.data?.isEmpty() == true) {
                     emit(ApiResponse.Error("Data not found"))
                     return@flow
                 }
 
                 Timber.d("searchProducts: $response")
+
+                emit(ApiResponse.Success(response.data!!))
+            } catch (e: HttpException) {
+                emit(ApiResponse.Error(e.getHttpBodyErrorMessage()))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.createErrorResponse()))
+            }
+        }
+    }
+
+    fun fetchProductDetail(id: String): Flow<ApiResponse<ProductResponse>> {
+        return flow {
+            try {
+                emit(ApiResponse.Loading)
+                val response = service.fetchBookDetail(id)
+
+                if (response.data == null) {
+                    emit(ApiResponse.Error(response.message))
+                    return@flow
+                }
 
                 emit(ApiResponse.Success(response.data))
             } catch (e: HttpException) {

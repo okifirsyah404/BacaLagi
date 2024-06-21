@@ -6,3 +6,9 @@ fun String.toCapitalCase(): String {
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
     }
 }
+
+fun String.parsePhoneNumber(): String {
+    val countryCode = "+62"
+    val phoneNumberDigits = this.trimStart('6', '2')
+    return countryCode + phoneNumberDigits
+}

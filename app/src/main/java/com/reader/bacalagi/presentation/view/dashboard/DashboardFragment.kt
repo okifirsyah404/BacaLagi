@@ -12,7 +12,9 @@ import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDashboardBinding
 import com.reader.bacalagi.presentation.adapter.DashboardProductPagingAdapter
+import com.reader.bacalagi.presentation.parcel.FailedParcel
 import com.reader.bacalagi.utils.decorator.ListRecyclerViewItemDivider
+import com.reader.bacalagi.utils.enum.FailedContext
 import com.reader.bacalagi.utils.extension.hide
 import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +25,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     private val productAdapter: DashboardProductPagingAdapter by lazy {
         DashboardProductPagingAdapter(
             onClick = {
-//            navigateToDetailBookFragment(it)
             }
         )
     }
@@ -91,6 +92,16 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun showError(isError: Boolean, message: String) {
         if (isError) {
+
+            if (message == getString(R.string.code_unauthorized)) {
+                findNavController().navigate(
+                    DashboardFragmentDirections.actionDashboardFragmentToFailedFragment(
+                        FailedParcel(context = FailedContext.UNAUTHORIZED)
+                    )
+                )
+                return
+            }
+
             binding.rvProductMain.hide()
         } else {
             binding.rvProductMain.show()
@@ -136,7 +147,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private fun navigateToDetailBookFragment(id: String) {
         findNavController().navigate(
-            DashboardFragmentDirections.actionDashboardFragmentToDetailBookFragment()
+            DashboardFragmentDirections.actionDashboardFragmentToDetailDashboardFragment(id)
         )
     }
 

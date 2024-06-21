@@ -18,6 +18,9 @@ class BookRepositoryImpl(private val dataSource: BookDataSource) : BookRepositor
     fun searchProducts(title: String): Flow<ApiResponse<List<ProductResponse>>> =
         dataSource.searchProducts(title).flowOn(Dispatchers.IO)
 
+    fun getProductDetail(id: String): Flow<ApiResponse<ProductResponse>> =
+        dataSource.fetchProductDetail(id).flowOn(Dispatchers.IO)
+
     fun getPagingProducts(): LiveData<PagingData<GeneralProductModel>> =
         dataSource.fetchPagingProducts()
 

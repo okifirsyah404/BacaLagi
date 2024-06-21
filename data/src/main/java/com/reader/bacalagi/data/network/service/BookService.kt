@@ -4,6 +4,7 @@ import com.reader.bacalagi.data.base.BasePaginationResponse
 import com.reader.bacalagi.data.base.BaseResponse
 import com.reader.bacalagi.data.network.response.ProductResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BookService {
@@ -24,4 +25,9 @@ interface BookService {
     suspend fun searchBookWithoutPaging(
         @Query("q") title: String
     ): BaseResponse<List<ProductResponse>>
+
+    @GET("book/{id}")
+    suspend fun fetchBookDetail(
+        @Path("id") id: String
+    ): BaseResponse<ProductResponse>
 }

@@ -68,7 +68,11 @@
         android:id="@+id/searchFragment"
         android:name="com.reader.bacalagi.presentation.view.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.reader.bacalagi.presentation.view.register.RegisterFragment"
@@ -120,6 +124,9 @@
         <action
             android:id="@+id/action_postFragment_to_detailPostFragment"
             app:destination="@id/detailPostFragment" />
+        <action
+            android:id="@+id/action_postFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailPostFragment"
@@ -132,6 +139,9 @@
         <action
             android:id="@+id/action_detailPostFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_detailPostFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/areaSelectorFragment"
@@ -168,12 +178,19 @@
         <argument
             android:name="profile"
             app:argType="com.reader.bacalagi.presentation.parcel.EditProfileParcel" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/faqFragment"
         android:name="com.reader.bacalagi.presentation.view.profile_faq.FaqFragment"
         android:label="fragment_faq"
-        tools:layout="@layout/fragment_faq" />
+        tools:layout="@layout/fragment_faq">
+        <action
+            android:id="@+id/action_faqFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.reader.bacalagi.presentation.view.setting.SettingFragment"
@@ -207,6 +224,9 @@
         <action
             android:id="@+id/action_myBookFragment_to_detailMyBookFragment"
             app:destination="@id/detailMyBookFragment" />
+        <action
+            android:id="@+id/action_myBookFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/editMyBookFragment"
@@ -216,6 +236,9 @@
         <action
             android:id="@+id/action_editMyBookFragment_to_editMyBookDetailFragment"
             app:destination="@id/editMyBookDetailFragment" />
+        <action
+            android:id="@+id/action_editMyBookFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/editMyBookDetailFragment"
@@ -228,6 +251,9 @@
         <argument
             android:name="mybook"
             app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
+        <action
+            android:id="@+id/action_editMyBookDetailFragment_to_failedFragment"
+            app:destination="@id/failedFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailDashboardFragment"

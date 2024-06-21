@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".presentation.view.dashboard_detail.DetailDashboardFragment">
 
     <!-- Toolbar -->
@@ -19,10 +18,10 @@
 
     <!-- Scrollable Content -->
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_button_container"
+        app:layout_constraintBottom_toTopOf="@id/fl_bottom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -108,114 +107,233 @@
 
                     <TextView
                         android:id="@+id/tvSellerName"
+                        style="@style/Theme.BacaLagi.Text.LabelMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dimen_16dp"
                         android:gravity="center_vertical"
-                        android:text="Dio Brando"
-                        android:textSize="14sp" />
+                        android:text="Dio Brando" />
                 </LinearLayout>
 
-                <TextView
-                    style="@style/Theme.BacaLagi.Text.LabelMedium"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:text="Location" />
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_8dp"
-                    android:text="Surabaya" />
+                    <TextView
+                        style="@style/Theme.BacaLagi.Text.LabelMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:text="Location" />
+
+                    <TextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:text="Surabaya" />
+                </LinearLayout>
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_8dp"
+                android:background="?attr/colorDivider" />
 
 
             <!-- Seller Information -->
 
 
             <!-- About Book -->
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp"
-                android:text="About Book"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:text="Author: John Doe"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="4dp"
+                    android:text="About Book"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvPublisher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:text="Publisher: Gramedia"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:text="Year: 2022"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:text="Author"
 
-            <TextView
-                android:id="@+id/tvISBN"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:text="ISBN: 68459054690, 345908345098"
-                android:textSize="14sp" />
+                        android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvLanguage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:text="Language: English"
-                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/tvAuthor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        tools:text="Author: John Doe" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:text="Publisher"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvPublisher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        tools:text="Publisher: Gramedia" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:text="Year"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        tools:text="Year: 2022" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:text="ISBN"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvISBN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:paddingBottom="4dp"
+                        android:textSize="14sp"
+                        tools:text=" 68459054690, 345908345098" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
+                        android:text="Language"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:paddingBottom="16dp"
+                        android:textSize="14sp"
+                        tools:text="Language: English" />
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Button -->
-    <LinearLayout
-        android:id="@+id/bottom_button_container"
+    <FrameLayout
+        android:id="@+id/fl_bottom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:padding="16dp"
+        android:background="@drawable/bg_stroke_top_primary"
+        android:paddingHorizontal="@dimen/dimen_16dp"
+        android:paddingVertical="@dimen/dimen_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/bottom_button_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Rp 140.000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/btnChatSeller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/primaryColor"
-            android:text="Chat Penjual"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvPrice"
+                style="@style/Theme.BacaLagi.Text.TitleLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                tools:text="Rp 140.000" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChatSeller"
+                style="@style/Theme.BacaLagi.FilledButtonTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat Penjual"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <include
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <!-- Bottom Button -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
