@@ -1,4 +1,4 @@
-package com.reader.bacalagi.presentation.view.post
+package com.reader.bacalagi.presentation.view.edit_mybook
 
 import android.app.Activity
 import android.content.Intent
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isEmpty
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
@@ -20,8 +22,6 @@ import com.reader.bacalagi.data.network.response.PredictionResponse
 import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.databinding.FragmentEditMyBookBinding
 import com.reader.bacalagi.presentation.parcel.MyBookParcel
-import com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookFragmentDirections
-import com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookViewModel
 import com.reader.bacalagi.utils.extension.requestPermission
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog
@@ -32,9 +32,11 @@ import com.yalantis.ucrop.UCrop
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
+
 class EditMyBookFragment : BaseFragment<FragmentEditMyBookBinding>() {
 
     private val viewModel: EditMyBookViewModel by viewModel()
+    private val args by navArgs<EditMyBookFragmentArgs>()
 
 
     private lateinit var uCropLauncher: ActivityResultLauncher<Intent>
@@ -77,85 +79,96 @@ class EditMyBookFragment : BaseFragment<FragmentEditMyBookBinding>() {
     }
 
     override fun initUI() {
-        binding.btnChangePhoto.setOnClickListener {
-            showImagePickerMenu()
-        }
+        binding.apply {
+            tilTitle.editText?.setText(args.mybook.title)
+            ivMyBook.load(args.mybook.imageUri)
+            tilAuthor.editText?.setText(args.mybook.author)
+            tilPublisher.editText?.setText(args.mybook.publisher)
+            tilPublishYear.editText?.setText(args.mybook.publishYear)
+            tilBuyPrice.editText?.setText(args.mybook.buyPrice)
+            tilIsbn.editText?.setText(args.mybook.ISBN)
+            tilLanguage.editText?.setText(args.mybook.language)
+            tilDescription.editText?.setText(args.mybook.description)
 
-        binding.btnPost.setOnClickListener {
-            val title = binding.tilTitle.editText?.text.toString()
-            val author = binding.tilAuthor.editText?.text.toString()
-            val publisher = binding.tilPublisher.editText?.text.toString()
-            val publishYear = binding.tilPublishYear
-            val buyPrice = binding.tilBuyPrice.editText?.text.toString()
-            val isbn = binding.tilIsbn.editText?.text.toString()
-            val language = binding.tilLanguage.editText?.text.toString()
-            val description = binding.tilDescription.editText?.text.toString()
+            btnChangePhoto.setOnClickListener {
+                showImagePickerMenu()
+            }
 
+            btnEdit.setOnClickListener {
+                val title = binding.tilTitle.editText?.text.toString()
+                val author = binding.tilAuthor.editText?.text.toString()
+                val publisher = binding.tilPublisher.editText?.text.toString()
+                val publishYear = binding.tilPublishYear
+                val buyPrice = binding.tilBuyPrice.editText?.text.toString()
+                val isbn = binding.tilIsbn.editText?.text.toString()
+                val language = binding.tilLanguage.editText?.text.toString()
+                val description = binding.tilDescription.editText?.text.toString()
 
-            when {
-                title.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_title_field_empty)
-                    )
-                }
+                when {
+                    title.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_title_field_empty)
+                        )
+                    }
 
-                author.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_author_field_empty)
-                    )
-                }
+                    author.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_author_field_empty)
+                        )
+                    }
 
-                publisher.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_publisher_field_empty)
-                    )
-                }
+                    publisher.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_publisher_field_empty)
+                        )
+                    }
 
-                publishYear.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_publish_year_field_empty)
-                    )
-                }
+                    publishYear.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_publish_year_field_empty)
+                        )
+                    }
 
-                buyPrice.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_buy_price_field_empty)
-                    )
-                }
+                    buyPrice.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_buy_price_field_empty)
+                        )
+                    }
 
-                isbn.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_isbn_field_empty)
-                    )
-                }
+                    isbn.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_isbn_field_empty)
+                        )
+                    }
 
-                language.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_language_field_empty)
-                    )
-                }
+                    language.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_language_field_empty)
+                        )
+                    }
 
-                description.isEmpty() -> {
-                    showSingleActionDialog(
-                        title = getString(R.string.dialog_title_warning),
-                        message = getString(R.string.dialog_msg_description_field_empty)
-                    )
-                }
+                    description.isEmpty() -> {
+                        showSingleActionDialog(
+                            title = getString(R.string.dialog_title_warning),
+                            message = getString(R.string.dialog_msg_description_field_empty)
+                        )
+                    }
 
-                else -> {
-                    viewModel.predict(
-                        buyPrice = buyPrice,
-                        image = imageUri.let { uri ->
-                            uriToFile(requireActivity(), uri!!)
-                        }
-                    )
+                    else -> {
+                        viewModel.predict(
+                            buyPrice = buyPrice,
+                            image = imageUri.let { uri ->
+                                uriToFile(requireActivity(), uri!!)
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -225,7 +238,7 @@ class EditMyBookFragment : BaseFragment<FragmentEditMyBookBinding>() {
         val description = binding.tilDescription.editText?.text.toString()
         val predictionResult = response.outputPrice.toString()
         findNavController().navigate(
-            EditMyBookFragmentDirections.actionEditMyBookFragmentToEditMyBookDetailFragment(
+            EditMyBookFragmentDirections.actionEditMyBookFragment2ToEditMyBookDetailFragment2(
                 MyBookParcel(
                     id = response.id,
                     title = title,
@@ -274,7 +287,7 @@ class EditMyBookFragment : BaseFragment<FragmentEditMyBookBinding>() {
     }
 
     private fun setImage() {
-        binding.ivProfile.setImageURI(imageUri)
+        binding.ivMyBook.setImageURI(imageUri)
     }
 
     private fun intentToUCrop() {

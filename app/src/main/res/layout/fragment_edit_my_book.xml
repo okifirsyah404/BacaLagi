@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".presentation.view.post.PostFragment">
+    tools:context=".presentation.view.edit_mybook.EditMyBookFragment">
 
     <include
         android:id="@+id/main_toolbar_post"
@@ -31,7 +31,7 @@
             android:padding="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_profile"
+                android:id="@+id/iv_myBook"
                 android:layout_width="@dimen/dimen_128dp"
                 android:layout_height="@dimen/dimen_128dp"
                 android:layout_gravity="center"
@@ -229,7 +229,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_post"
+            android:id="@+id/btnEdit"
             style="@style/Theme.BacaLagi.FilledButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

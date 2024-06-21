@@ -88,7 +88,7 @@
             style="@style/Theme.BacaLagi.FilledButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_label_start_reading"
+            android:text="@string/set_as_done"
             android:textSize="16sp" />
     </FrameLayout>
 
