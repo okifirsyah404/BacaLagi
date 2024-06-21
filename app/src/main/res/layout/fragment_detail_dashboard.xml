@@ -30,8 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <!-- Book Image -->
             <ImageView
@@ -42,74 +41,100 @@
                 android:src="@drawable/img_bg" />
 
             <!-- Book Title and Description -->
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp"
-                android:text="The World"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:text="Hoho... mukatta kuruno ka? Nigetsu ni kono DIO no chikazuite kuruno ka? Sekkaku sofu no josefu ga watashi ni za warudo no shotai o shiken shuryo chaimu chokuzenn made mondai o hodoite iru jukensei no yona hisshi koita kibun de oshiete kureta to iu no ni"
-                android:textSize="14sp" />
-
-            <!-- Seller Information -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp"
-                android:text="Seller Information"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivSeller"
-                    android:layout_width="@dimen/dimen_48dp"
-                    android:layout_height="@dimen/dimen_48dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvSellerName"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitle"
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Dio Brando"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="4dp"
+                    android:text="The World" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:text="Hoho... mukatta kuruno ka? Nigetsu ni kono DIO no chikazuite kuruno ka? Sekkaku sofu no josefu ga watashi ni za warudo no shotai o shiken shuryo chaimu chokuzenn made mondai o hodoite iru jukensei no yona hisshi koita kibun de oshiete kureta to iu no ni"
                     android:textSize="14sp" />
+
+
             </LinearLayout>
 
-            <TextView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:text="Location"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_height="@dimen/dimen_8dp"
+                android:background="?attr/colorDivider" />
 
-            <TextView
-                android:id="@+id/tvLocation"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:text="Surabaya"
-                android:textSize="14sp" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="4dp"
+                    android:text="Seller Information"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="4dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivSeller"
+                        android:layout_width="@dimen/dimen_48dp"
+                        android:layout_height="@dimen/dimen_48dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSellerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Dio Brando"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:text="Location" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_8dp"
+                    android:text="Surabaya" />
+
+
+            </LinearLayout>
+
+
+            <!-- Seller Information -->
+
 
             <!-- About Book -->
             <TextView

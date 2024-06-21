@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!--    Ref Static Color -->
     <color name="primary_100">#FFFFFF</color>
     <color name="primary_99">#F7FDFF</color>

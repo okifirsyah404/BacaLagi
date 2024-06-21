@@ -32,3 +32,7 @@ fun Long.toRupiah(): String {
 
     return "Rp $result"
 }
+
+fun Int.toPercentage(): String {
+    return "$this%"
+}

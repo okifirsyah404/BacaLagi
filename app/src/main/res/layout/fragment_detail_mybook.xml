@@ -18,7 +18,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/layout_button"
+        app:layout_constraintBottom_toTopOf="@id/fl_bottom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mybook_toolbar">
@@ -26,14 +26,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/dimen_16dp">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/iv_myBook"
-                android:layout_width="@dimen/dimen_128dp"
-                android:layout_height="@dimen/dimen_128dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_240dp"
                 android:layout_gravity="center"
+                android:scaleType="centerCrop"
                 android:src="@drawable/img_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,62 +41,56 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                style="@style/Theme.BacaLagi.Text.TitleLarge"
+                style="@style/Theme.BacaLagi.Text.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingHorizontal="@dimen/dimen_16dp"
                 android:text="@string/shr_title"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:textAllCaps="true" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                style="@style/Theme.BacaLagi.Text.HeadlineSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingHorizontal="@dimen/dimen_16dp"
+                android:textColor="@color/primary_50"
+                tools:text="Rp100.000" />
 
             <TextView
                 android:id="@+id/tv_description"
                 style="@style/Theme.BacaLagi.Text.BodyMedium"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingHorizontal="@dimen/dimen_16dp"
                 android:text="@string/shr_description" />
 
-            <TextView
-                android:id="@+id/label_price_recommendation"
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Price" />
-
-            <TextView
-                android:id="@+id/tv_price"
-                style="@style/Theme.BacaLagi.Text.BodyMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Rp100.000" />
 
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/layout_button"
+    <FrameLayout
+        android:id="@+id/fl_bottom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
+        android:background="@drawable/bg_stroke_top_primary"
+        android:paddingHorizontal="@dimen/dimen_16dp"
+        android:paddingVertical="@dimen/dimen_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/done_button"
-            android:layout_width="0dp"
+            android:id="@+id/btn_done"
+            style="@style/Theme.BacaLagi.FilledButtonTheme"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:text="@string/set_as_done"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
+            android:text="@string/btn_label_start_reading"
+            android:textSize="16sp" />
+    </FrameLayout>
 
     <include
         android:id="@+id/loading_container"

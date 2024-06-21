@@ -25,6 +25,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primary_40" />
 
+        <ImageButton
+            android:id="@+id/iv_shadow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="Back Button"
+            android:paddingHorizontal="@dimen/dimen_16dp"
+            android:paddingVertical="@dimen/dimen_16dp"
+            android:src="@drawable/ic_back"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_40" />
+
+
         <TextView
             style="@style/Theme.BacaLagi.Text.LabelLarge"
             android:layout_width="0dp"
@@ -36,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_edit"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintStart_toEndOf="@id/iv_shadow_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton

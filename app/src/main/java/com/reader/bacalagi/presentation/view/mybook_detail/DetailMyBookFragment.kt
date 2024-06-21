@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailMybookBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
+import com.reader.bacalagi.utils.extension.showDecisionDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailMyBookFragment : BaseFragment<FragmentDetailMybookBinding>() {
@@ -31,8 +33,14 @@ class DetailMyBookFragment : BaseFragment<FragmentDetailMybookBinding>() {
                 findNavController().navigateUp()
             }
             ivDelete.setOnClickListener {
-                viewModel.delete(
-                    id = args.myBook.id
+                showDecisionDialog(
+                    title = getString(R.string.dialog_title_delete_book),
+                    message = getString(R.string.dialog_msg_delete_book),
+                    onYes = {
+                        viewModel.delete(
+                            id = args.myBook.id
+                        )
+                    }
                 )
             }
         }
@@ -40,15 +48,15 @@ class DetailMyBookFragment : BaseFragment<FragmentDetailMybookBinding>() {
 
     override fun initUI() {
         binding.apply {
-            doneButton.isEnabled = true
+            btnDone.isEnabled = true
             tvTitle.text = args.myBook.title
             tvDescription.text = args.myBook.description
             tvPrice.text = args.myBook.predictionResult
             ivMyBook.load(args.myBook.imageUri)
             if (args.myBook.status != "OPEN") {
-                doneButton.isEnabled = false
+                btnDone.isEnabled = false
             } else {
-                doneButton.setOnClickListener {
+                btnDone.setOnClickListener {
                     viewModel.soldOut(
                         id = args.myBook.id
                     )

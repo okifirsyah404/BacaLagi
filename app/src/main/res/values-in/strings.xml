@@ -79,4 +79,6 @@
     <string name="dialog_msg_language_field_empty">Language Masih Kosong</string>
     <string name="dialog_msg_description_field_empty">Description Masih Kosong</string>
     <string name="dialog_msg_image_field_empty">Gambar buku tidak boleh kosong</string>
+    <string name="dialog_title_delete_book">Hapus Buku</string>
+    <string name="dialog_msg_delete_book">Apakah anda yakin untuk menghapus buku ini?</string>
 </resources>

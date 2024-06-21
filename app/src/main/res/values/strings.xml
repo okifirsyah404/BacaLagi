@@ -93,5 +93,7 @@
     <string name="chat">Chat</string>
     <string name="book_title">Title Book</string>
     <string name="title_my_book">My Books</string>
+    <string name="dialog_title_delete_book" translatable="false">Delete Book</string>
+    <string name="dialog_msg_delete_book">Are you sure to delete this book?</string>
 
 </resources>

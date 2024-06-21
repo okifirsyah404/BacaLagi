@@ -4,6 +4,8 @@
         <!-- Customize your font theme here. -->
         <item name="android:fontFamily">@font/nunito</item>
 
+        <item name="colorDivider">@color/neutral_80</item>
+
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
