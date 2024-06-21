@@ -2,6 +2,7 @@ package com.reader.bacalagi.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import coil.load
 import com.reader.bacalagi.R
 import com.reader.bacalagi.data.local.model.GeneralProductModel
 import com.reader.bacalagi.databinding.ItemProductBinding
+import com.reader.bacalagi.presentation.view.dashboard.DashboardFragmentDirections
 import com.reader.bacalagi.utils.extension.toRupiah
 
 class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
@@ -30,29 +32,27 @@ class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
     inner class DashboardProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         fun bind(item: GeneralProductModel) {
             binding.apply {
-
-                binding.apply {
-                    tvItemName.text = item.user.name
-                    tvItemTitle.text = item.book.title
-                    tvPrice.text = item.finalPrice.toRupiah()
-
-                    ivPostAuthorPhoto.load(item.user.avatarURL) {
-                        placeholder(R.drawable.ic_account_box)
-                    }
-
-                    ivItemPhoto.load(item.book.imageURL) {
-                        placeholder(R.drawable.ic_edit)
-                    }
-
-                    chipLoc.text = item.user.cityLocality
-
+                tvItemName.text = item.user.name
+                tvItemTitle.text = item.book.title
+                tvPrice.text = item.finalPrice.toRupiah()
+                ivPostAuthorPhoto.load(item.user.avatarURL) {
+                    placeholder(R.drawable.ic_account_box)
                 }
 
+                ivItemPhoto.load(item.book.imageURL) {
+                    placeholder(R.drawable.ic_edit)
+                }
+
+                chipLoc.text = item.user.cityLocality
+
                 root.setOnClickListener {
-//                    onClick(DashboardProductParcel.fromModel(data))
+                    val action =
+                        DashboardFragmentDirections.actionDashboardFragmentToDetailDashboardFragment(
+                            item.id
+                        )
+                    it.findNavController().navigate(action)
                 }
             }
         }
@@ -64,16 +64,15 @@ class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
                 oldItem: GeneralProductModel,
                 newItem: GeneralProductModel
             ): Boolean {
-                return oldItem == newItem
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
                 oldItem: GeneralProductModel,
                 newItem: GeneralProductModel
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
         }
     }
-
 }

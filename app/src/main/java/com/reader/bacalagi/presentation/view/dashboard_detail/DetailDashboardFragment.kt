@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailDashboardBinding
 
 class DetailDashboardFragment : BaseFragment<FragmentDetailDashboardBinding>() {
 
+    private val args by navArgs<DetailDashboardFragmentArgs>()
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,7 +21,7 @@ class DetailDashboardFragment : BaseFragment<FragmentDetailDashboardBinding>() {
     }
 
     override fun initAppBar() {
-        binding.dashboardToolbar.apply {
+        binding.toolbar.apply {
             mainToolbar.title = getString(R.string.book_title)
             mainToolbar.setNavigationIcon(R.drawable.ic_back)
 
@@ -30,5 +32,6 @@ class DetailDashboardFragment : BaseFragment<FragmentDetailDashboardBinding>() {
     }
 
     override fun initUI() {
+        binding.tvTitle.text = args.id
     }
 }

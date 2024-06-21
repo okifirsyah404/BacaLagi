@@ -61,8 +61,8 @@
             android:id="@+id/action_dashboardFragment_to_postFragment"
             app:destination="@id/postFragment" />
         <action
-            android:id="@+id/action_dashboardFragment_to_detailBookFragment"
-            app:destination="@id/detailBookFragment" />
+            android:id="@+id/action_dashboardFragment_to_detailDashboardFragment"
+            app:destination="@id/detailDashboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -209,11 +209,6 @@
             app:destination="@id/detailMyBookFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailBookFragment"
-        android:name="com.reader.bacalagi.presentation.view.detail_book.DetailBookFragment"
-        android:label="fragment_detail_book"
-        tools:layout="@layout/fragment_detail_book" />
-    <fragment
         android:id="@+id/editMyBookFragment"
         android:name="com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookFragment"
         android:label="fragment_edit_my_book"
@@ -233,5 +228,14 @@
         <argument
             android:name="mybook"
             app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailDashboardFragment"
+        android:name="com.reader.bacalagi.presentation.view.dashboard_detail.DetailDashboardFragment"
+        android:label="fragment_detail_dashboard"
+        tools:layout="@layout/fragment_detail_dashboard">
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>
