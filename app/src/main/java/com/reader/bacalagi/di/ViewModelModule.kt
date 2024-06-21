@@ -4,9 +4,11 @@ import com.reader.bacalagi.presentation.MainActivityViewModel
 import com.reader.bacalagi.presentation.view.area_selector.AreaSelectorViewModel
 import com.reader.bacalagi.presentation.view.auth.AuthViewModel
 import com.reader.bacalagi.presentation.view.dashboard.DashboardViewModel
+import com.reader.bacalagi.presentation.view.edit_mybook_detail.EditMyBookDetailViewModel
 import com.reader.bacalagi.presentation.view.edit_profile.EditProfileViewModel
 import com.reader.bacalagi.presentation.view.failed.FailedViewModel
 import com.reader.bacalagi.presentation.view.mybook.MyBookViewModel
+import com.reader.bacalagi.presentation.view.mybook_detail.DetailMyBookViewModel
 import com.reader.bacalagi.presentation.view.post.PostViewModel
 import com.reader.bacalagi.presentation.view.post_detail.DetailPostViewModel
 import com.reader.bacalagi.presentation.view.profile.ProfileViewModel
@@ -76,5 +78,11 @@ val viewModelModule = module {
     }
     viewModel {
         MyBookViewModel(get())
+    }
+    viewModel {
+        DetailMyBookViewModel(get())
+    }
+    viewModel {
+        EditMyBookDetailViewModel(get())
     }
 }

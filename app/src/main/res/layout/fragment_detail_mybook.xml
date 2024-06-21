@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.view.mybook_detail.DetailMyBookFragment">
 
     <include
         android:id="@+id/mybook_toolbar"
-        layout="@layout/toolbar_main"
+        layout="@layout/toolbar_mybook"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/mybook_toolbar"
         app:layout_constraintBottom_toTopOf="@id/layout_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/mybook_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,20 +29,24 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_16dp">
 
-            <include
-                android:id="@+id/iv_image"
-                layout="@layout/card_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_myBook"
+                android:layout_width="@dimen/dimen_128dp"
+                android:layout_height="@dimen/dimen_128dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_title"
+                style="@style/Theme.BacaLagi.Text.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/shr_title"
                 android:textAllCaps="true"
-                style="@style/Theme.BacaLagi.Text.TitleLarge"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,19 +59,19 @@
 
             <TextView
                 android:id="@+id/label_price_recommendation"
+                style="@style/Theme.BacaLagi.Text.LabelLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Price"
-                style="@style/Theme.BacaLagi.Text.LabelLarge" />
+                android:text="Price" />
 
             <TextView
-                android:id="@+id/tv_price_recommendation"
+                android:id="@+id/tv_price"
+                style="@style/Theme.BacaLagi.Text.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Rp100.000"
-                style="@style/Theme.BacaLagi.Text.BodyMedium" />
+                android:text="Rp100.000" />
 
         </LinearLayout>
     </ScrollView>
@@ -83,14 +87,24 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:id="@+id/done_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/set_as_done"
-            android:textColor="@android:color/white"
             android:layout_gravity="center_vertical"
-            android:padding="8dp"/>
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/set_as_done"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/loading_container"
+        layout="@layout/container_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mybook_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

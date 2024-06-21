@@ -1,6 +1,5 @@
 package com.reader.bacalagi.data.local.model
 
-import com.reader.bacalagi.data.network.request.EditProductRequest
 import com.reader.bacalagi.data.network.response.PredictionResponse
 import com.reader.bacalagi.data.network.response.ProductResponse
 import com.reader.bacalagi.data.network.service.ProductService
@@ -80,6 +79,52 @@ class ProductDataSource(private val service: ProductService) {
         }
     }
 
+    suspend fun soldOut(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>> {
+        return flow {
+            try {
+                emit(ApiResponse.Loading)
+                val response = service.soldOut(
+                    id = id
+                )
+                if (response.data == null) {
+                    emit(ApiResponse.Error(response.message))
+                    return@flow
+                }
+
+                emit(ApiResponse.Success(response.data))
+            } catch (e: HttpException) {
+                emit(ApiResponse.Error(e.getHttpBodyErrorMessage()))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.createErrorResponse()))
+            }
+        }
+    }
+
+    suspend fun delete(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>> {
+        return flow {
+            try {
+                emit(ApiResponse.Loading)
+                val response = service.delete(
+                    id = id
+                )
+                if (response.data == null) {
+                    emit(ApiResponse.Error(response.message))
+                    return@flow
+                }
+
+                emit(ApiResponse.Success(response.data))
+            } catch (e: HttpException) {
+                emit(ApiResponse.Error(e.getHttpBodyErrorMessage()))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.createErrorResponse()))
+            }
+        }
+    }
+
     suspend fun postProduct(
         title: String,
         author: String,
@@ -123,33 +168,34 @@ class ProductDataSource(private val service: ProductService) {
     }
 
     suspend fun editProduct(
+        id: String,
         title: String,
         author: String,
         publisher: String,
-        publishYear: Long,
-        buyPrice: Long,
-        finalPrice: Long,
+        publishYear: String,
+        buyPrice: String,
+        finalPrice: String,
         ISBN: String,
         language: String,
         description: String,
-        image: File?
+        image: File
     ): Flow<ApiResponse<ProductResponse>> {
         return flow {
             try {
                 emit(ApiResponse.Loading)
                 val response = service.editProduct(
-                    EditProductRequest(
-                        title = title,
-                        author = author,
-                        publisher = publisher,
-                        publishYear = publishYear,
-                        buyPrice = buyPrice,
-                        finalPrice = finalPrice,
-                        ISBN = ISBN,
-                        language = language,
-                        description = description,
-                        image = image
-                    )
+                    id = id,
+                    title = title.toRequestBody(),
+                    author = author.toRequestBody(),
+                    publisher = publisher.toRequestBody(),
+                    publishYear = publishYear.toRequestBody(),
+                    buyPrice = buyPrice.toRequestBody(),
+                    finalPrice = finalPrice.toRequestBody(),
+                    ISBN = ISBN.toRequestBody(),
+                    language = language.toRequestBody(),
+                    description = description.toRequestBody(),
+                    image = image.toMultipart()
+
                 )
 
                 if (response.data == null) {

@@ -19,6 +19,19 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
         return dataSource.fetchMyBook()
     }
 
+    override suspend fun soldOut(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>> {
+        return dataSource.soldOut(id)
+    }
+
+    override suspend fun delete(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>> {
+        return dataSource.delete(id)
+    }
+
+
     override suspend fun predictProduct(
         buyPrice: String,
         image: File
@@ -55,18 +68,20 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
 
 
     override suspend fun editProduct(
+        id: String,
         title: String,
         author: String,
         publisher: String,
-        publishYear: Long,
-        buyPrice: Long,
-        finalPrice: Long,
+        publishYear: String,
+        buyPrice: String,
+        finalPrice: String,
         ISBN: String,
         language: String,
         description: String,
-        image: File?
-    ): Flow<ApiResponse<ProductResponse>> {
-        return dataSource.editProduct(
+        image: File
+    ): Flow<ApiResponse<ProductResponse>> =
+        dataSource.editProduct(
+            id,
             title,
             author,
             publisher,
@@ -77,6 +92,6 @@ class ProductRepositoryImpl(private val dataSource: ProductDataSource) : Product
             language,
             description,
             image
-        )
-    }
+        ).flowOn(Dispatchers.IO)
+
 }

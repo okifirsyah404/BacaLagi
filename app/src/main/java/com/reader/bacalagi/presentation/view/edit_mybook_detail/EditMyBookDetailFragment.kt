@@ -1,34 +1,32 @@
-package com.reader.bacalagi.presentation.view.post_detail
+package com.reader.bacalagi.presentation.view.edit_mybook_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
-import com.reader.bacalagi.databinding.FragmentDetailPostBinding
+import com.reader.bacalagi.databinding.FragmentEditMyBookDetailBinding
 import com.reader.bacalagi.domain.utils.extension.observeResult
-import com.reader.bacalagi.utils.extension.showLoadingDialog
-import com.reader.bacalagi.utils.helper.MutableReference
+import com.reader.bacalagi.utils.extension.gone
+import com.reader.bacalagi.utils.extension.show
 import com.reader.bacalagi.utils.helper.uriToFile
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
+class EditMyBookDetailFragment : BaseFragment<FragmentEditMyBookDetailBinding>() {
 
-    private val args by navArgs<DetailPostFragmentArgs>()
-    private val viewModel: DetailPostViewModel by viewModel()
+    private val args by navArgs<EditMyBookDetailFragmentArgs>()
+    private val viewModel: EditMyBookDetailViewModel by viewModel()
     private var finalPrice: String = ""
 
-    private val loadingDialogReference = MutableReference<AlertDialog?>(null)
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentDetailPostBinding {
-        return FragmentDetailPostBinding.inflate(inflater, container, false)
+    ): FragmentEditMyBookDetailBinding {
+        return FragmentEditMyBookDetailBinding.inflate(inflater, container, false)
     }
 
     override fun initUI() {
@@ -37,19 +35,10 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
         binding.labelPrice.visibility = View.GONE
         binding.tfPrice.visibility = View.GONE
 
-        binding.tfPrice.editText?.setText(args.product.buyPrice)
-
-        binding.ivProduct.setImageURI(args.product.imageUri)
-        binding.tvTitle.text = args.product.title
-        binding.tvDescription.text = args.product.description
-        binding.tvPriceRecommendation.text = args.product.predictionResult
-        
-        var finalPrice = args.product.predictionResult
-
-        finalPrice = when (binding.tfPrice.editText?.text.toString().isEmpty()) {
-            true -> args.product.predictionResult
-            false -> binding.tfPrice.editText?.text.toString()
-        }
+        binding.ivProduct.setImageURI(args.mybook.imageUri)
+        binding.tvTitle.text = args.mybook.title
+        binding.tvDescription.text = args.mybook.description
+        binding.tvPriceRecommendation.text = args.mybook.predictionResult
 
         binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
@@ -57,7 +46,7 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
                     R.id.button2 -> {
                         binding.labelPrice.visibility = View.GONE
                         binding.tfPrice.visibility = View.GONE
-                        finalPrice = args.product.predictionResult
+                        finalPrice = args.mybook.predictionResult
                     }
 
                     R.id.button1 -> {
@@ -69,19 +58,19 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
                 }
             }
         }
-
         binding.filledButtonPost.setOnClickListener {
-            viewModel.post(
-                title = args.product.title,
-                author = args.product.author,
-                publisher = args.product.publisher,
-                publishYear = args.product.publishYear,
-                buyPrice = args.product.buyPrice,
+            viewModel.edit(
+                id = args.mybook.id,
+                title = args.mybook.title,
+                author = args.mybook.author,
+                publisher = args.mybook.publisher,
+                publishYear = args.mybook.publishYear,
+                buyPrice = args.mybook.buyPrice,
                 finalPrice = finalPrice,
-                ISBN = args.product.ISBN,
-                language = args.product.language,
-                description = args.product.description,
-                image = args.product.imageUri.let { uri ->
+                ISBN = args.mybook.ISBN,
+                language = args.mybook.language,
+                description = args.mybook.description,
+                image = args.mybook.imageUri.let { uri ->
                     uriToFile(requireActivity(), uri)
                 }
             )
@@ -108,7 +97,7 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
             onSuccess = {
                 showError(false, "")
                 showLoading(false)
-                findNavController().navigate(R.id.action_detailPostFragment_to_dashboardFragment)
+                findNavController().navigate(R.id.action_editMyBookDetailFragment_to_myBookFragment)
             }
             onError = {
                 showLoading(false)
@@ -121,11 +110,14 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
     }
 
     override fun showLoading(isLoading: Boolean) {
-
-        showLoadingDialog(
-            loading = isLoading,
-            dialogReference = loadingDialogReference
-        )
-
+        if (isLoading) {
+            binding.apply {
+                loadingContainer.root.show()
+            }
+        } else {
+            binding.apply {
+                loadingContainer.root.gone()
+            }
+        }
     }
 }

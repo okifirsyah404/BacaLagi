@@ -92,5 +92,6 @@
     <string name="dialog_msg_image_field_empty">Image cannot be empty</string>
     <string name="chat">Chat</string>
     <string name="book_title">Title Book</string>
+    <string name="title_my_book">My Books</string>
 
 </resources>
