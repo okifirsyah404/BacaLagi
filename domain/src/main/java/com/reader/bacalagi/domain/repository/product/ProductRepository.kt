@@ -10,17 +10,27 @@ interface ProductRepository {
     suspend fun getProduct(): Flow<ApiResponse<ProductResponse>>
 
     suspend fun getMyBooks(): Flow<ApiResponse<List<ProductResponse>>>
+
+    suspend fun soldOut(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>>
+
+    suspend fun delete(
+        id: String
+    ): Flow<ApiResponse<ProductResponse>>
+
     suspend fun editProduct(
+        id: String,
         title: String,
         author: String,
         publisher: String,
-        publishYear: Long,
-        buyPrice: Long,
-        finalPrice: Long,
+        publishYear: String,
+        buyPrice: String,
+        finalPrice: String,
         ISBN: String,
         language: String,
         description: String,
-        image: File?
+        image: File
     ): Flow<ApiResponse<ProductResponse>>
 
     suspend fun predictProduct(

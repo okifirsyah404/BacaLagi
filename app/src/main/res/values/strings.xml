@@ -91,5 +91,6 @@
     <string name="dialog_msg_description_field_empty">Description Masih Kosong</string>
     <string name="chat">Chat</string>
     <string name="book_title">Title Book</string>
+    <string name="title_my_book">My Books</string>
 
 </resources>

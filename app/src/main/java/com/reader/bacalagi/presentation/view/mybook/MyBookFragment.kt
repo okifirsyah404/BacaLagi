@@ -72,9 +72,6 @@ class MyBookFragment : BaseFragment<FragmentMybookBinding>() {
         binding.rvBook.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = myBookAdapter
-            setOnClickListener {
-                findNavController().navigate(R.id.action_myBookFragment_to_detailMyBookFragment)
-            }
         }
     }
 

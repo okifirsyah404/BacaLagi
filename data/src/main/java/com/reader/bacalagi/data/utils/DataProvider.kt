@@ -6,7 +6,7 @@ object DataProvider {
     var databaseName: String = BuildConfig.DATABASE_NAME
 
 
-    var baseUrl: String = "https://emerging-moccasin-ghastly.ngrok-free.app/"
+    var baseUrl: String = "https://api.readerlab.my.id/"
 //    var baseUrl: String = BuildConfig.BASE_URL
 
     var areaBaseUrl: String = BuildConfig.AREA_BASE_URL

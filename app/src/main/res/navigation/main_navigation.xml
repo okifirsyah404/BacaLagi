@@ -183,7 +183,17 @@
         android:id="@+id/detailMyBookFragment"
         android:name="com.reader.bacalagi.presentation.view.mybook_detail.DetailMyBookFragment"
         android:label="fragment_detail_mybook"
-        tools:layout="@layout/fragment_detail_mybook" />
+        tools:layout="@layout/fragment_detail_mybook">
+        <argument
+            android:name="myBook"
+            app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
+        <action
+            android:id="@+id/action_detailMyBookFragment_to_myBookFragment"
+            app:destination="@id/myBookFragment" />
+        <action
+            android:id="@+id/action_detailMyBookFragment_to_editMyBookFragment"
+            app:destination="@id/editMyBookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.reader.bacalagi.presentation.view.profile_privacy_policy.PrivacyPolicyFragment"
@@ -203,4 +213,25 @@
         android:name="com.reader.bacalagi.presentation.view.detail_book.DetailBookFragment"
         android:label="fragment_detail_book"
         tools:layout="@layout/fragment_detail_book" />
+    <fragment
+        android:id="@+id/editMyBookFragment"
+        android:name="com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookFragment"
+        android:label="fragment_edit_my_book"
+        tools:layout="@layout/fragment_edit_my_book">
+        <action
+            android:id="@+id/action_editMyBookFragment_to_editMyBookDetailFragment"
+            app:destination="@id/editMyBookDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMyBookDetailFragment"
+        android:name="com.reader.bacalagi.presentation.view.edit_mybook_detail.EditMyBookDetailFragment"
+        android:label="fragment_edit_my_book_detail"
+        tools:layout="@layout/fragment_edit_my_book_detail">
+        <action
+            android:id="@+id/action_editMyBookDetailFragment_to_myBookFragment"
+            app:destination="@id/myBookFragment" />
+        <argument
+            android:name="mybook"
+            app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
+    </fragment>
 </navigation>
