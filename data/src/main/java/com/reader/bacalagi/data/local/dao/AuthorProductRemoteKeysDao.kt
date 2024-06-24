@@ -15,6 +15,6 @@ interface AuthorProductRemoteKeysDao {
     @Query("SELECT * FROM author_product_remote_keys WHERE id = :id")
     suspend fun getRemoteKeysId(id: String): AuthorProductRemoteKeysModel?
 
-    @Query("DELETE FROM province_remote_keys")
+    @Query("DELETE FROM author_product_remote_keys")
     suspend fun deleteRemoteKeys()
 }

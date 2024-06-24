@@ -20,7 +20,7 @@ import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.AuthResponse
 import com.reader.bacalagi.databinding.FragmentAuthBinding
-import com.reader.bacalagi.domain.utils.extension.observeSingleEventResult
+import com.reader.bacalagi.utilities.extension.observeSingleEventResult
 import com.reader.bacalagi.utils.extension.observeInternetConnection
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog

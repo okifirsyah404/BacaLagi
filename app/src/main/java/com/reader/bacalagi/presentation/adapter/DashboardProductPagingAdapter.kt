@@ -2,7 +2,6 @@ package com.reader.bacalagi.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,6 @@ import coil.load
 import com.reader.bacalagi.R
 import com.reader.bacalagi.data.local.model.GeneralProductModel
 import com.reader.bacalagi.databinding.ItemProductBinding
-import com.reader.bacalagi.presentation.view.dashboard.DashboardFragmentDirections
 import com.reader.bacalagi.utils.extension.toRupiah
 
 class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
@@ -48,11 +46,7 @@ class DashboardProductPagingAdapter(private val onClick: (String) -> Unit) :
                 chipLoc.text = item.user.cityLocality
 
                 root.setOnClickListener {
-                    val action =
-                        DashboardFragmentDirections.actionDashboardFragmentToDetailDashboardFragment(
-                            item.id
-                        )
-                    it.findNavController().navigate(action)
+                    onClick(item.id)
                 }
             }
         }

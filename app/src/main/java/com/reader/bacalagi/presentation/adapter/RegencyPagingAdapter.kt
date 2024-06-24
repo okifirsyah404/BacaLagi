@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.reader.bacalagi.data.local.model.RegencyModel
+import com.reader.bacalagi.data_area.local.model.RegencyModel
 import com.reader.bacalagi.databinding.ItemTileBinding
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
 import com.reader.bacalagi.utils.extension.toCapitalCase

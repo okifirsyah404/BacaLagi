@@ -18,6 +18,7 @@ import com.reader.bacalagi.utils.enum.FailedContext
 import com.reader.bacalagi.utils.extension.hide
 import com.reader.bacalagi.utils.extension.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
@@ -25,6 +26,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     private val productAdapter: DashboardProductPagingAdapter by lazy {
         DashboardProductPagingAdapter(
             onClick = {
+                navigateToDetailBookFragment(it)
             }
         )
     }
@@ -110,11 +112,17 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     override fun showLoading(isLoading: Boolean) {
         if (isLoading) {
-            binding.loadingContainer.root.show()
-            binding.rvProductMain.hide()
+            binding.apply {
+                fabAddStory.hide()
+                loadingContainer.root.show()
+                rvProductMain.hide()
+            }
         } else {
-            binding.loadingContainer.root.hide()
-            binding.rvProductMain.show()
+            binding.apply {
+                fabAddStory.show()
+                loadingContainer.root.hide()
+                rvProductMain.show()
+            }
         }
     }
 
@@ -127,7 +135,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     private fun loadStateListener(loadState: CombinedLoadStates) {
-
         if (view == null) return
 
         when (loadState.refresh) {
@@ -141,13 +148,15 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
             is LoadState.Error -> {
                 showLoading(false)
+                Timber.e((loadState.refresh as LoadState.Error).error.message)
+                showError(true, (loadState.refresh as LoadState.Error).error.message ?: "")
             }
         }
     }
 
     private fun navigateToDetailBookFragment(id: String) {
         findNavController().navigate(
-            DashboardFragmentDirections.actionDashboardFragmentToDetailDashboardFragment(id)
+            DashboardFragmentDirections.actionDashboardFragmentToDetailProductFragment(id)
         )
     }
 

@@ -17,12 +17,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentEditProfileBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
-import com.reader.bacalagi.domain.utils.extension.observeSingleEvent
 import com.reader.bacalagi.presentation.parcel.AreaContextParcel
 import com.reader.bacalagi.presentation.parcel.ProvinceParcel
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
 import com.reader.bacalagi.presentation.view.register.RegisterFragment
+import com.reader.bacalagi.utilities.extension.observeResult
+import com.reader.bacalagi.utilities.extension.observeSingleEvent
 import com.reader.bacalagi.utils.enum.AreaContext
 import com.reader.bacalagi.utils.extension.requestPermission
 import com.reader.bacalagi.utils.extension.showLoadingDialog
@@ -268,7 +268,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             onSuccess = {
                 showLoading(false)
                 showError(false, "")
-                findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+                findNavController().navigateUp()
             }
         }
     }

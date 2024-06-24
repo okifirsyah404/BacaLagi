@@ -9,7 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentEditMyBookDetailBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookFragmentArgs
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
 import com.reader.bacalagi.utils.helper.uriToFile
@@ -17,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditMyBookDetailFragment : BaseFragment<FragmentEditMyBookDetailBinding>() {
 
-    private val args by navArgs<EditMyBookDetailFragmentArgs>()
+    private val args by navArgs<EditMyBookFragmentArgs>()
     private val viewModel: EditMyBookDetailViewModel by viewModel()
     private var finalPrice: String = ""
 
@@ -97,7 +98,7 @@ class EditMyBookDetailFragment : BaseFragment<FragmentEditMyBookDetailBinding>()
             onSuccess = {
                 showError(false, "")
                 showLoading(false)
-                findNavController().navigate(R.id.action_editMyBookDetailFragment_to_myBookFragment)
+                findNavController().navigate(R.id.action_editMyBookDetailFragment2_to_myBookFragment)
             }
             onError = {
                 showLoading(false)

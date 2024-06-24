@@ -56,7 +56,7 @@ class SearchBookAdapter(private val onClick: (String) -> Unit) :
 
 
                 root.setOnClickListener {
-//                    onClick(DashboardProductParcel.fromModel(data))
+                    onClick(item.id)
                 }
             }
 

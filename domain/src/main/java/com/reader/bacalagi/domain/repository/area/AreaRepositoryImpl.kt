@@ -2,14 +2,15 @@ package com.reader.bacalagi.domain.repository.area
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.reader.bacalagi.data.local.model.ProvinceModel
-import com.reader.bacalagi.data.local.model.RegencyModel
-import com.reader.bacalagi.data.local.model.SavedProvinceModel
-import com.reader.bacalagi.data.local.model.SavedRegencyModel
-import com.reader.bacalagi.data.network.response.AreaProvinceResponse
-import com.reader.bacalagi.data.network.response.AreaRegenciesResponse
-import com.reader.bacalagi.data.source.AreaDataSource
-import com.reader.bacalagi.data.utils.ApiResponse
+import com.reader.bacalagi.data_area.local.model.ProvinceModel
+import com.reader.bacalagi.data_area.local.model.RegencyModel
+import com.reader.bacalagi.data_area.local.model.SavedProvinceModel
+import com.reader.bacalagi.data_area.local.model.SavedRegencyModel
+import com.reader.bacalagi.data_area.network.response.ProvinceResponse
+import com.reader.bacalagi.data_area.network.response.RegencyResponse
+import com.reader.bacalagi.data_area.source.AreaDataSource
+import com.reader.bacalagi.utilities.base.ApiResponse
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -18,13 +19,13 @@ class AreaRepositoryImpl(private val dataSource: AreaDataSource) : AreaRepositor
 
     suspend fun fetchProvinces(
         name: String?,
-    ): Flow<ApiResponse<List<AreaProvinceResponse>>> =
+    ): Flow<ApiResponse<List<ProvinceResponse>>> =
         dataSource.fetchProvinces(name = name).flowOn(Dispatchers.IO)
 
     override fun getPagingProvince(): LiveData<PagingData<ProvinceModel>> =
         dataSource.fetchPagingProvinces()
 
-    suspend fun fetchRegencies(name: String?): Flow<ApiResponse<List<AreaRegenciesResponse>>> =
+    suspend fun fetchRegencies(name: String?): Flow<ApiResponse<List<RegencyResponse>>> =
         dataSource.fetchRegencies(name = name).flowOn(Dispatchers.IO)
 
     override fun getPagingRegency(provinceId: String): LiveData<PagingData<RegencyModel>> =

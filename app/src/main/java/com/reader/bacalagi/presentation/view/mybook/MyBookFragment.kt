@@ -9,8 +9,8 @@ import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.ProductResponse
 import com.reader.bacalagi.databinding.FragmentMybookBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.adapter.MyBooksAdapter
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.decorator.ListRecyclerViewItemDivider
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show

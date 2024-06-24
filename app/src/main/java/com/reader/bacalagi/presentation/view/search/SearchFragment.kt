@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentSearchBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.adapter.SearchBookAdapter
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.decorator.ListRecyclerViewItemDivider
 import com.reader.bacalagi.utils.extension.hide
 import com.reader.bacalagi.utils.extension.show
@@ -24,7 +24,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val productAdapter: SearchBookAdapter by lazy {
         SearchBookAdapter(
             onClick = {
-//            navigateToDetailBookFragment(it)
+                navigateToDetailBookFragment(it)
             }
         )
     }
@@ -143,7 +143,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
 
     private fun navigateToDetailBookFragment(id: String) {
-//        findNavController().navigate(
-//        )
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToDetailProductFragment(
+                id
+            )
+        )
     }
 }

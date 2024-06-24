@@ -2,9 +2,9 @@ package com.reader.bacalagi.data.source
 
 import com.reader.bacalagi.data.network.response.PrivacyPolicyResponse
 import com.reader.bacalagi.data.network.service.PolicyService
-import com.reader.bacalagi.data.utils.ApiResponse
-import com.reader.bacalagi.data.utils.extension.createErrorResponse
-import com.reader.bacalagi.data.utils.extension.getHttpBodyErrorMessage
+import com.reader.bacalagi.utilities.base.ApiResponse
+import com.reader.bacalagi.utilities.extension.createErrorResponse
+import com.reader.bacalagi.utilities.extension.getHttpBodyErrorMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

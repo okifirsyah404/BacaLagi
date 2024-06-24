@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reader.bacalagi.data.local.preference.StoragePreference
 import com.reader.bacalagi.data.network.response.UserResponse
-import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.domain.repository.profile.ProfileRepositoryImpl
+import com.reader.bacalagi.utilities.base.ApiResponse
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reader.bacalagi.data.local.model.ProvinceModel
-import com.reader.bacalagi.data.local.model.RegencyModel
 import com.reader.bacalagi.data.network.response.UserResponse
-import com.reader.bacalagi.data.utils.ApiResponse
+import com.reader.bacalagi.data_area.local.model.ProvinceModel
+import com.reader.bacalagi.data_area.local.model.RegencyModel
 import com.reader.bacalagi.domain.repository.area.AreaRepositoryImpl
 import com.reader.bacalagi.domain.repository.auth.AuthRepositoryImpl
+import com.reader.bacalagi.utilities.base.ApiResponse
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(

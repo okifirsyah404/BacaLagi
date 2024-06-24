@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reader.bacalagi.data.network.response.ProductResponse
-import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.domain.repository.product.ProductRepositoryImpl
+import com.reader.bacalagi.utilities.base.ApiResponse
 import kotlinx.coroutines.launch
 
 class MyBookViewModel(

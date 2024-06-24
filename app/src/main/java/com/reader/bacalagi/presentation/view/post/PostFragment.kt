@@ -17,9 +17,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.PredictionResponse
-import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.databinding.FragmentPostBinding
 import com.reader.bacalagi.presentation.parcel.ProductParcel
+import com.reader.bacalagi.utilities.base.ApiResponse
 import com.reader.bacalagi.utils.extension.requestPermission
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog
@@ -42,6 +42,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 intentToUCrop()
+            } else {
+                deleteImage()
             }
         }
 
@@ -50,6 +52,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
             if (uri != null) {
                 imageUri = uri
                 intentToUCrop()
+            } else {
+                deleteImage()
             }
         }
 
@@ -189,6 +193,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                 if (result.data != null && result.resultCode == Activity.RESULT_OK) {
                     imageUri = UCrop.getOutput(result.data!!)
                     setImage()
+                } else {
+                    deleteImage()
                 }
             }
     }
@@ -302,11 +308,28 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
     }
 
     private fun launchCamera() {
+        deleteImage()
         imageUri = getImageUri(requireActivity())
         cameraLauncher.launch(imageUri)
     }
 
     private fun launchGallery() {
+        deleteImage()
         galleryLauncher.launch("image/*")
+    }
+
+    private fun deleteImage() {
+        imageUri?.let {
+            try {
+                val rowsDeleted = requireActivity().contentResolver.delete(it, null, null)
+                if (rowsDeleted > 0) {
+                    Timber.d("DeleteImage", "Image deleted successfully.")
+                } else {
+                    Timber.d("DeleteImage", "No image found to delete.")
+                }
+            } catch (e: Exception) {
+                Timber.e("DeleteImage", "Error deleting image: ${e.message}", e)
+            }
+        } ?: Timber.w("DeleteImage", "Image URI is null, cannot delete image.")
     }
 }

@@ -9,7 +9,8 @@ import coil.load
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailMybookBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.presentation.parcel.MyBookParcel
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
 import com.reader.bacalagi.utils.extension.showDecisionDialog
@@ -41,6 +42,26 @@ class DetailMyBookFragment : BaseFragment<FragmentDetailMybookBinding>() {
                             id = args.myBook.id
                         )
                     }
+                )
+            }
+            ivEdit.setOnClickListener {
+                findNavController().navigate(
+                    DetailMyBookFragmentDirections.actionDetailMyBookFragmentToEditMyBookFragment22(
+                        MyBookParcel(
+                            id = args.myBook.id,
+                            title = args.myBook.title,
+                            author = args.myBook.author,
+                            publisher = args.myBook.publisher,
+                            publishYear = args.myBook.publishYear,
+                            buyPrice = args.myBook.buyPrice,
+                            ISBN = args.myBook.ISBN,
+                            language = args.myBook.language,
+                            imageUri = args.myBook.imageUri,
+                            description = args.myBook.description,
+                            predictionResult = args.myBook.predictionResult,
+                            status = args.myBook.status
+                        )
+                    )
                 )
             }
         }

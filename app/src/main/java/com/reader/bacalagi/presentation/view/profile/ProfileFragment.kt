@@ -9,9 +9,9 @@ import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.databinding.FragmentProfileBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.parcel.EditProfileParcel
 import com.reader.bacalagi.presentation.parcel.FailedParcel
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.enum.FailedContext
 import com.reader.bacalagi.utils.extension.gone
 import com.reader.bacalagi.utils.extension.show
@@ -59,13 +59,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 )
             }
             cltBooks.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_myBookFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMyBookFragment())
             }
             cltFaq.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_faqFragment)
             }
             cltSetting.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingFragment())
             }
             cltPrivacyPolicy.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_privacyPolicyFragment)

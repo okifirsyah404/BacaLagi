@@ -84,6 +84,8 @@ dependencies {
     // Submodules
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":data_area"))
+    implementation(project(":utilities"))
 
     // Firebase
     implementation(platform(libs.firebase.bom))

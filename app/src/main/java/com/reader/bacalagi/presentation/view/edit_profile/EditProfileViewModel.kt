@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.reader.bacalagi.data.local.model.SavedProvinceModel
-import com.reader.bacalagi.data.local.model.SavedRegencyModel
 import com.reader.bacalagi.data.network.response.UserResponse
-import com.reader.bacalagi.data.utils.ApiResponse
+import com.reader.bacalagi.data_area.local.model.SavedProvinceModel
+import com.reader.bacalagi.data_area.local.model.SavedRegencyModel
 import com.reader.bacalagi.domain.repository.area.AreaRepositoryImpl
 import com.reader.bacalagi.domain.repository.profile.ProfileRepositoryImpl
-import com.reader.bacalagi.domain.utils.helper.Event
+import com.reader.bacalagi.utilities.base.ApiResponse
+import com.reader.bacalagi.utilities.helper.Event
 import kotlinx.coroutines.launch
 import java.io.File
 

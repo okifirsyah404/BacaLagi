@@ -3,10 +3,10 @@ package com.reader.bacalagi.data.source
 import com.reader.bacalagi.data.network.request.EditProfileRequest
 import com.reader.bacalagi.data.network.response.UserResponse
 import com.reader.bacalagi.data.network.service.ProfileService
-import com.reader.bacalagi.data.utils.ApiResponse
-import com.reader.bacalagi.data.utils.extension.createErrorResponse
-import com.reader.bacalagi.data.utils.extension.getHttpBodyErrorMessage
-import com.reader.bacalagi.data.utils.extension.toMultipart
+import com.reader.bacalagi.utilities.base.ApiResponse
+import com.reader.bacalagi.utilities.extension.createErrorResponse
+import com.reader.bacalagi.utilities.extension.getHttpBodyErrorMessage
+import com.reader.bacalagi.utilities.extension.toMultipart
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -64,7 +64,7 @@ class ProfileDataSource(private val service: ProfileService) {
 
                 if (file != null) {
                     val uploadResponse = service.uploadProfilePicture(file.toMultipart())
-                    
+
                     if (uploadResponse.data == null) {
                         emit(ApiResponse.Error(uploadResponse.message))
                         return@flow

@@ -9,7 +9,7 @@ import com.reader.bacalagi.data.local.model.SearchProductModel
 import com.reader.bacalagi.data.local.model.SearchProductRemoteKeysModel
 import com.reader.bacalagi.data.local.room.BacaLagiDatabase
 import com.reader.bacalagi.data.network.service.BookService
-import com.reader.bacalagi.data.utils.extension.createErrorResponse
+import com.reader.bacalagi.utilities.extension.createErrorResponse
 import timber.log.Timber
 
 @OptIn(ExperimentalPagingApi::class)

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentDetailPostBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.helper.MutableReference
 import com.reader.bacalagi.utils.helper.uriToFile
@@ -43,7 +43,7 @@ class DetailPostFragment : BaseFragment<FragmentDetailPostBinding>() {
         binding.tvTitle.text = args.product.title
         binding.tvDescription.text = args.product.description
         binding.tvPriceRecommendation.text = args.product.predictionResult
-        
+
         var finalPrice = args.product.predictionResult
 
         finalPrice = when (binding.tfPrice.editText?.text.toString().isEmpty()) {

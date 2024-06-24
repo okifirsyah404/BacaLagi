@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import com.reader.bacalagi.data.di.dataModule
+import com.reader.bacalagi.data_area.di.areaDataModule
 import com.reader.bacalagi.di.presentationModule
 import com.reader.bacalagi.di.storagePreferenceModule
 import com.reader.bacalagi.domain.di.domainModule
@@ -29,6 +30,7 @@ class BacaLagiApplication : Application() {
             modules(
                 storagePreferenceModule(dataStore),
                 dataModule,
+                areaDataModule,
                 domainModule,
                 presentationModule,
             )

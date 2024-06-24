@@ -184,7 +184,7 @@
     </fragment>
     <fragment
         android:id="@+id/faqFragment"
-        android:name="com.reader.bacalagi.presentation.view.profile_faq.FaqFragment"
+        android:name="com.reader.bacalagi.presentation.view.faq.FaqFragment"
         android:label="fragment_faq"
         tools:layout="@layout/fragment_faq">
         <action
@@ -208,12 +208,12 @@
             android:id="@+id/action_detailMyBookFragment_to_myBookFragment"
             app:destination="@id/myBookFragment" />
         <action
-            android:id="@+id/action_detailMyBookFragment_to_editMyBookFragment"
+            android:id="@+id/action_detailMyBookFragment_to_editMyBookFragment22"
             app:destination="@id/editMyBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.reader.bacalagi.presentation.view.profile_privacy_policy.PrivacyPolicyFragment"
+        android:name="com.reader.bacalagi.presentation.view.privacy_policy.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
     <fragment
@@ -229,39 +229,35 @@
             app:destination="@id/failedFragment" />
     </fragment>
     <fragment
+        android:id="@+id/detailDashboardFragment"
+        android:name="com.reader.bacalagi.presentation.view.dashboard_detail.DetailProductFragment"
+        android:label="fragment_detail_dashboard"
+        tools:layout="@layout/fragment_detail_product">
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
         android:id="@+id/editMyBookFragment"
         android:name="com.reader.bacalagi.presentation.view.edit_mybook.EditMyBookFragment"
         android:label="fragment_edit_my_book"
         tools:layout="@layout/fragment_edit_my_book">
-        <action
-            android:id="@+id/action_editMyBookFragment_to_editMyBookDetailFragment"
-            app:destination="@id/editMyBookDetailFragment" />
-        <action
-            android:id="@+id/action_editMyBookFragment_to_failedFragment"
-            app:destination="@id/failedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editMyBookDetailFragment"
-        android:name="com.reader.bacalagi.presentation.view.edit_mybook_detail.EditMyBookDetailFragment"
-        android:label="fragment_edit_my_book_detail"
-        tools:layout="@layout/fragment_edit_my_book_detail">
-        <action
-            android:id="@+id/action_editMyBookDetailFragment_to_myBookFragment"
-            app:destination="@id/myBookFragment" />
         <argument
             android:name="mybook"
             app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
         <action
-            android:id="@+id/action_editMyBookDetailFragment_to_failedFragment"
-            app:destination="@id/failedFragment" />
+            android:id="@+id/action_editMyBookFragment2_to_editMyBookDetailFragment2"
+            app:destination="@id/editMyBookDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailDashboardFragment"
-        android:name="com.reader.bacalagi.presentation.view.dashboard_detail.DetailDashboardFragment"
-        android:label="fragment_detail_dashboard"
-        tools:layout="@layout/fragment_detail_dashboard">
+        android:id="@+id/editMyBookDetailFragment"
+        android:name="com.reader.bacalagi.presentation.view.edit_mybook_detail.EditMyBookDetailFragment"
+        android:label="EditMyBookDetailFragment">
+        <action
+            android:id="@+id/action_editMyBookDetailFragment2_to_myBookFragment"
+            app:destination="@id/myBookFragment" />
         <argument
-            android:name="id"
-            app:argType="string" />
+            android:name="mybook"
+            app:argType="com.reader.bacalagi.presentation.parcel.MyBookParcel" />
     </fragment>
 </navigation>

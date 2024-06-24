@@ -9,10 +9,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.reader.bacalagi.R
 import com.reader.bacalagi.base.BaseFragment
 import com.reader.bacalagi.databinding.FragmentRegisterBinding
-import com.reader.bacalagi.domain.utils.extension.observeResult
 import com.reader.bacalagi.presentation.parcel.AreaContextParcel
 import com.reader.bacalagi.presentation.parcel.ProvinceParcel
 import com.reader.bacalagi.presentation.parcel.RegencyParcel
+import com.reader.bacalagi.utilities.extension.observeResult
 import com.reader.bacalagi.utils.enum.AreaContext
 import com.reader.bacalagi.utils.extension.showLoadingDialog
 import com.reader.bacalagi.utils.extension.showSingleActionDialog

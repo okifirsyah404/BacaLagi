@@ -2,8 +2,8 @@ package com.reader.bacalagi.presentation.view.area_selector
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.reader.bacalagi.data.local.model.ProvinceModel
-import com.reader.bacalagi.data.local.model.RegencyModel
+import com.reader.bacalagi.data_area.local.model.ProvinceModel
+import com.reader.bacalagi.data_area.local.model.RegencyModel
 import com.reader.bacalagi.domain.repository.area.AreaRepositoryImpl
 import kotlinx.coroutines.launch
 
@@ -18,7 +18,6 @@ class AreaSelectorViewModel(private val repository: AreaRepositoryImpl) : ViewMo
             repository.saveProvince(province)
         }
     }
-
 
     fun saveSelectedRegency(regency: RegencyModel) {
         viewModelScope.launch {

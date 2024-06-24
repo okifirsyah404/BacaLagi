@@ -1,8 +1,8 @@
 package com.reader.bacalagi.presentation.parcel
 
 import android.os.Parcelable
-import com.reader.bacalagi.data.local.model.RegencyModel
-import com.reader.bacalagi.data.local.model.SavedRegencyModel
+import com.reader.bacalagi.data_area.local.model.RegencyModel
+import com.reader.bacalagi.data_area.local.model.SavedRegencyModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reader.bacalagi.data.network.response.AuthResponse
-import com.reader.bacalagi.data.utils.ApiResponse
 import com.reader.bacalagi.domain.repository.auth.AuthRepositoryImpl
-import com.reader.bacalagi.domain.utils.helper.Event
+import com.reader.bacalagi.utilities.base.ApiResponse
+import com.reader.bacalagi.utilities.helper.Event
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AuthRepositoryImpl) : ViewModel() {

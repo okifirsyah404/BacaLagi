@@ -27,3 +27,6 @@ rootProject.name = "BacaLagi"
 include(":app")
 include(":data")
 include(":domain")
+include(":data_area")
+include(":data_paging")
+include(":utilities")

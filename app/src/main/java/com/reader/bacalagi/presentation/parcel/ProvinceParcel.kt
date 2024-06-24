@@ -1,8 +1,8 @@
 package com.reader.bacalagi.presentation.parcel
 
 import android.os.Parcelable
-import com.reader.bacalagi.data.local.model.ProvinceModel
-import com.reader.bacalagi.data.local.model.SavedProvinceModel
+import com.reader.bacalagi.data_area.local.model.ProvinceModel
+import com.reader.bacalagi.data_area.local.model.SavedProvinceModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

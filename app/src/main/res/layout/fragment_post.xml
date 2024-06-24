@@ -27,8 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_profile"
@@ -52,180 +51,187 @@
                 app:icon="@drawable/ic_camera"
                 app:strokeColor="@color/primary_50" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_title" />
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_title"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_title" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_author" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_title"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_author"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_author" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_publisher" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_author"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_publisher"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_publisher" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_publish_year" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_publisher"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_publish_year"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
-                    android:maxLength="4"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_publish_year" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_buy_price" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_publish_year"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_buy_price"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:maxLength="4"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_buy_price" />
 
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_buy_price"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_isbn" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_isbn"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_isbn" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_language" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_isbn"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_language"
-                style="@style/Theme.BacaLagi.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_language" />
 
-            <TextView
-                style="@style/Theme.BacaLagi.Text.LabelLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/shr_description" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_language"
+                    style="@style/Theme.BacaLagi.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_description"
-                style="@style/Theme.BacaLagi.TextInputLayout.MultiLines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/Theme.BacaLagi.Text.LabelLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:maxLines="5"
-                    android:minLines="5" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/shr_description" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_description"
+                    style="@style/Theme.BacaLagi.TextInputLayout.MultiLines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:maxLines="5"
+                        android:minLines="5" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

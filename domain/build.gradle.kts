@@ -41,7 +41,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(project(":utilities"))
     implementation(project(":data"))
+    implementation(project(":data_area"))
 
     //  Coroutines
     implementation(libs.kotlinx.coroutines.core)

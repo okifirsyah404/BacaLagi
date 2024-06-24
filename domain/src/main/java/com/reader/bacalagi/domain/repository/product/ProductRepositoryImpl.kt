@@ -3,7 +3,7 @@ package com.reader.bacalagi.domain.repository.product
 import com.reader.bacalagi.data.local.model.ProductDataSource
 import com.reader.bacalagi.data.network.response.PredictionResponse
 import com.reader.bacalagi.data.network.response.ProductResponse
-import com.reader.bacalagi.data.utils.ApiResponse
+import com.reader.bacalagi.utilities.base.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
